@@ -1,0 +1,14 @@
+.dropdown>button::after {
+    display: none;
+}
+
+.dropdownMenu {
+    transform: translate(-50%, 54px) !important;
+    left: 50% !important;
+}
+
+@media (max-width: 576px) {
+    .dropdown>button {
+        padding: 0;
+    }
+}

@@ -1,0 +1,7 @@
+.dropdown button {
+    padding: 0;
+}
+
+.dropdown button::after {
+    display: none;
+}
