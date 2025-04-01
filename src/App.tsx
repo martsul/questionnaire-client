@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Layout } from "./components/layout/layout";
-import { AuthorizationForm } from "./components/authorization-form/authorization-form";
 import { ThemeContextProvider } from "./contexts/theme-context/theme-context-provider";
 import { LanguageContextProvider } from "./contexts/language-context/language-context-provider";
+import { AuthorizationPage } from "./pages/authorization-page";
 
 function App() {
     const router = createBrowserRouter([
@@ -10,7 +10,14 @@ function App() {
             path: "/",
             element: <Layout />,
             children: [
-                { path: "authorization", element: <AuthorizationForm /> },
+                {
+                    path: "login",
+                    element: <AuthorizationPage thereIsAccount={true} />,
+                },
+                {
+                    path: "signup",
+                    element: <AuthorizationPage thereIsAccount={false} />,
+                },
             ],
         },
     ]);
