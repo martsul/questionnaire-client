@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import styles from "./user.module.css";
 import { useLanguage } from "../../contexts/language-context/use-language";
 import { dictionary } from "../../constants/dictionary";
+import classNames from "classnames";
+import { useTheme } from "../../contexts/theme-context/use-theme";
 
 export const User = () => {
     const isAuthorized = false;
     const { language } = useLanguage();
+    const { theme } = useTheme();
     const words = dictionary[language].header;
 
     return (
@@ -14,7 +17,11 @@ export const User = () => {
             {!isAuthorized && (
                 <Link
                     to={"/login"}
-                    className="text-nowrap btn btn-outline-light d-flex gap-2 align-items-center"
+                    className={classNames(
+                        "text-nowrap btn d-flex gap-2 align-items-center",
+                        { "btn-outline-light": theme === "dark" },
+                        { "btn-outline-dark": theme === "light" }
+                    )}
                 >
                     <span className="d-none d-sm-inline">{words.login}</span>
                     <i className="bi bi-box-arrow-in-right"></i>
