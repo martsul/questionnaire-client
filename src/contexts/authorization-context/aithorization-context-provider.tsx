@@ -6,10 +6,7 @@ import { UserData } from "../../types/user-data";
 type Props = { children: ReactElement };
 
 export const AuthorizationContextProvider: FC<Props> = ({ children }) => {
-    const [userData, setUserData] = useState<UserData>({
-        userName: null,
-        id: null,
-    });
+    const [userData, setUserData] = useState<UserData>(null);
 
     const addUser = (data: AuthorizationResponse) => {
         localStorage.setItem("accessToken", data.accessToken);
@@ -18,7 +15,7 @@ export const AuthorizationContextProvider: FC<Props> = ({ children }) => {
 
     const deleteUser = () => {
         localStorage.removeItem("accessToken");
-        setUserData({ id: null, userName: null });
+        setUserData(null);
     };
 
     return (

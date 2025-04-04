@@ -5,16 +5,19 @@ import { useLanguage } from "../../contexts/language-context/use-language";
 import { dictionary } from "../../constants/dictionary";
 import classNames from "classnames";
 import { useTheme } from "../../contexts/theme-context/use-theme";
+import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
+import { useLogout } from "../../hooks/use-logout";
 
 export const User = () => {
-    const isAuthorized = false;
+    const { userData } = useAuthorization();
     const { language } = useLanguage();
     const { theme } = useTheme();
     const words = dictionary[language].header;
+    const {handlerLogout} = useLogout()
 
     return (
         <>
-            {!isAuthorized && (
+            {!userData && (
                 <Link
                     to={"/login"}
                     className={classNames(
@@ -27,7 +30,7 @@ export const User = () => {
                     <i className="bi bi-box-arrow-in-right"></i>
                 </Link>
             )}
-            {isAuthorized && (
+            {userData && (
                 <DropdownButton
                     className={styles.dropdown}
                     variant="link"
@@ -36,7 +39,7 @@ export const User = () => {
                     <Link className="dropdown-item" to={"profile"}>
                         {words.profile}
                     </Link>
-                    <Dropdown.Item>{words.logout}</Dropdown.Item>
+                    <Dropdown.Item onClick={handlerLogout}>{words.logout}</Dropdown.Item>
                 </DropdownButton>
             )}
         </>

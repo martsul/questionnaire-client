@@ -5,6 +5,7 @@ import { LanguageContextProvider } from "./contexts/language-context/language-co
 import { AuthorizationPage } from "./pages/authorization-page";
 import { MessageContextProvider } from "./contexts/message-context/message-context-provider";
 import { AuthorizationContextProvider } from "./contexts/authorization-context/aithorization-context-provider";
+import { LoadingContextProvider } from "./contexts/loading-context/loading-context-provider";
 
 function App() {
     const router = createBrowserRouter([
@@ -25,15 +26,17 @@ function App() {
     ]);
 
     return (
-        <AuthorizationContextProvider>
-            <MessageContextProvider>
-                <LanguageContextProvider>
-                    <ThemeContextProvider>
-                        <RouterProvider router={router} />
-                    </ThemeContextProvider>
-                </LanguageContextProvider>
-            </MessageContextProvider>
-        </AuthorizationContextProvider>
+        <LoadingContextProvider>
+            <AuthorizationContextProvider>
+                <MessageContextProvider>
+                    <LanguageContextProvider>
+                        <ThemeContextProvider>
+                            <RouterProvider router={router} />
+                        </ThemeContextProvider>
+                    </LanguageContextProvider>
+                </MessageContextProvider>
+            </AuthorizationContextProvider>
+        </LoadingContextProvider>
     );
 }
 
