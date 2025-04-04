@@ -1,1 +1,1 @@
-export type RequestData = FormData | JSON | undefined;
+export type RequestData = FormData | JSON;
