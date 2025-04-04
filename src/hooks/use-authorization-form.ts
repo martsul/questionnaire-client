@@ -1,39 +1,33 @@
-import { ChangeEvent, FormEventHandler, useReducer } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../contexts/language-context/use-language";
+import { useMessage } from "../contexts/message-context/use-message-context";
+import { authorizationService } from "../services/authorization-service";
+import { useAuthorization } from "../contexts/authorization-context/use-authorization";
+import { handlerErrors } from "../helpers/handler-errors";
+import { FormEventHandler } from "react";
 
-const DEFAULT_FORM_VALUES = {
-    email: "",
-    password: "",
-    name: "",
-};
-
-type FormValues = keyof typeof DEFAULT_FORM_VALUES;
-
-type FormAction = { type: "UPDATE_FIELD"; name: FormValues; value: string };
-
-const reducer = (state: typeof DEFAULT_FORM_VALUES, action: FormAction) => {
-    switch (action.type) {
-        case "UPDATE_FIELD":
-            return { ...state, [action.name]: action.value };
-        default:
-            return state;
-    }
+const getResult = async (target: HTMLFormElement) => {
+    const formData = new FormData(target);
+    const thereIsAccount = Boolean(formData.get("name") === null);
+    return await authorizationService(thereIsAccount, formData);
 };
 
 export const useAuthorizationForm = () => {
-    const [formParameters, dispatch] = useReducer(reducer, DEFAULT_FORM_VALUES);
+    const { addMessage } = useMessage();
+    const { language } = useLanguage();
+    const { addUser } = useAuthorization();
+    const navigate = useNavigate();
 
-    const handlerChangeValue = (event: ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value;
-        const name = event.target.name as FormValues;
-
-        dispatch({ type: "UPDATE_FIELD", name, value });
+    const handlerSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+        try {
+            event.preventDefault();
+            const result = await getResult(event.target as HTMLFormElement);
+            addUser(result.data);
+            navigate("/");
+        } catch (error) {
+            addMessage("error", handlerErrors(error, language));
+        }
     };
 
-    const handlerSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-        event.preventDefault();
-
-        console.log(formParameters);
-    };
-
-    return { handlerChangeValue, formParameters, handlerSubmit };
+    return { handlerSubmit };
 };

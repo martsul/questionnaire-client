@@ -3,6 +3,8 @@ import { Layout } from "./components/layout/layout";
 import { ThemeContextProvider } from "./contexts/theme-context/theme-context-provider";
 import { LanguageContextProvider } from "./contexts/language-context/language-context-provider";
 import { AuthorizationPage } from "./pages/authorization-page";
+import { MessageContextProvider } from "./contexts/message-context/message-context-provider";
+import { AuthorizationContextProvider } from "./contexts/authorization-context/aithorization-context-provider";
 
 function App() {
     const router = createBrowserRouter([
@@ -23,11 +25,15 @@ function App() {
     ]);
 
     return (
-        <LanguageContextProvider>
-            <ThemeContextProvider>
-                <RouterProvider router={router} />
-            </ThemeContextProvider>
-        </LanguageContextProvider>
+        <AuthorizationContextProvider>
+            <MessageContextProvider>
+                <LanguageContextProvider>
+                    <ThemeContextProvider>
+                        <RouterProvider router={router} />
+                    </ThemeContextProvider>
+                </LanguageContextProvider>
+            </MessageContextProvider>
+        </AuthorizationContextProvider>
     );
 }
 

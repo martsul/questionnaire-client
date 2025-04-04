@@ -1,0 +1,13 @@
+.container {
+    position: absolute;
+    z-index: 2;
+    top: 15px;
+    left: 50%;
+    transform: translate(-50%, calc(-100% - 15px));
+    width: max-content;
+}
+
+.container.active {
+    transform: translate(-50%, 0);
+    transition: transform .2s ease;
+}
