@@ -10,7 +10,7 @@ export const Header = () => {
         <header className="bg-body-secondary py-3">
             <Container>
                 <div className="d-flex justify-content-between align-items-center gap-2">
-                    <Link to={"/"}>
+                    <Link to={""}>
                         <i className="bi bi-house-fill fs-5"></i>
                     </Link>
                     <Search />

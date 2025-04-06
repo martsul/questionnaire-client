@@ -6,4 +6,5 @@ export const endpoints = {
     signin: `/signin`,
     signup: `/signup`,
     logout: `/logout`,
+    authRequest: "/auth_request"
 } as const;

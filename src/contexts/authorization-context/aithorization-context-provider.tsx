@@ -10,7 +10,7 @@ export const AuthorizationContextProvider: FC<Props> = ({ children }) => {
 
     const addUser = (data: AuthorizationResponse) => {
         localStorage.setItem("accessToken", data.accessToken);
-        setUserData({ id: data.id, userName: data.name });
+        setUserData({ id: data.id, userName: data.name, isAdmin: data.isAdmin });
     };
 
     const deleteUser = () => {

@@ -1,1 +1,5 @@
-export type UserData = { userName: string; id: number } | null;
+export type UserData = {
+    userName: string;
+    id: number;
+    isAdmin: boolean;
+} | null;

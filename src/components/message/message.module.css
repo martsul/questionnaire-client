@@ -5,6 +5,7 @@
     left: 50%;
     transform: translate(-50%, calc(-100% - 15px));
     width: max-content;
+    max-width: calc(100vw - 20px);
 }
 
 .container.active {

@@ -6,6 +6,7 @@ import { AuthorizationPage } from "./pages/authorization-page";
 import { MessageContextProvider } from "./contexts/message-context/message-context-provider";
 import { AuthorizationContextProvider } from "./contexts/authorization-context/aithorization-context-provider";
 import { LoadingContextProvider } from "./contexts/loading-context/loading-context-provider";
+import { AdminPage } from "./pages/admin-page";
 
 function App() {
     const router = createBrowserRouter([
@@ -20,6 +21,10 @@ function App() {
                 {
                     path: "signup",
                     element: <AuthorizationPage thereIsAccount={false} />,
+                },
+                {
+                    path: "admin",
+                    element: <AdminPage />,
                 },
             ],
         },

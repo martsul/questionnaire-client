@@ -5,6 +5,7 @@ export const dictionary = {
             logout: "Log Out",
             profile: "Profile",
             search: "Search",
+            adminPanel: "Admin panel",
             noResult: "No Result",
         },
         authorization: {
@@ -21,13 +22,18 @@ export const dictionary = {
         },
         errors: {
             unknown: "Unknown error. Please repeat later.",
-            "Invalid email address": "There is no user with this email address.",
+            "Invalid email address":
+                "There is no user with this email address.",
             "Invalid password": "Wrong password.",
-            "Validation error: Validation len on name failed": "The name must be between 1 and 100 characters long.",
-            "Validation error: Validation len on email failed": "Fill in the email field.",
-            "Validation error: Validation isEmail on email failed": "Incorrect email address.",
-            "Validation error: Validation len on password failed": "The password must have at least 1 character.",
-            "Validation error": "The user with this email already exists."
+            "Validation error: Validation len on name failed":
+                "The name must be between 1 and 100 characters long.",
+            "Validation error: Validation len on email failed":
+                "Fill in the email field.",
+            "Validation error: Validation isEmail on email failed":
+                "Incorrect email address.",
+            "Validation error: Validation len on password failed":
+                "The password must have at least 1 character.",
+            "Validation error": "The user with this email already exists.",
         },
     },
     es: {
@@ -37,6 +43,7 @@ export const dictionary = {
             profile: "Perfil",
             search: "Buscar",
             noResult: "Sin resultados",
+            adminPanel: "Panel de administración",
         },
         authorization: {
             login: "Iniciar sesión",
@@ -51,14 +58,21 @@ export const dictionary = {
             submit: "Enviar",
         },
         errors: {
-            unknown: "Error desconocido. Por favor, intenta de nuevo más tarde.",
-            "Invalid email address": "No existe un usuario con esta dirección de correo electrónico.",
+            unknown:
+                "Error desconocido. Por favor, intenta de nuevo más tarde.",
+            "Invalid email address":
+                "No existe un usuario con esta dirección de correo electrónico.",
             "Invalid password": "Contraseña incorrecta.",
-            "Validation error: Validation len on name failed": "El nombre debe tener entre 1 y 100 caracteres de longitud.",
-            "Validation error: Validation len on email failed": "Rellena el campo de correo electrónico.",
-            "Validation error: Validation isEmail on email failed": "Dirección de correo electrónico incorrecta.",
-            "Validation error: Validation len on password failed": "La contraseña debe tener al menos 1 carácter.",
-            "Validation error": "Ya existe un usuario con este correo electrónico."
+            "Validation error: Validation len on name failed":
+                "El nombre debe tener entre 1 y 100 caracteres de longitud.",
+            "Validation error: Validation len on email failed":
+                "Rellena el campo de correo electrónico.",
+            "Validation error: Validation isEmail on email failed":
+                "Dirección de correo electrónico incorrecta.",
+            "Validation error: Validation len on password failed":
+                "La contraseña debe tener al menos 1 carácter.",
+            "Validation error":
+                "Ya existe un usuario con este correo electrónico.",
         },
     },
 } as const;

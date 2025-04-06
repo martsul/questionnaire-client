@@ -13,13 +13,13 @@ export const User = () => {
     const { language } = useLanguage();
     const { theme } = useTheme();
     const words = dictionary[language].header;
-    const {handlerLogout} = useLogout()
+    const { handlerLogout } = useLogout();
 
     return (
         <>
             {!userData && (
                 <Link
-                    to={"/login"}
+                    to={"login"}
                     className={classNames(
                         "text-nowrap btn d-flex gap-2 align-items-center",
                         { "btn-outline-light": theme === "dark" },
@@ -36,10 +36,17 @@ export const User = () => {
                     variant="link"
                     title={<i className="fs-3 bi bi-person-circle"></i>}
                 >
+                    {userData.isAdmin && (
+                        <Link className="dropdown-item" to={"admin"}>
+                            {words.adminPanel}
+                        </Link>
+                    )}
                     <Link className="dropdown-item" to={"profile"}>
                         {words.profile}
                     </Link>
-                    <Dropdown.Item onClick={handlerLogout}>{words.logout}</Dropdown.Item>
+                    <Dropdown.Item onClick={handlerLogout}>
+                        {words.logout}
+                    </Dropdown.Item>
                 </DropdownButton>
             )}
         </>

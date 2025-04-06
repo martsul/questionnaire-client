@@ -8,7 +8,6 @@ type Props = {
 export const LoadingContextProvider: FC<Props> = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
 
-    console.log(isLoading)
     const startLoading = () => {
         setIsLoading(true);
     };

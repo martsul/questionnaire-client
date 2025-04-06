@@ -3,4 +3,5 @@ export type AuthorizationResponse = {
     refreshToken: string;
     name: string;
     id: number;
+    isAdmin: boolean
 };
