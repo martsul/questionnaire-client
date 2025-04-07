@@ -34,6 +34,14 @@ export const dictionary = {
             "Validation error: Validation len on password failed":
                 "The password must have at least 1 character.",
             "Validation error": "The user with this email already exists.",
+            Unauthorized: "Authorization error",
+        },
+        usersTable: {
+            title: "Users",
+            id: "ID",
+            name: "Name",
+            status: "Status",
+            role: "Role",
         },
     },
     es: {
@@ -73,6 +81,14 @@ export const dictionary = {
                 "La contraseña debe tener al menos 1 carácter.",
             "Validation error":
                 "Ya existe un usuario con este correo electrónico.",
+            Unauthorized: "Error de autorización",
+        },
+        usersTable: {
+            title: "Usuarios",
+            id: "ID",
+            name: "Nombre",
+            status: "Estado",
+            role: "Rol",
         },
     },
 } as const;

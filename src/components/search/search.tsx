@@ -1,7 +1,8 @@
-import { Dropdown, Form, InputGroup } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import styles from "./search.module.css";
 import { useLanguage } from "../../contexts/language-context/use-language";
 import { dictionary } from "../../constants/dictionary";
+import { InputSearch } from "../input-search/input-search";
 
 export const Search = () => {
     const searchResult = [1];
@@ -25,16 +26,4 @@ export const Search = () => {
     );
 };
 
-const InputSearch = () => {
-    const { language } = useLanguage();
-    const words = dictionary[language].header;
 
-    return (
-        <InputGroup>
-            <InputGroup.Text>
-                <i className="bi bi-search"></i>
-            </InputGroup.Text>
-            <Form.Control placeholder={words.search} />
-        </InputGroup>
-    );
-};

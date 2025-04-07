@@ -1,0 +1,25 @@
+.input, .more {
+    width: 36px;
+}
+
+.input input {
+    cursor: pointer;
+}
+
+.cell button {
+    padding-right: 17px;
+    position: relative;
+}
+
+.cell i {
+    opacity: 0;
+    transition: opacity .1s ease;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -45%);
+}
+
+.cell button:hover i {
+    opacity: 1;
+}

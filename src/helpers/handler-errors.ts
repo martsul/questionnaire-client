@@ -3,6 +3,7 @@ import { dictionary } from "../constants/dictionary";
 import { AvailableErrors } from "../types/available-errors";
 import { AvailableLanguages } from "../types/available-languages";
 
+
 export const handlerErrors = (
     error: unknown,
     language: AvailableLanguages

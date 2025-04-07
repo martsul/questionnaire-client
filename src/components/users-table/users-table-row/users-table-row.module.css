@@ -1,0 +1,11 @@
+.input {
+    cursor: pointer;
+}
+
+.more {
+    transition: transform .2s ease;
+}
+
+.more.active {
+    transform: rotate(180deg);
+}
