@@ -11,7 +11,7 @@ export const useLogout = () => {
 
     const handlerLogout = async () => {
         try {
-            await request("post", endpoints.logout);
+            await request("post", endpoints.logout, true);
             localStorage.removeItem("accessToken");
             deleteUser();
         } catch (error) {

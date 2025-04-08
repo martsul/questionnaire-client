@@ -3,6 +3,15 @@ import { UserData } from "./user-data";
 
 export type AuthorizationContextValue = {
     userData: UserData;
-    addUser: (data: AuthorizationResponse) => void;
+    addUser: (
+        data: Omit<AuthorizationResponse, "accessToken" | "refreshToken">
+    ) => void;
     deleteUser: () => void;
+    changeStatus: ({
+        isAdmin,
+        isBlocked,
+    }: {
+        isAdmin: boolean;
+        isBlocked: boolean;
+    }) => void;
 };

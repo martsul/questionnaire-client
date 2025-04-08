@@ -8,20 +8,28 @@ import { useApi } from "../../hooks/use-api";
 import { endpoints } from "../../constants/config";
 import { UsersTable } from "../../types/users-table";
 import { AvailableEndpoints } from "../../types/available-endpoints";
+import { useMessage } from "../../contexts/message-context/use-message-context";
+import { dictionary } from "../../constants/dictionary";
+import { useLanguage } from "../../contexts/language-context/use-language";
+import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
 
-let data: UsersTable[] = [];
+let data: UsersTable["users"] = [];
 
 export const useUsersTable = () => {
     const [users, setUsers] = useState(data);
     const [selectedUsers, setSelectedUsers] = useState(new Set<number>());
     const [isAscending, setIsAscending] = useState(true);
+    const { addMessage } = useMessage();
+    const { language } = useLanguage();
+    const words = dictionary[language].success;
     const request = useApi();
+    const { changeStatus } = useAuthorization();
 
     useEffect(() => {
-        request<UsersTable[]>("get", endpoints.users).then((response) => {
+        request<UsersTable>("get", endpoints.users, true).then((response) => {
             if (response) {
-                setUsers(response);
-                data = response;
+                setUsers(response.users);
+                data = response.users;
             }
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,21 +57,23 @@ export const useUsersTable = () => {
     };
 
     const sendUsers = (endpoint: AvailableEndpoints) => {
-        request<UsersTable[]>(
+        request<UsersTable>(
             "post",
             endpoint,
+            true,
             JSON.stringify(Array.from(selectedUsers))
         ).then((response) => {
             if (response) {
-                setUsers(response);
-                data = response;
+                setUsers(response.users);
+                data = response.users;
+                addMessage("success", words.success);
+                changeStatus(response.status);
             }
         });
-        setSelectedUsers(new Set());
     };
 
     const sortUsers: MouseEventHandler<HTMLButtonElement> = (event) => {
-        const id = event.currentTarget.id as keyof UsersTable;
+        const id = event.currentTarget.id as keyof UsersTable["users"][0];
         const tempUsers = [...users];
         tempUsers.sort((a, b) =>
             isAscending ? +(a[id] > b[id]) : +(a[id] < b[id])

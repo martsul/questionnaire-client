@@ -4,7 +4,7 @@ import classNames from "classnames";
 import styles from "./users-table-row.module.css";
 
 type Props = {
-    data: UsersTable;
+    data: UsersTable["users"][0];
     active: boolean;
     handlerSingleInput: ChangeEventHandler<HTMLInputElement>;
 };

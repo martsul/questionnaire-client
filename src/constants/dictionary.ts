@@ -35,6 +35,10 @@ export const dictionary = {
                 "The password must have at least 1 character.",
             "Validation error": "The user with this email already exists.",
             Unauthorized: "Authorization error",
+            "User is blocked": "This user is blocked",
+        },
+        success: {
+            success: "The operation was successful",
         },
         usersTable: {
             title: "Users",
@@ -82,6 +86,10 @@ export const dictionary = {
             "Validation error":
                 "Ya existe un usuario con este correo electrónico.",
             Unauthorized: "Error de autorización",
+            "User is blocked": "Este usuario está bloqueado",
+        },
+        success: {
+            success: "La operación fue exitosa",
         },
         usersTable: {
             title: "Usuarios",

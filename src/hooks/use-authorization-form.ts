@@ -10,7 +10,7 @@ const getResult = async (target: HTMLFormElement, request: ApiRequest) => {
     const formData = new FormData(target);
     const thereIsAccount = Boolean(formData.get("name") === null);
     const url = thereIsAccount ? endpoints.signin : endpoints.signup;
-    return await request<AuthorizationResponse>("post", url, formData);
+    return await request<AuthorizationResponse>("post", url, true, formData);
 };
 
 export const useAuthorizationForm = () => {
@@ -20,9 +20,10 @@ export const useAuthorizationForm = () => {
 
     const handlerSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
             event.preventDefault();
-            const result = await getResult(event.target as HTMLFormElement, request);
+            const result = await getResult(event.currentTarget, request);
             if (!result) return
             addUser(result);
+            localStorage.setItem("accessToken", result.accessToken);
             navigate("/");
     };
 

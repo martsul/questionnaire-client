@@ -12,7 +12,7 @@ export const Message = () => {
                 [styles.active]: message,
             })}
         >
-            <Alert variant="danger">{message?.message}</Alert>
+            <Alert variant={message?.type}>{message?.message}</Alert>
         </div>
     );
 };

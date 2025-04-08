@@ -12,4 +12,5 @@ export const endpoints = {
     unblock: "/unblock",
     giveAdmin: "/give_admin",
     takeAdmin: "/take_admin",
+    refresh: "/refresh"
 } as const;

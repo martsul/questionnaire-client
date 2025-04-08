@@ -8,9 +8,14 @@ type Props = { children: ReactElement };
 export const AuthorizationContextProvider: FC<Props> = ({ children }) => {
     const [userData, setUserData] = useState<UserData>(null);
 
-    const addUser = (data: AuthorizationResponse) => {
-        localStorage.setItem("accessToken", data.accessToken);
-        setUserData({ id: data.id, userName: data.name, isAdmin: data.isAdmin });
+    const addUser = (
+        data: Omit<AuthorizationResponse, "accessToken" | "refreshToken">
+    ) => {
+        setUserData({
+            id: data.id,
+            userName: data.name,
+            isAdmin: data.isAdmin,
+        });
     };
 
     const deleteUser = () => {
@@ -18,8 +23,24 @@ export const AuthorizationContextProvider: FC<Props> = ({ children }) => {
         setUserData(null);
     };
 
+    const changeStatus = ({
+        isAdmin,
+        isBlocked,
+    }: {
+        isAdmin: boolean;
+        isBlocked: boolean;
+    }) => {
+        if (isBlocked) {
+            deleteUser();
+        } else if (userData) {
+            setUserData({ ...userData, isAdmin });
+        }
+    };
+
     return (
-        <AuthorizationContext.Provider value={{userData, deleteUser, addUser}}>
+        <AuthorizationContext.Provider
+            value={{ userData, deleteUser, addUser, changeStatus }}
+        >
             {children}
         </AuthorizationContext.Provider>
     );

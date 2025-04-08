@@ -1,4 +1,4 @@
-type MessageType = "error" | "success";
+type MessageType = "danger" | "success";
 
 export type MessageContextState = {
     type: MessageType;

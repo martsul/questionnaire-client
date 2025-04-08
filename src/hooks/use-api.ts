@@ -16,6 +16,7 @@ export const useApi = () => {
     const request = async <T>(
         method: HttpMethods,
         url: AvailableEndpoints,
+        needMessage: boolean,
         data?: RequestData
     ) => {
         try {
@@ -23,7 +24,9 @@ export const useApi = () => {
             const response: ApiResponse<T> = await api[method](url, data);
             return response.data;
         } catch (error) {
-            addMessage("error", handlerErrors(error, language));
+            if (needMessage) {
+                addMessage("danger", handlerErrors(error, language));
+            }
         } finally {
             stopLoading();
         }
