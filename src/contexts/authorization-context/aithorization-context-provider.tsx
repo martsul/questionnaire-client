@@ -1,11 +1,10 @@
-import { FC, ReactElement, useState } from "react";
+import { FC, useState } from "react";
 import { AuthorizationContext } from ".";
 import { AuthorizationResponse } from "../../types/authorization-response";
 import { UserData } from "../../types/user-data";
+import { ProviderProps } from "../../types/provider-pops";
 
-type Props = { children: ReactElement };
-
-export const AuthorizationContextProvider: FC<Props> = ({ children }) => {
+export const AuthorizationContextProvider: FC<ProviderProps> = ({ children }) => {
     const [userData, setUserData] = useState<UserData>(null);
 
     const addUser = (

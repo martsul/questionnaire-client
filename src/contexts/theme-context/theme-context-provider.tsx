@@ -1,11 +1,8 @@
-import { FC, ReactElement, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { ThemeContext } from ".";
+import { ProviderProps } from "../../types/provider-pops";
 
-type Props = {
-    children: ReactElement;
-};
-
-export const ThemeContextProvider: FC<Props> = ({ children }) => {
+export const ThemeContextProvider: FC<ProviderProps> = ({ children }) => {
     const [theme, setTheme] = useState(
         localStorage.getItem("theme") || "light"
     );

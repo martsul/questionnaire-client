@@ -1,5 +1,15 @@
 export const dictionary = {
     en: {
+        form: {
+            title: "Name of the form",
+            description: "Description",
+            education: "Education",
+            quiz: "Quiz",
+            other: "Other",
+            theme: "Choose a theme",
+            tag: "Select Tags",
+            user: "Select users",
+        },
         header: {
             login: "Log In",
             logout: "Log Out",
@@ -49,6 +59,16 @@ export const dictionary = {
         },
     },
     es: {
+        form: {
+            title: "Nombre del formulario",
+            description: "Descripción",
+            education: "Educación",
+            quiz: "Cuestionario",
+            other: "Otro",
+            theme: "Elige un tema",
+            tag: "Seleccionar etiquetas",
+            user: "Seleccionar usuarios",
+        },
         header: {
             login: "Iniciar sesión",
             logout: "Cerrar sesión",

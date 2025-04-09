@@ -7,6 +7,7 @@ import { MessageContextProvider } from "./contexts/message-context/message-conte
 import { AuthorizationContextProvider } from "./contexts/authorization-context/aithorization-context-provider";
 import { LoadingContextProvider } from "./contexts/loading-context/loading-context-provider";
 import { AdminPage } from "./pages/admin-page";
+import { FormPage } from "./pages/form-page";
 
 function App() {
     const router = createBrowserRouter([
@@ -25,6 +26,10 @@ function App() {
                 {
                     path: "admin",
                     element: <AdminPage />,
+                },
+                {
+                    path: "form/:formId",
+                    element: <FormPage />,
                 },
             ],
         },

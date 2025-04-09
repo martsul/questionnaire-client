@@ -1,10 +1,9 @@
-import { FC, ReactElement, useRef, useState } from "react";
+import { FC, useRef, useState } from "react";
 import { MessageContext } from ".";
 import { AddMessage, MessageContextState } from "../../types/message-context";
+import { ProviderProps } from "../../types/provider-pops";
 
-type Props = { children: ReactElement };
-
-export const MessageContextProvider: FC<Props> = ({ children }) => {
+export const MessageContextProvider: FC<ProviderProps> = ({ children }) => {
     const [message, setMessage] = useState<MessageContextState>(null);
     const timerId = useRef<number>(null);
 

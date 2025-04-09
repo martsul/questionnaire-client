@@ -8,15 +8,17 @@ import { useEffect, useState } from "react";
 
 export const Layout = () => {
     const { checkAuthorization } = useCheckAuthorization();
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    useEffect(() => {
-        (async () => {
-            await checkAuthorization();
-            setLoading(false);
-        })();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+
+    // useEffect(() => {
+    //     (async () => {
+    //         await checkAuthorization();
+    //         setLoading(false);
+    //     })();
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, []);
 
     return (
         <>

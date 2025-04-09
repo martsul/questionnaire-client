@@ -1,11 +1,8 @@
-import { FC, ReactElement, useState } from "react";
+import { FC, useState } from "react";
 import { LoadingContext } from ".";
+import { ProviderProps } from "../../types/provider-pops";
 
-type Props = {
-    children: ReactElement;
-};
-
-export const LoadingContextProvider: FC<Props> = ({ children }) => {
+export const LoadingContextProvider: FC<ProviderProps> = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const startLoading = () => {
