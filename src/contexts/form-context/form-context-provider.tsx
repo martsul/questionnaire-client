@@ -1,54 +1,74 @@
-import { ChangeEventHandler, FC, useReducer, useState } from "react";
+import { ChangeEventHandler, FC, useEffect, useState } from "react";
 import { ProviderProps } from "../../types/provider-pops";
 import { FormContext } from ".";
-import { FormHeadState } from "../../types/form/form-head-state";
-import { formHeadReducer } from "../../helpers/form-head-reducer";
-import { useAuthorization } from "../authorization-context/use-authorization";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-
-// const DEFAULT_HEAD_VALUES: FormHeadState = {
-//     isPublic: true,
-//     owner: "No Owner",
-//     date: new Date(),
-//     title: "",
-//     description: "",
-//     theme: "education",
-//     ownTheme: "",
-//     tag: "",
-//     tags: new Set(),
-//     sortUsers: "email",
-//     user: "",
-//     users: new Set(),
-//     like: false,
-//     isNew: true,
-// };
+import { useApi } from "../../hooks/use-api";
+import { endpoints } from "../../constants/config";
+import { fileToBase64 } from "../../helpers/file-to-base-64";
+import { useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { selectFormData } from "../../redux/entities/form/form-slice";
+import { FormData } from "../../types/form/form-data";
+import { imgInFile } from "../../helpers/img-in-file";
+import { getForm } from "../../redux/entities/form/get-form";
+import { getTheme } from "../../helpers/get-theme";
+import { useLanguage } from "../language-context/use-language";
+import { debounce } from "lodash";
+import { simpleApi } from "../../api";
 
 export const FormContextProvider: FC<ProviderProps> = ({ children }) => {
-    // const [headParams, dispatch] = useReducer(
-    //     formHeadReducer,
-    //     DEFAULT_HEAD_VALUES
-    // );
-    // const { userData } = useAuthorization();
-
-    // (() => {
-    //     if (userData?.userName) {
-    //         dispatch({ type: "INIT", payload: userData?.userName });
-    //     }
-    // })();
-
-    // const togglePublic = () => {
-    //     dispatch({ type: "TOGGLE_PUBLIC" });
-    // };
-    // const changeTitle: ChangeEventHandler<HTMLInputElement> = (event) => {
-    //     dispatch({type: "CHANGE_TITLE", payload:event.target.value})
-    // }
-    // const changeDescription
-
-    const { register, handleSubmit, watch } = useForm();
+    const formData = useAppSelector(selectFormData);
     const [isEdit, setIsEdit] = useState(false);
     const [isPublic, setIsPublic] = useState(true);
+    const request = useApi();
+    const dispatch = useAppDispatch();
+    const { language } = useLanguage();
+    const { register, handleSubmit, watch, reset } = useForm<FormData>();
+    const formId = +(useParams().formId as string);
+    const [availableTags, setAvailableTags] = useState<string[]>([]);
 
-    const onSubmit: SubmitHandler<FieldValues> = (data) => console.log(data);
+    useEffect(() => {
+        (async () => {
+            const imgFile = await imgInFile(formData?.head.img);
+            const theme = getTheme(formData?.head.Theme.theme, language);
+            const ownTheme =
+                theme === "other" ? formData?.head.Theme.theme : "";
+
+            reset({
+                title: formData?.head.title,
+                description: formData?.head.description,
+                theme,
+                ownTheme,
+                img: imgFile,
+            });
+        })();
+    }, [reset, formData, language]);
+
+    const sendTagToServer = async (value: string) => {
+        try {
+            const response = await simpleApi.get(endpoints.tag, {
+                params: { tag: value },
+            });
+            setAvailableTags(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const debouncedSendData = debounce(sendTagToServer, 100);
+
+    const onChangeTag: ChangeEventHandler<HTMLInputElement> = async (event) => {
+        const value = event.target.value;
+        debouncedSendData(value);
+    };
+
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        const img = await fileToBase64(data.img[0]);
+        const requestData = { ...data, isPublic, img, formId };
+        await request("put", endpoints.form, true, requestData);
+        await dispatch(getForm(formId)).unwrap();
+        setIsEdit(false);
+    };
 
     const toggleEdit = () => {
         setIsEdit(!isEdit);
@@ -67,6 +87,8 @@ export const FormContextProvider: FC<ProviderProps> = ({ children }) => {
                 togglePublic,
                 isEdit,
                 isPublic,
+                onChangeTag,
+                availableTags,
             }}
         >
             {children}

@@ -1,12 +1,14 @@
-import { BaseSyntheticEvent } from "react";
+import { BaseSyntheticEvent, ChangeEventHandler } from "react";
 import { FieldValues, UseFormRegister, UseFormWatch } from "react-hook-form";
 
 export type FormContextValue = {
     register: UseFormRegister<FieldValues>;
     onSubmit: (e?: BaseSyntheticEvent) => Promise<void>;
-    watch: UseFormWatch<FieldValues>
+    watch: UseFormWatch<FieldValues>;
     toggleEdit: () => void;
     togglePublic: () => void;
     isEdit: boolean;
     isPublic: boolean;
+    onChangeTag: ChangeEventHandler<HTMLInputElement>;
+    availableTags: string[];
 };

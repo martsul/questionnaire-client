@@ -9,6 +9,7 @@ export const dictionary = {
             theme: "Choose a theme",
             tag: "Select Tags",
             user: "Select users",
+            save: "Save",
         },
         header: {
             login: "Log In",
@@ -68,6 +69,7 @@ export const dictionary = {
             theme: "Elige un tema",
             tag: "Seleccionar etiquetas",
             user: "Seleccionar usuarios",
+            save: "Guardar",
         },
         header: {
             login: "Iniciar sesión",

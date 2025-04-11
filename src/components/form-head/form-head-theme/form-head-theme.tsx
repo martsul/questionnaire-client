@@ -15,13 +15,13 @@ export const FromHeadTheme = () => {
                     {...register("theme")}
                     type={"radio"}
                     label={words.education}
-                    value="education"
+                    value={words.education.toLowerCase()}
                 />
                 <Form.Check
                     {...register("theme")}
                     type={"radio"}
                     label={words.quiz}
-                    value="quiz"
+                    value={words.quiz.toLowerCase()}
                 />
                 <Form.Check
                     {...register("theme")}

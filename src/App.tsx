@@ -8,6 +8,8 @@ import { AuthorizationContextProvider } from "./contexts/authorization-context/a
 import { LoadingContextProvider } from "./contexts/loading-context/loading-context-provider";
 import { AdminPage } from "./pages/admin-page";
 import { FormPage } from "./pages/form-page";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 function App() {
     const router = createBrowserRouter([
@@ -36,17 +38,19 @@ function App() {
     ]);
 
     return (
-        <LoadingContextProvider>
-            <AuthorizationContextProvider>
-                <MessageContextProvider>
-                    <LanguageContextProvider>
-                        <ThemeContextProvider>
-                            <RouterProvider router={router} />
-                        </ThemeContextProvider>
-                    </LanguageContextProvider>
-                </MessageContextProvider>
-            </AuthorizationContextProvider>
-        </LoadingContextProvider>
+        <Provider store={store}>
+            <LoadingContextProvider>
+                <AuthorizationContextProvider>
+                    <MessageContextProvider>
+                        <LanguageContextProvider>
+                            <ThemeContextProvider>
+                                <RouterProvider router={router} />
+                            </ThemeContextProvider>
+                        </LanguageContextProvider>
+                    </MessageContextProvider>
+                </AuthorizationContextProvider>
+            </LoadingContextProvider>
+        </Provider>
     );
 }
 

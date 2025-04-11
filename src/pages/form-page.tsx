@@ -1,10 +1,10 @@
-import { Form } from "../components/form/form";
+import { FormContainer } from "../components/form/form-container";
 import { FormContextProvider } from "../contexts/form-context/form-context-provider";
 
 export const FormPage = () => {
     return (
         <FormContextProvider>
-            <Form />
+            <FormContainer />
         </FormContextProvider>
     );
 };

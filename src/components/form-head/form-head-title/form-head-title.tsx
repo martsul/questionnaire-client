@@ -2,12 +2,12 @@ import { Form } from "react-bootstrap";
 import { dictionary } from "../../../constants/dictionary";
 import { useFormContext } from "../../../contexts/form-context/use-form-context";
 import { useLanguage } from "../../../contexts/language-context/use-language";
-import styles from "./form-head-title.module.css"
+import styles from "./form-head-title.module.css";
 
 export const FormHeadTitle = () => {
     const { language } = useLanguage();
     const words = dictionary[language].form;
-    const {register,watch} = useFormContext()
+    const { register, watch } = useFormContext();
 
     return (
         <>
