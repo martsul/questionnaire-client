@@ -17,7 +17,7 @@ export const FormHeadVisible: FC<Props> = ({ head }) => {
         <FormHeadBlock
             owner={head.owner.name}
             createdAt={head.createdAt}
-            canEdit={true}
+            canEdit={canEdit}
         >
             <>
                 <h1>{head.title}</h1>

@@ -9,10 +9,12 @@ export const Search = () => {
     const { language } = useLanguage();
     const words = dictionary[language].header;
 
+    const handlerChange = () => {}
+
     return (
         <Dropdown className={styles.dropdown}>
             <Dropdown.Toggle variant="link">
-                <InputSearch />
+                <InputSearch handlerChange={handlerChange} />
             </Dropdown.Toggle>
             <Dropdown.Menu className={styles.dropdownMenu}>
                 {searchResult.map((e, ind) => (
