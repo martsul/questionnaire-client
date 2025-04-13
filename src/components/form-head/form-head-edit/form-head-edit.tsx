@@ -15,7 +15,7 @@ export const FormHeadEdit: FC<Props> = ({ head }) => {
     const { isPublic, isEdit } = useFormContext();
 
     return (
-        <FormHeadBlock owner={head.User.name} createdAt={head.createdAt}>
+        <FormHeadBlock owner={head.owner.name} createdAt={head.createdAt}>
             <>
                 <FormHeadTitle />
                 <FromHeadTheme />

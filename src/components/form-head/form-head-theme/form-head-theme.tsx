@@ -2,11 +2,14 @@ import { Form } from "react-bootstrap";
 import { useFormContext } from "../../../contexts/form-context/use-form-context";
 import { useLanguage } from "../../../contexts/language-context/use-language";
 import { dictionary } from "../../../constants/dictionary";
+import { useFormHeadTheme } from "./use-form-head-theme";
 
 export const FromHeadTheme = () => {
     const { register, watch } = useFormContext();
     const { language } = useLanguage();
     const words = dictionary[language].form;
+
+    const { availableThemes, onChangeTag } = useFormHeadTheme();
 
     return (
         <>
@@ -35,13 +38,13 @@ export const FromHeadTheme = () => {
                     <Form.Control
                         {...register("ownTheme")}
                         list="theme"
+                        onChange={onChangeTag}
                         placeholder={words.theme}
                     />
                     <datalist id="theme">
-                        <option value="Яблоко" />
-                        <option value="Банан" />
-                        <option value="Груша" />
-                        <option value="Апельсин" />
+                        {availableThemes.map((e) => (
+                            <option value={e} key={e} />
+                        ))}
                     </datalist>
                 </>
             )}

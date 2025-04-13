@@ -10,8 +10,11 @@ import { AdminPage } from "./pages/admin-page";
 import { FormPage } from "./pages/form-page";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import { enableMapSet } from "immer";
 
 function App() {
+    enableMapSet()
+
     const router = createBrowserRouter([
         {
             path: "/",

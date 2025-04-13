@@ -11,6 +11,8 @@ export const FormHeadDetails: FC<Props> = ({ canEdit, owner, createdAt }) => {
         day: "2-digit",
     });
 
+    console.log(isPublic)
+
     return (
         <div className="d-flex justify-content-between text-muted align-items-center">
             <span>{owner}</span>

@@ -4,8 +4,8 @@ import { Form } from "./form";
 import { getForm } from "../../redux/entities/form/get-form";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-    selectFormData,
     selectFormStatus,
+    selectHead,
 } from "../../redux/entities/form/form-slice";
 import { useLoading } from "../../contexts/loading-context/use-loading";
 import { useMessage } from "../../contexts/message-context/use-message-context";
@@ -21,7 +21,7 @@ export const FormContainer = () => {
     const { language } = useLanguage();
     const { errors } = dictionary[language];
     const navigate = useNavigate();
-    const formData = useAppSelector(selectFormData);
+    const formHead = useAppSelector(selectHead);
 
     useEffect(() => {
         dispatch(getForm(formId));
@@ -40,11 +40,11 @@ export const FormContainer = () => {
             addMessage("danger", errors.unknown);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [errors.unknown, formData, navigate, status]);
+    }, [errors.unknown, formHead, navigate, status]);
 
-    if (!formData?.head) {
+    if (!formHead) {
         return null;
     }
 
-    return <Form formData={formData} />;
+    return <Form formHead={formHead} />;
 };
