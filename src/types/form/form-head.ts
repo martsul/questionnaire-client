@@ -8,5 +8,6 @@ export type FormHead = {
     createdAt: Date;
     isPublic: boolean;
     owner: { name: string };
-    Theme: { theme: string };
+    theme: string;
+    themes: string[];
 };

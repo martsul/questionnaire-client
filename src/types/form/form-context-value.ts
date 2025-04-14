@@ -6,7 +6,5 @@ export type FormContextValue = {
     onSubmit: (e?: BaseSyntheticEvent) => Promise<void>;
     watch: UseFormWatch<FieldValues>;
     toggleEdit: () => void;
-    togglePublic: () => void;
     isEdit: boolean;
-    isPublic: boolean;
 };

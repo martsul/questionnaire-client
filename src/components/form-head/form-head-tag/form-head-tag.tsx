@@ -14,7 +14,7 @@ export const FormHeadTag: FC<Props> = ({ text, onDelete }) => {
         <Badge className="d-flex align-items-center gap-1 fs-6">
             <span>{text}</span>
             {isEdit && (
-                <button onClick={onDelete} type="button">
+                <button className="text-white" onClick={onDelete} type="button">
                     <i className="bi bi-x"></i>
                 </button>
             )}

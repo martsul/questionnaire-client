@@ -3,21 +3,33 @@ import { dictionary } from "../../../constants/dictionary";
 import { useFormContext } from "../../../contexts/form-context/use-form-context";
 import { useLanguage } from "../../../contexts/language-context/use-language";
 import styles from "./form-head-title.module.css";
+import MDEditor from "@uiw/react-md-editor";
+import { useFormHeadTitle } from "./use-form-head-title";
+import { FC } from "react";
 
-export const FormHeadTitle = () => {
+type Props = { title: string; description: string };
+
+export const FormHeadTitle: FC<Props> = ({ description, title }) => {
     const { language } = useLanguage();
     const words = dictionary[language].form;
     const { register, watch } = useFormContext();
+    const { handlerChangeDescription, handlerChangeTitle } = useFormHeadTitle();
 
     return (
         <>
-            <Form.Control placeholder={words.title} {...register("title")} />
             <Form.Control
-                className={styles.textarea}
-                placeholder={words.description}
-                {...register("description")}
-                as="textarea"
+                placeholder={words.title}
+                value={title}
+                onChange={(event) => handlerChangeTitle(event.target.value)}
             />
+            <div>
+                <MDEditor
+                    value={description}
+                    onChange={(event) => {
+                        handlerChangeDescription(event || "");
+                    }}
+                />
+            </div>
             <div className={styles.file}>
                 {!watch("img")?.length && (
                     <i className="bi bi-card-image fs-1"></i>

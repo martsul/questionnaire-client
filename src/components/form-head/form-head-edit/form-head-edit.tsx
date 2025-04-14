@@ -12,13 +12,14 @@ type Props = {
 };
 
 export const FormHeadEdit: FC<Props> = ({ head }) => {
-    const { isPublic, isEdit } = useFormContext();
+    const { isEdit } = useFormContext();
+    const { title, description, isPublic, themes, theme } = head;
 
     return (
-        <FormHeadBlock owner={head.owner.name} createdAt={head.createdAt}>
+        <FormHeadBlock isPublic={isPublic} owner={head.owner.name} createdAt={head.createdAt}>
             <>
-                <FormHeadTitle />
-                <FromHeadTheme />
+                <FormHeadTitle title={title} description={description} />
+                <FromHeadTheme themes={themes} theme={theme} />
                 <FormHeadTags />
                 {!isPublic && isEdit && <FromHeadUsers />}
             </>

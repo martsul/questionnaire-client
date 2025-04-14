@@ -9,6 +9,7 @@ import { ManagementPanel } from "../management-panel/management-panel";
 import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { UsersPanel } from "../users-panel/users-panel";
 
 export const UsersTable = () => {
     const { language } = useLanguage();
@@ -33,7 +34,9 @@ export const UsersTable = () => {
 
     return (
         <section className="mt-5">
-            <ManagementPanel sendUsers={sendUsers} isActive={Boolean(selectedUsers.size)} />
+            <ManagementPanel isActive={Boolean(selectedUsers.size)}>
+                <UsersPanel sendUsers={sendUsers} />
+            </ManagementPanel>
             <TableTitle title={words.title} handlerChange={filterUsers} />
             <div className="overflow-auto">
                 <Table className="">

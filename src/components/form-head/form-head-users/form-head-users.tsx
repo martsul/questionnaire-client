@@ -19,7 +19,7 @@ export const FromHeadUsers = () => {
         availableUsers,
     } = useFormHeadUsers();
 
-    const formatUsers = users?.addUsers ? Object.values(users.addUsers) : [];
+    const formatUsers = users ? Object.values(users) : [];
 
     return (
         <>

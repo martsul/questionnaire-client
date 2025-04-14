@@ -1,10 +1,11 @@
-import { UsersState } from "../users-state";
+import { AvailableUser } from "./available-users";
 import { FormHead } from "./form-head";
-import { TagsState } from "./tags-state";
+import { Question } from "./question";
 
 export type FormSliceState = {
     head: FormHead | null;
-    tags: TagsState | null;
-    users: UsersState | null;
+    tags: string[] | null;
+    users: Record<number, AvailableUser> | null;
+    questions: Question[];
     requestStatus: "idle" | "pending" | "rejected" | "fulfilled";
 };

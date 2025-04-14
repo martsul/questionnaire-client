@@ -6,6 +6,7 @@ type Props = {
     canEdit?: boolean;
     owner: string;
     createdAt: Date;
+    isPublic: boolean;
 };
 
 export const FormHeadBlock: FC<Props> = ({
@@ -13,6 +14,7 @@ export const FormHeadBlock: FC<Props> = ({
     canEdit = true,
     owner,
     createdAt,
+    isPublic
 }) => {
     return (
         <div className="bg-body-secondary p-4 rounded d-flex flex-column gap-3">
@@ -20,6 +22,7 @@ export const FormHeadBlock: FC<Props> = ({
                 canEdit={canEdit}
                 owner={owner}
                 createdAt={createdAt}
+                isPublic={isPublic}
             />
             {children}
         </div>
