@@ -1,44 +1,64 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useApi } from "./use-api";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { imgInFile } from "../helpers/img-in-file";
-import { FormData } from "../types/form/form-data";
-import { fileToBase64 } from "../helpers/file-to-base-64";
 import { endpoints } from "../constants/config";
 import { getForm } from "../redux/entities/form/get-form";
-import { selectEditData, selectImg } from "../redux/entities/form/form-slice";
+import {
+    selectEditData,
+    selectHead,
+    toggleLike,
+} from "../redux/entities/form/form-slice";
+import { convertImg } from "../helpers/convert-img";
+import { useAuthorization } from "../contexts/authorization-context/use-authorization";
+import { simpleApi } from "../api";
 
 export const useFormLogic = () => {
     const dispatch = useAppDispatch();
-    const img = useAppSelector(selectImg);
+    const headData = useAppSelector(selectHead);
     const request = useApi();
-    const { register, handleSubmit, watch, reset } = useForm<FormData>();
     const formData = useAppSelector(selectEditData);
+    const [isEdit, setIsEdit] = useState(false);
+    const { userData } = useAuthorization();
+
+    const onLike = () => {
+        simpleApi.post(endpoints.like, {
+            formId: headData?.id,
+            userId: userData?.id,
+            isLiked: headData?.isLiked,
+        });
+        dispatch(toggleLike());
+    };
+
+    const toggleEdit = () => setIsEdit(!isEdit);
 
     useEffect(() => {
-        const initializeForm = async () => {
-            const imgFile = await imgInFile(img);
+        if (!isEdit && headData?.id) {
+            dispatch(getForm({ formId: headData.id, userId: userData?.id }));
+        }
+    }, [isEdit, headData?.id, dispatch, userData?.id]);
 
-            reset({
-                img: imgFile,
-            });
-        };
-
-        initializeForm();
-    }, [img, reset]);
-
-    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        const img = await fileToBase64(data.img[0]);
-        const requestData = { img, ...formData };
-        await request("put", endpoints.form, true, requestData);
-        await dispatch(getForm(formData?.formId as number));
+    const onSubmit = async () => {
+        const img = await convertImg(formData?.img);
+        const responseData = { ...formData, img };
+        const response = await request(
+            "put",
+            endpoints.form,
+            true,
+            responseData
+        );
+        if (!(response instanceof Error)) {
+            if (headData?.id) {
+                await dispatch(
+                    getForm({ formId: headData.id, userId: userData?.id })
+                );
+            }
+        }
     };
 
     return {
-        register,
-        handleSubmit,
-        watch,
+        toggleEdit,
+        isEdit,
         onSubmit,
+        onLike,
     };
 };

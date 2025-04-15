@@ -11,26 +11,28 @@ import { useLoading } from "../../contexts/loading-context/use-loading";
 import { useMessage } from "../../contexts/message-context/use-message-context";
 import { dictionary } from "../../constants/dictionary";
 import { useLanguage } from "../../contexts/language-context/use-language";
+import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
 
 export const FormContainer = () => {
     const dispatch = useAppDispatch();
-    const formId = +(useParams().formId as string);
-    const status = useAppSelector(selectFormStatus);
     const { startLoading, stopLoading } = useLoading();
     const { addMessage } = useMessage();
     const { language } = useLanguage();
     const { errors } = dictionary[language];
-    const navigate = useNavigate();
+    const { userData } = useAuthorization();
     const formHead = useAppSelector(selectHead);
+    const formId = +(useParams().formId as string);
+    const status = useAppSelector(selectFormStatus);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(getForm(formId));
-    }, [dispatch, formId]);
+        dispatch(getForm({ formId, userId: userData?.id }));
+    }, [dispatch, formId, userData?.id]);
 
     useEffect(() => {
         if (status === "pending" || status === "idle") {
             startLoading();
-            return
+            return;
         }
 
         stopLoading();

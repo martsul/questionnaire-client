@@ -18,7 +18,7 @@ export const useApi = () => {
         url: AvailableEndpoints,
         needMessage: boolean,
         data?: RequestData
-    ) => {
+    ): Promise<T | Error> => {
         try {
             startLoading();
             const response: ApiResponse<T> = await api[method](url, data);
@@ -27,6 +27,7 @@ export const useApi = () => {
             if (needMessage) {
                 addMessage("danger", handlerErrors(error, language));
             }
+            return error as Error
         } finally {
             stopLoading();
         }

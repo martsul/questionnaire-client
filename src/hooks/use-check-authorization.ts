@@ -8,7 +8,7 @@ const getResult = async (request: ReturnType<typeof useApi>) => {
     const result = await request<
         Omit<AuthorizationResponse, "accessToken" | "refreshToken">
     >("get", endpoints.authRequest, false);
-    if (!result) {
+    if (result instanceof Error) {
         throw new Error("Unauthorized");
     }
     return result;
@@ -27,8 +27,7 @@ export const useCheckAuthorization = () => {
             const result = await getResult(request);
             addUser(result);
         } catch (error) {
-            console.log(error);
-            localStorage.removeItem("accessToken");
+            console.log(error)
         } finally {
             stopLoading();
         }

@@ -3,25 +3,25 @@ import { FormHeadDetails } from "../form-head-details/form-head-details";
 
 type Props = {
     children: ReactElement;
-    canEdit?: boolean;
-    owner: string;
-    createdAt: Date;
+    canEdit: boolean;
     isPublic: boolean;
+    likes: number;
+    isLiked: boolean;
 };
 
 export const FormHeadBlock: FC<Props> = ({
     children,
-    canEdit = true,
-    owner,
-    createdAt,
-    isPublic
+    canEdit,
+    isPublic,
+    likes,
+    isLiked,
 }) => {
     return (
         <div className="bg-body-secondary p-4 rounded d-flex flex-column gap-3">
             <FormHeadDetails
+                likes={likes}
+                isLiked={isLiked}
                 canEdit={canEdit}
-                owner={owner}
-                createdAt={createdAt}
                 isPublic={isPublic}
             />
             {children}

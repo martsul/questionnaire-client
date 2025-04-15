@@ -27,7 +27,7 @@ export const useUsersTable = () => {
 
     useEffect(() => {
         request<UsersTable>("get", endpoints.users, true).then((response) => {
-            if (response) {
+            if (!(response instanceof Error)) {
                 setUsers(response.users);
                 data = response.users;
             }
@@ -63,7 +63,7 @@ export const useUsersTable = () => {
             true,
             JSON.stringify(Array.from(selectedUsers))
         ).then((response) => {
-            if (response) {
+            if (!(response instanceof Error)) {
                 setUsers(response.users);
                 data = response.users;
                 addMessage("success", words.success);

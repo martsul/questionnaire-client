@@ -9,12 +9,13 @@ import {
     ChangeTypePayload,
     DeleteAnswerPayload,
     SetQuestionsPayload,
+    ToggleStatisticPayload,
 } from "../../../types/payloads/form-payloads";
 
 const initialState: FormSliceState = {
     head: null,
-    tags: null,
-    users: null,
+    tags: [],
+    users: [],
     questions: [],
     requestStatus: "idle",
 };
@@ -29,7 +30,7 @@ export const formSlice = createSlice({
             }
         },
         changeHeadDescription: (state, { payload }: PayloadAction<string>) => {
-            if (state.head) {
+            if (state.head && payload.length <= 512) {
                 state.head.description = payload;
             }
         },
@@ -129,6 +130,32 @@ export const formSlice = createSlice({
                 answers[payload.answerIndex] = payload.value;
             }
         },
+        setImg: (state, { payload }: PayloadAction<string>) => {
+            if (state.head) {
+                state.head.img = payload;
+            }
+        },
+        toggleLike: (state) => {
+            if (state.head) {
+                if (state.head.isLiked) {
+                    state.head.likes--;
+                } else {
+                    state.head.likes++;
+                }
+                state.head.isLiked = !state.head.isLiked;
+            }
+        },
+        toggleStatistic: (
+            state,
+            { payload }: PayloadAction<ToggleStatisticPayload>
+        ) => {
+            const questions = new Set(payload.questions);
+            state.questions.forEach(q => {
+                if (questions.has(q.id)) {
+                    q.inStatistic = payload.inStatistic
+                }
+            })
+        },
     },
     selectors: {
         selectQuestions: (state) => {
@@ -156,12 +183,10 @@ export const formSlice = createSlice({
                     isPublic: state.head.isPublic,
                     users: state.users,
                     tags: state.tags,
-                    questions: state.questions
+                    questions: state.questions,
+                    img: state.head.img,
                 };
             }
-        },
-        selectImg: (state) => {
-            return state.head?.img;
         },
     },
     extraReducers: (builder) => {
@@ -176,6 +201,7 @@ export const formSlice = createSlice({
                 state.requestStatus = "fulfilled";
                 state.head = action.payload.head as FormHead;
                 state.tags = action.payload.tags;
+                state.questions = action.payload.questions;
                 action.payload.users.forEach((u) => {
                     if (!state.users) {
                         state.users = {};
@@ -193,7 +219,6 @@ export const {
     selectUsers,
     selectQuestions,
     selectEditData,
-    selectImg,
 } = formSlice.selectors;
 export const {
     changeHeadTitle,
@@ -212,4 +237,7 @@ export const {
     changeQuestionTitle,
     changeQuestionDescription,
     changeAnswer,
+    setImg,
+    toggleLike,
+    toggleStatistic
 } = formSlice.actions;

@@ -4,13 +4,15 @@ import { ApiResponse } from "../../../types/api-response";
 import { endpoints } from "../../../constants/config";
 import { FormEntities } from "../../../types/form/form-entities";
 
+type Data = { formId: number; userId?: number };
+
 export const getForm = createAsyncThunk(
     "form/getForm",
-    async (id: number, { rejectWithValue }) => {
+    async (data: Data, { rejectWithValue }) => {
         try {
             const response: ApiResponse<FormEntities> = await simpleApi.get(
                 endpoints.form,
-                { params: { id } }
+                { params: { formId: data.formId, userId: data.userId } }
             );
 
             if (!response.data.head) {

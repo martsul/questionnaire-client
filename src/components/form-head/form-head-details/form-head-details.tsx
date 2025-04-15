@@ -5,34 +5,31 @@ import { togglePublic } from "../../../redux/entities/form/form-slice";
 
 type Props = {
     canEdit: boolean;
-    owner: string;
-    createdAt: Date;
     isPublic: boolean;
+    likes: number;
+    isLiked: boolean;
 };
 
 export const FormHeadDetails: FC<Props> = ({
     canEdit,
-    owner,
-    createdAt,
     isPublic,
+    likes,
+    isLiked,
 }) => {
-    const dispatch = useAppDispatch()
-    const { isEdit, toggleEdit } = useFormContext();
-    const date = new Date(createdAt).toLocaleString("en-US", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-    });
+    const dispatch = useAppDispatch();
+    const { isEdit, toggleEdit, onLike } = useFormContext();
 
     return (
         <div className="d-flex justify-content-between text-muted align-items-center">
-            <span>{owner}</span>
+            <span>owner</span>
             <div className="d-flex align-items-center gap-3">
                 {isEdit && (
                     <button
                         type="button"
                         className="fs-4"
-                        onClick={() => {dispatch(togglePublic())}}
+                        onClick={() => {
+                            dispatch(togglePublic());
+                        }}
                     >
                         {!isPublic && (
                             <i className="bi bi-eye-slash text-muted"></i>
@@ -46,7 +43,14 @@ export const FormHeadDetails: FC<Props> = ({
                         {!isEdit && <i className="bi bi-pencil fs-6"></i>}
                     </button>
                 )}
-                <span>{date}</span>
+                <span className="d-flex align-items-center gap-2">
+                    <span>{likes}</span>
+                    <button onClick={onLike}>
+                        {isLiked && <i className="bi bi-heart-fill"></i>}
+                        {!isLiked && <i className="bi bi-heart"></i>}
+                    </button>
+                </span>
+                <span>date</span>
             </div>
         </div>
     );

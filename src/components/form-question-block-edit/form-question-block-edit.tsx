@@ -4,10 +4,11 @@ import { CSS } from "@dnd-kit/utilities";
 import { Question } from "../../types/form/question";
 import { Form } from "react-bootstrap";
 import { produce } from "immer";
-import { FormQuestion } from "../form-question/form-question";
-import { FormAnswer } from "../form-answer/form-answer";
-import { useFormContext } from "../../contexts/form-context/use-form-context";
+import { FormQuestionEdit } from "../form-question-edit/form-question-edit";
+import { FormAnswerEdit } from "../form-answer-edit/form-answer-edit";
 import { QuestionType } from "../question-type/question-type";
+import { FormQuestionVisible } from "../form-question-visible/form-question-visible";
+import { FormAnswerVisible } from "../form-answer-visible/form-answer-visible";
 
 type Props = {
     question: Question;
@@ -17,16 +18,14 @@ type Props = {
     setEditQuestion: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const FormBlock: FC<Props> = ({
+export const FormQuestionBlockEdit: FC<Props> = ({
     question,
     isSelected,
     setSelectedQuestions,
     setEditQuestion,
     active,
 }) => {
-    const { type, index, title, description } = question;
-    const { isEdit } = useFormContext();
-    const isPreview = !(active && isEdit);
+    const { type, index, title, description, inStatistic } = question;
     const { attributes, listeners, setNodeRef, transform, transition } =
         useSortable({ id: question.id });
 
@@ -66,8 +65,31 @@ export const FormBlock: FC<Props> = ({
                 <QuestionType type={type} index={index} />
             </div>
             <div className="d-flex flex-column gap-2">
-                <FormQuestion index={index} title={title} description={description} isPreview={isPreview} />
-                <FormAnswer index={index}  isPreview={isPreview} type={type} answers={question.answers} />
+                {active && (
+                    <FormQuestionEdit
+                        index={index}
+                        title={title}
+                        description={description}
+                        inStatistic={inStatistic}
+                    />
+                )}
+                {!active && (
+                    <FormQuestionVisible
+                        title={title}
+                        description={description}
+                        inStatistic={inStatistic}
+                    />
+                )}
+                {active && (
+                    <FormAnswerEdit
+                        index={index}
+                        type={type}
+                        answers={question.answers}
+                    />
+                )}
+                {!active && (
+                    <FormAnswerVisible answers={question.answers} type={type} />
+                )}
             </div>
         </div>
     );

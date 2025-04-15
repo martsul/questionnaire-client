@@ -11,5 +11,6 @@ export const handlerErrors = (
     const { errors } = dictionary[language];
     if (!(error instanceof AxiosError)) return errors.unknown;
     const errorData = error.response?.data.split(",")[0];
+    console.log(errorData)
     return errorData in errors ? errors[errorData as AvailableErrors] : errors.unknown;
 };

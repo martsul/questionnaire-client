@@ -20,6 +20,7 @@ export const FormHeadTags = () => {
                 placeholder={words.tag}
                 onChange={onChangeTag}
                 onKeyDown={handlerEnter}
+                maxLength={25}
             />
             <datalist id="tag">
                 {availableTags.map((e) => (

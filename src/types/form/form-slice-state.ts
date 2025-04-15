@@ -4,8 +4,8 @@ import { Question } from "./question";
 
 export type FormSliceState = {
     head: FormHead | null;
-    tags: string[] | null;
-    users: Record<number, AvailableUser> | null;
+    tags: string[];
+    users: Record<number, AvailableUser> ;
     questions: Question[];
     requestStatus: "idle" | "pending" | "rejected" | "fulfilled";
 };

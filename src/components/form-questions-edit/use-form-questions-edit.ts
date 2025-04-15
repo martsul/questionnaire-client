@@ -3,6 +3,7 @@ import {
     setQuestions,
     selectQuestions,
     addQuestion,
+    toggleStatistic,
 } from "../../redux/entities/form/form-slice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
@@ -14,7 +15,7 @@ import {
 } from "@dnd-kit/core";
 import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 
-export const useFormQuestion = () => {
+export const useFormQuestionEdit = () => {
     const questions = useAppSelector(selectQuestions);
     const dispatch = useAppDispatch();
     const [editQuestion, setEditQuestion] = useState("");
@@ -49,7 +50,14 @@ export const useFormQuestion = () => {
         dispatch(addQuestion());
     };
 
+    const onStatistic = (inStatistic: boolean) => {
+        dispatch(
+            toggleStatistic({ inStatistic, questions: Array.from(selectedQuestions) })
+        );
+    };
+
     return {
+        onStatistic,
         sensors,
         editQuestion,
         setEditQuestion,

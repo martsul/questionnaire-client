@@ -18,6 +18,9 @@ export const dictionary = {
             questionTitle: "Title",
             questionDescription: "Description",
             questionAnswer: "Answer",
+            commentsTitle: "Comments",
+            commentsInput: "Leave a comment",
+            send: "Send"
         },
         header: {
             login: "Log In",
@@ -86,6 +89,9 @@ export const dictionary = {
             questionTitle: "Título",
             questionDescription: "Descripción",
             questionAnswer: "Respuesta",
+            commentsTitle: "Comentarios",
+            commentsInput: "Deja un comentario",
+            send: "Enviar"
         },
         header: {
             login: "Iniciar sesión",

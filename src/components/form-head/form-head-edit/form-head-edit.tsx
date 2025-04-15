@@ -5,7 +5,6 @@ import { useFormContext } from "../../../contexts/form-context/use-form-context"
 import { FormHeadTitle } from "../form-head-title/form-head-title";
 import { FormHead } from "../../../types/form/form-head";
 import { FC } from "react";
-import { FormHeadBlock } from "../form-head-block/form-head-block";
 
 type Props = {
     head: FormHead;
@@ -13,16 +12,14 @@ type Props = {
 
 export const FormHeadEdit: FC<Props> = ({ head }) => {
     const { isEdit } = useFormContext();
-    const { title, description, isPublic, themes, theme } = head;
+    const { title, description, isPublic, themes, theme, img} = head;
 
     return (
-        <FormHeadBlock isPublic={isPublic} owner={head.owner.name} createdAt={head.createdAt}>
             <>
-                <FormHeadTitle title={title} description={description} />
+                <FormHeadTitle img={img} title={title} description={description} />
                 <FromHeadTheme themes={themes} theme={theme} />
                 <FormHeadTags />
                 {!isPublic && isEdit && <FromHeadUsers />}
             </>
-        </FormHeadBlock>
     );
 };

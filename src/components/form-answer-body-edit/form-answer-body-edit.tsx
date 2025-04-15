@@ -1,42 +1,37 @@
 import { FC } from "react";
 import { QuestionsType } from "../../types/form/questions-type";
 import { Form } from "react-bootstrap";
-import { FormCheckboxAnswer } from "../form-checkbox-answer/form-checkbox-answer";
-import { useFormContext } from "../../contexts/form-context/use-form-context";
+import { FormCheckboxAnswerEdit } from "../form-checkbox-answer-edit/form-checkbox-answer-edit";
 
 type Props = {
     type: QuestionsType;
     answers?: string[];
     selectedAnswers: Set<number>;
     handlerChange: (index: number) => void;
-    isPreview: boolean;
     index: number;
 };
 
-export const FormAnswerBody: FC<Props> = ({
+export const FormAnswerBodyEdit: FC<Props> = ({
     type,
     answers,
     selectedAnswers,
     handlerChange,
-    isPreview,
     index
 }) => {
-    const { isEdit } = useFormContext();
 
     return (
         <>
             {(type === "line" || type === "number") && (
-                <Form.Control readOnly={isEdit} />
+                <Form.Control readOnly={true} />
             )}
             {type === "paragraph" && (
-                <Form.Control as={"textarea"} readOnly={isEdit} />
+                <Form.Control as={"textarea"} readOnly={true} />
             )}
             {answers &&
                 answers.map((a, i) => (
-                    <FormCheckboxAnswer
+                    <FormCheckboxAnswerEdit
                         isActive={selectedAnswers.has(i)}
                         answer={a}
-                        isPreview={isPreview}
                         handlerChange={() => {
                             handlerChange(i);
                         }}

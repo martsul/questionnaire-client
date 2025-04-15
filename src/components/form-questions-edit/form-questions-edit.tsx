@@ -3,13 +3,12 @@ import {
     SortableContext,
     verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { FormBlock } from "../form-block/form-block";
-import { useFormQuestion } from "./use-form-questions";
+import { FormQuestionBlockEdit } from "../form-question-block-edit/form-question-block-edit";
+import { useFormQuestionEdit } from "./use-form-questions-edit";
 import { ManagementPanel } from "../management-panel/management-panel";
 import { FormManagement } from "../form-management/form-management";
-import { useFormContext } from "../../contexts/form-context/use-form-context";
 
-export const FormQuestions = () => {
+export const FormQuestionsEdit = () => {
     const {
         editQuestion,
         handleDragEnd,
@@ -20,8 +19,8 @@ export const FormQuestions = () => {
         questions,
         onAdd,
         onDelete,
-    } = useFormQuestion();
-    const { isEdit } = useFormContext();
+        onStatistic,
+    } = useFormQuestionEdit();
 
     return (
         <>
@@ -36,7 +35,7 @@ export const FormQuestions = () => {
                         strategy={verticalListSortingStrategy}
                     >
                         {questions.map((q) => (
-                            <FormBlock
+                            <FormQuestionBlockEdit
                                 active={editQuestion === q.id}
                                 setEditQuestion={setEditQuestion}
                                 isSelected={selectedQuestions.has(q.id)}
@@ -48,11 +47,13 @@ export const FormQuestions = () => {
                     </SortableContext>
                 </DndContext>
             </div>
-            {isEdit && (
-                <ManagementPanel>
-                    <FormManagement onDelete={onDelete} onAdd={onAdd} />
-                </ManagementPanel>
-            )}
+            <ManagementPanel>
+                <FormManagement
+                    onDelete={onDelete}
+                    onAdd={onAdd}
+                    onStatistic={onStatistic}
+                />
+            </ManagementPanel>
         </>
     );
 };

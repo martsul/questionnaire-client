@@ -16,5 +16,6 @@ export const endpoints = {
     form: "/form",
     tag: "/tag",
     theme: "/theme",
-    user: "/user"
+    user: "/user",
+    like: "/like"
 } as const;

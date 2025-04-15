@@ -1,6 +1,7 @@
 import {
     changeHeadDescription,
     changeHeadTitle,
+    setImg,
 } from "../../../redux/entities/form/form-slice";
 import { useAppDispatch } from "../../../redux/hooks";
 
@@ -15,5 +16,11 @@ export const useFormHeadTitle = () => {
         dispatch(changeHeadDescription(value));
     };
 
-    return { handlerChangeTitle, handlerChangeDescription };
+    const handlerFileChange = (files: FileList | null) => {
+        if (files) {
+            dispatch(setImg(URL.createObjectURL(files[0])));
+        }
+    };
+
+    return { handlerChangeTitle, handlerChangeDescription, handlerFileChange };
 };

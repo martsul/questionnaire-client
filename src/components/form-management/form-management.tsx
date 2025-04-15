@@ -4,9 +4,10 @@ import { useFormContext } from "../../contexts/form-context/use-form-context";
 type Props = {
     onDelete: () => void;
     onAdd: () => void;
+    onStatistic: (inStatistic: boolean) => void;
 };
 
-export const FormManagement: FC<Props> = ({ onDelete, onAdd }) => {
+export const FormManagement: FC<Props> = ({ onDelete, onAdd, onStatistic }) => {
     const { onSubmit } = useFormContext();
 
     return (
@@ -24,6 +25,20 @@ export const FormManagement: FC<Props> = ({ onDelete, onAdd }) => {
             </button>
             <button type="button" onClick={onDelete}>
                 <i className="bi bi-trash"></i>
+            </button>
+            <button
+                onClick={() => {
+                    onStatistic(true);
+                }}
+            >
+                <i className="bi bi-people-fill"></i>
+            </button>
+            <button
+                onClick={() => {
+                    onStatistic(false);
+                }}
+            >
+                <i className="bi bi-incognito"></i>
             </button>
         </>
     );

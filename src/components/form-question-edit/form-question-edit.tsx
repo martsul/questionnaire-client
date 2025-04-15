@@ -7,20 +7,19 @@ import {
     changeQuestionDescription,
     changeQuestionTitle,
 } from "../../redux/entities/form/form-slice";
-import styles from "./form-question.module.css";
 
 type Props = {
     title: string;
     description: string;
-    isPreview: boolean;
     index: number;
+    inStatistic: boolean;
 };
 
-export const FormQuestion: FC<Props> = ({
+export const FormQuestionEdit: FC<Props> = ({
     title,
     description,
-    isPreview,
     index,
+    inStatistic,
 }) => {
     const dispatch = useAppDispatch();
     const { language } = useLanguage();
@@ -34,31 +33,27 @@ export const FormQuestion: FC<Props> = ({
 
     return (
         <>
-            {!isPreview && (
+            <div className="d-flex align-items-center justify-content-between gap-3">
                 <Form.Control
+                    maxLength={40}
                     placeholder={words.questionTitle}
                     onChange={(event) => {
                         handlerChange("title", event.target.value);
                     }}
                     value={title}
                 />
-            )}
-            {isPreview && <h2>{title}</h2>}
-            {!isPreview && (
-                <Form.Control
+                {!inStatistic && <i className="bi bi-incognito"></i>}
+            </div>
+
+            <Form.Control
+                maxLength={100}
                 placeholder={words.questionDescription}
-                    onChange={(event) => {
-                        handlerChange("description", event.target.value);
-                    }}
-                    as="textarea"
-                    value={description}
-                />
-            )}
-            {isPreview && (
-                <p className={styles.description}>
-                    {description || words.noInfo}
-                </p>
-            )}
+                onChange={(event) => {
+                    handlerChange("description", event.target.value);
+                }}
+                as="textarea"
+                value={description}
+            />
         </>
     );
 };

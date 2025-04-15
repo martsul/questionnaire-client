@@ -19,3 +19,7 @@ export type ChangeAnswerPayload = {
     answerIndex: number;
     value: string;
 };
+export type ToggleStatisticPayload = {
+    inStatistic: boolean;
+    questions: string[]
+}

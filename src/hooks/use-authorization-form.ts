@@ -21,7 +21,7 @@ export const useAuthorizationForm = () => {
     const handlerSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
             event.preventDefault();
             const result = await getResult(event.currentTarget, request);
-            if (!result) return
+            if (result instanceof Error) return
             addUser(result);
             localStorage.setItem("accessToken", result.accessToken);
             navigate("/");

@@ -4,10 +4,9 @@ export type FormHead = {
     title: string;
     description: string;
     likes: number;
+    isLiked: boolean
     img: string;
-    createdAt: Date;
     isPublic: boolean;
-    owner: { name: string };
     theme: string;
     themes: string[];
 };
