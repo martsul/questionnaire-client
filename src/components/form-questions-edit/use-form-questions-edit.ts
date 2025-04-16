@@ -4,7 +4,7 @@ import {
     selectQuestions,
     addQuestion,
     toggleStatistic,
-} from "../../redux/entities/form/form-slice";
+} from "../../redux/entities/forms/forms-slice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
     DragEndEvent,
@@ -52,7 +52,10 @@ export const useFormQuestionEdit = () => {
 
     const onStatistic = (inStatistic: boolean) => {
         dispatch(
-            toggleStatistic({ inStatistic, questions: Array.from(selectedQuestions) })
+            toggleStatistic({
+                inStatistic,
+                questions: Array.from(selectedQuestions),
+            })
         );
     };
 

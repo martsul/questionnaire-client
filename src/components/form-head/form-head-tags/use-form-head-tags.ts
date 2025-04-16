@@ -3,11 +3,11 @@ import { simpleApi } from "../../../api";
 import { endpoints } from "../../../constants/config";
 import { debounce } from "lodash";
 import { useAppDispatch } from "../../../redux/hooks";
-import { addTag, deleteTag } from "../../../redux/entities/form/form-slice";
+import { addTag, deleteTag } from "../../../redux/entities/forms/forms-slice";
 
 export const useFormHeadTags = () => {
     const [availableTags, setAvailableTags] = useState<string[]>([]);
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
 
     const sendTagToServer = async (value: string) => {
         try {
@@ -28,11 +28,11 @@ export const useFormHeadTags = () => {
     };
 
     const handlerAddTag = (tag: string) => {
-        dispatch(addTag(tag))
+        dispatch(addTag(tag));
     };
 
     const handlerDeleteTag = (tag: string) => {
-        dispatch(deleteTag(tag))
+        dispatch(deleteTag(tag));
     };
 
     const handlerEnter: React.KeyboardEventHandler<HTMLInputElement> = (
@@ -48,6 +48,6 @@ export const useFormHeadTags = () => {
         availableTags,
         onChangeTag,
         handlerDeleteTag,
-        handlerEnter
+        handlerEnter,
     };
 };

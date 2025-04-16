@@ -7,7 +7,7 @@ import { FormQuestionsEdit } from "../form-questions-edit/form-questions-edit";
 import { FormHeadBlock } from "../form-head/form-head-block/form-head-block";
 import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
 import { FormQuestionsVisible } from "../form-questions-visible/form-questions-visible";
-import { FormCommentsContainer } from "../form-comments/form-comments-container";
+import { FormComments } from "../form-comments/form-comments";
 
 type Props = {
     formHead: FormHead;
@@ -43,7 +43,7 @@ export const Form: FC<Props> = ({ formHead }) => {
                 {isEdit && <FormQuestionsEdit />}
                 {!isEdit && <FormQuestionsVisible />}
             </form>
-            <FormCommentsContainer />
+            <FormComments formId={formHead.id} />
         </>
     );
 };

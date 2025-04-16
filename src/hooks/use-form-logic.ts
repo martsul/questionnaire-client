@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useApi } from "./use-api";
 import { endpoints } from "../constants/config";
-import { getForm } from "../redux/entities/form/get-form";
+import { getForm } from "../redux/entities/forms/get-forms";
 import {
     selectEditData,
     selectHead,
     toggleLike,
-} from "../redux/entities/form/form-slice";
+} from "../redux/entities/forms/forms-slice";
 import { convertImg } from "../helpers/convert-img";
 import { useAuthorization } from "../contexts/authorization-context/use-authorization";
 import { simpleApi } from "../api";

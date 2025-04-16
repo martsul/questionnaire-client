@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { FormHead } from "../../../types/form/form-head";
 import { useAppSelector } from "../../../redux/hooks";
-import { selectTags } from "../../../redux/entities/form/form-slice";
+import { selectTags } from "../../../redux/entities/forms/forms-slice";
 import { FormHeadTag } from "../form-head-tag/form-head-tag";
 import MDEditor from "@uiw/react-md-editor";
 import styles from "./form-head-visible.module.css";

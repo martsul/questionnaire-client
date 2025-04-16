@@ -1,7 +1,7 @@
 import { Form } from "react-bootstrap";
 import { FC } from "react";
 import { useAppDispatch } from "../../../redux/hooks";
-import { setTheme } from "../../../redux/entities/form/form-slice";
+import { setTheme } from "../../../redux/entities/forms/forms-slice";
 
 type Props = { themes: string[]; theme: string };
 

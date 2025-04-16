@@ -4,7 +4,7 @@ import { useLanguage } from "../../../contexts/language-context/use-language";
 import { dictionary } from "../../../constants/dictionary";
 import { useFormHeadUsers } from "./use-form-head-users";
 import { useAppSelector } from "../../../redux/hooks";
-import { selectUsers } from "../../../redux/entities/form/form-slice";
+import { selectUsers } from "../../../redux/entities/forms/forms-slice";
 
 export const FromHeadUsers = () => {
     const { language } = useLanguage();

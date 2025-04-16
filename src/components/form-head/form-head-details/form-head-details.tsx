@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useFormContext } from "../../../contexts/form-context/use-form-context";
 import { useAppDispatch } from "../../../redux/hooks";
-import { togglePublic } from "../../../redux/entities/form/form-slice";
+import { togglePublic } from "../../../redux/entities/forms/forms-slice";
 
 type Props = {
     canEdit: boolean;

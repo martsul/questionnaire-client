@@ -20,7 +20,7 @@ export const dictionary = {
             questionAnswer: "Answer",
             commentsTitle: "Comments",
             commentsInput: "Leave a comment",
-            send: "Send"
+            send: "Send",
         },
         header: {
             login: "Log In",
@@ -91,7 +91,7 @@ export const dictionary = {
             questionAnswer: "Respuesta",
             commentsTitle: "Comentarios",
             commentsInput: "Deja un comentario",
-            send: "Enviar"
+            send: "Enviar",
         },
         header: {
             login: "Iniciar sesión",

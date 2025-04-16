@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FormSliceState } from "../../../types/form/form-slice-state";
-import { getForm } from "./get-form";
+import { formsSliceState } from "../../../types/form/form-slice-state";
+import { getForm } from "./get-forms";
 import { FormHead } from "../../../types/form/form-head";
 import { v4 as uuidv4 } from "uuid";
 import {
@@ -12,7 +12,7 @@ import {
     ToggleStatisticPayload,
 } from "../../../types/payloads/form-payloads";
 
-const initialState: FormSliceState = {
+const initialState: formsSliceState = {
     head: null,
     tags: [],
     users: [],
@@ -20,7 +20,7 @@ const initialState: FormSliceState = {
     requestStatus: "idle",
 };
 
-export const formSlice = createSlice({
+export const formsSlice = createSlice({
     name: "form",
     initialState,
     reducers: {
@@ -150,11 +150,11 @@ export const formSlice = createSlice({
             { payload }: PayloadAction<ToggleStatisticPayload>
         ) => {
             const questions = new Set(payload.questions);
-            state.questions.forEach(q => {
+            state.questions.forEach((q) => {
                 if (questions.has(q.id)) {
-                    q.inStatistic = payload.inStatistic
+                    q.inStatistic = payload.inStatistic;
                 }
-            })
+            });
         },
     },
     selectors: {
@@ -219,7 +219,7 @@ export const {
     selectUsers,
     selectQuestions,
     selectEditData,
-} = formSlice.selectors;
+} = formsSlice.selectors;
 export const {
     changeHeadTitle,
     changeHeadDescription,
@@ -239,5 +239,5 @@ export const {
     changeAnswer,
     setImg,
     toggleLike,
-    toggleStatistic
-} = formSlice.actions;
+    toggleStatistic,
+} = formsSlice.actions;

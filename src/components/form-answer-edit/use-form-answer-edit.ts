@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useAppDispatch } from "../../redux/hooks";
 import { produce } from "immer";
-import { addAnswer, deleteAnswer } from "../../redux/entities/form/form-slice";
+import {
+    addAnswer,
+    deleteAnswer,
+} from "../../redux/entities/forms/forms-slice";
 
 export const useFormAnswerEdit = (index: number) => {
     const dispatch = useAppDispatch();

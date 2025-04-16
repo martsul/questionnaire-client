@@ -4,7 +4,7 @@ import { endpoints } from "../../../constants/config";
 import { debounce } from "lodash";
 import { AvailableUser } from "../../../types/form/available-users";
 import { useAppDispatch } from "../../../redux/hooks";
-import { addUser, deleteUser } from "../../../redux/entities/form/form-slice";
+import { addUser, deleteUser } from "../../../redux/entities/forms/forms-slice";
 
 export const useFormHeadUsers = () => {
     const [userFilter, setUserFilter] = useState<"name" | "email">("name");

@@ -4,7 +4,7 @@ import { useLanguage } from "../../../contexts/language-context/use-language";
 import { dictionary } from "../../../constants/dictionary";
 import { useFormHeadTags } from "./use-form-head-tags";
 import { useAppSelector } from "../../../redux/hooks";
-import { selectTags } from "../../../redux/entities/form/form-slice";
+import { selectTags } from "../../../redux/entities/forms/forms-slice";
 
 export const FormHeadTags = () => {
     const tags = useAppSelector(selectTags);

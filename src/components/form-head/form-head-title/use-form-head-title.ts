@@ -2,7 +2,7 @@ import {
     changeHeadDescription,
     changeHeadTitle,
     setImg,
-} from "../../../redux/entities/form/form-slice";
+} from "../../../redux/entities/forms/forms-slice";
 import { useAppDispatch } from "../../../redux/hooks";
 
 export const useFormHeadTitle = () => {
