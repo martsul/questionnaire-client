@@ -25,7 +25,7 @@ export const FormQuestionBlockEdit: FC<Props> = ({
     setEditQuestion,
     active,
 }) => {
-    const { type, index, title, description, inStatistic } = question;
+    const { type, index, title, description, inStatistic, id } = question;
     const { attributes, listeners, setNodeRef, transform, transition } =
         useSortable({ id: question.id });
 
@@ -88,7 +88,11 @@ export const FormQuestionBlockEdit: FC<Props> = ({
                     />
                 )}
                 {!active && (
-                    <FormAnswerVisible answers={question.answers} type={type} />
+                    <FormAnswerVisible
+                        id={id}
+                        answers={question.answers}
+                        type={type}
+                    />
                 )}
             </div>
         </div>

@@ -15,7 +15,7 @@ export const FormQuestionsVisible = () => {
                         description={q.description}
                         inStatistic={q.inStatistic}
                     />
-                    <FormAnswerVisible answers={q.answers} type={q.type} />
+                    <FormAnswerVisible id={q.id} answers={q.answers} type={q.type} />
                 </div>
             ))}
         </>

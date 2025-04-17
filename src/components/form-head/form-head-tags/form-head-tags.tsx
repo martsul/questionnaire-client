@@ -5,8 +5,13 @@ import { dictionary } from "../../../constants/dictionary";
 import { useFormHeadTags } from "./use-form-head-tags";
 import { useAppSelector } from "../../../redux/hooks";
 import { selectTags } from "../../../redux/entities/forms/forms-slice";
+import { FC } from "react";
 
-export const FormHeadTags = () => {
+type Props = {
+    isEdit: boolean;
+};
+
+export const FormHeadTags: FC<Props> = ({ isEdit }) => {
     const tags = useAppSelector(selectTags);
     const { language } = useLanguage();
     const words = dictionary[language].form;
@@ -31,6 +36,7 @@ export const FormHeadTags = () => {
                 {tags &&
                     tags.map((tag) => (
                         <FormHeadTag
+                            isEdit={isEdit}
                             onDelete={() => {
                                 handlerDeleteTag(tag);
                             }}

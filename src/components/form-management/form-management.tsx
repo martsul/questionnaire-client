@@ -1,14 +1,13 @@
 import { FC } from "react";
-import { useFormContext } from "../../contexts/form-context/use-form-context";
 
 type Props = {
     onDelete: () => void;
     onAdd: () => void;
     onStatistic: (inStatistic: boolean) => void;
+    onSubmit: () => void
 };
 
-export const FormManagement: FC<Props> = ({ onDelete, onAdd, onStatistic }) => {
-    const { onSubmit } = useFormContext();
+export const FormManagement: FC<Props> = ({ onDelete, onAdd, onStatistic,onSubmit }) => {
 
     return (
         <>

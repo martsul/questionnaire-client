@@ -20,6 +20,7 @@ export const FormQuestionsEdit = () => {
         onAdd,
         onDelete,
         onStatistic,
+        onSubmit,
     } = useFormQuestionEdit();
 
     return (
@@ -49,6 +50,7 @@ export const FormQuestionsEdit = () => {
             </div>
             <ManagementPanel>
                 <FormManagement
+                    onSubmit={onSubmit}
                     onDelete={onDelete}
                     onAdd={onAdd}
                     onStatistic={onStatistic}

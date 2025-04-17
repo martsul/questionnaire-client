@@ -30,6 +30,7 @@ export const FormCheckboxAnswerEdit: FC<Props> = ({
             <Form.Control
                 placeholder={words.questionAnswer}
                 value={answer}
+                maxLength={50}
                 onChange={(event) => {
                     dispatch(
                         changeAnswer({

@@ -4,6 +4,8 @@ import {
     selectQuestions,
     addQuestion,
     toggleStatistic,
+    selectEditData,
+    selectHead,
 } from "../../redux/entities/forms/forms-slice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
@@ -14,10 +16,19 @@ import {
     useSensors,
 } from "@dnd-kit/core";
 import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
+import { convertImg } from "../../helpers/convert-img";
+import { useApi } from "../../hooks/use-api";
+import { endpoints } from "../../constants/config";
+import { getForm } from "../../redux/entities/forms/get-forms";
+import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
 
 export const useFormQuestionEdit = () => {
-    const questions = useAppSelector(selectQuestions);
     const dispatch = useAppDispatch();
+    const formData = useAppSelector(selectEditData);
+    const headData = useAppSelector(selectHead);
+    const questions = useAppSelector(selectQuestions);
+    const { userData } = useAuthorization();
+    const request = useApi();
     const [editQuestion, setEditQuestion] = useState("");
     const [selectedQuestions, setSelectedQuestions] = useState<Set<string>>(
         new Set()
@@ -36,6 +47,22 @@ export const useFormQuestionEdit = () => {
             const newIndex = questions.findIndex((q) => q.id === over.id);
             const newOrder = arrayMove(questions, oldIndex, newIndex);
             dispatch(setQuestions(newOrder));
+        }
+    };
+
+    const onSubmit = async () => {
+        const img = await convertImg(formData?.img);
+        const responseData = { ...formData, img };
+        const response = await request(
+            "put",
+            endpoints.form,
+            true,
+            responseData
+        );
+        if (!(response instanceof Error) && headData?.id) {
+            await dispatch(
+                getForm({ formId: headData.id, userId: userData?.id })
+            );
         }
     };
 
@@ -70,5 +97,6 @@ export const useFormQuestionEdit = () => {
         questions,
         onDelete,
         onAdd,
+        onSubmit,
     };
 };

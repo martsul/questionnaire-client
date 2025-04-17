@@ -20,7 +20,7 @@ export const FormContainer = () => {
     const { language } = useLanguage();
     const { errors } = dictionary[language];
     const { userData } = useAuthorization();
-    const formHead = useAppSelector(selectHead);
+    const headData = useAppSelector(selectHead);
     const formId = +(useParams().formId as string);
     const status = useAppSelector(selectFormStatus);
     const navigate = useNavigate();
@@ -42,11 +42,11 @@ export const FormContainer = () => {
             addMessage("danger", errors.unknown);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [errors.unknown, formHead, navigate, status]);
+    }, [errors.unknown, headData, navigate, status]);
 
-    if (!formHead) {
+    if (!headData) {
         return null;
     }
 
-    return <Form formHead={formHead} />;
+    return <Form formHead={headData} />;
 };

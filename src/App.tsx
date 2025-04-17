@@ -11,9 +11,12 @@ import { FormPage } from "./pages/form-page";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { enableMapSet } from "immer";
+import { FormLayout } from "./components/form-layout/form-layout";
+import { AnswersPage } from "./pages/answers-page";
+import { StatisticPage } from "./pages/statistic-page";
 
 function App() {
-    enableMapSet()
+    enableMapSet();
 
     const router = createBrowserRouter([
         {
@@ -34,7 +37,21 @@ function App() {
                 },
                 {
                     path: "form/:formId",
-                    element: <FormPage />,
+                    element: <FormLayout />,
+                    children: [
+                        {
+                            index: true,
+                            element: <FormPage />,
+                        },
+                        {
+                            path: "answers",
+                            element: <AnswersPage />,
+                        },
+                        {
+                            path: "statistic",
+                            element: <StatisticPage />,
+                        },
+                    ],
                 },
             ],
         },

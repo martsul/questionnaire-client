@@ -1,6 +1,6 @@
 import { FormEventHandler, useMemo, useState } from "react";
 import { WS_BASE_URL } from "../../constants/config";
-import { Comment } from "../../types/comments/comment";
+import { Comment } from "../../types/form/comment";
 import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
 
 export const useFormComments = (formId: number) => {

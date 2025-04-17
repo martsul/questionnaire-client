@@ -21,7 +21,7 @@ const initialState: formsSliceState = {
 };
 
 export const formsSlice = createSlice({
-    name: "form",
+    name: "forms",
     initialState,
     reducers: {
         changeHeadTitle: (state, { payload }: PayloadAction<string>) => {

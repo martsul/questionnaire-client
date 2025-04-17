@@ -1,0 +1,22 @@
+.container {
+    overflow: auto;
+}
+
+.row {
+    cursor: pointer;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.arrow {
+    opacity: 0;
+    transition: .1s ease;
+}
+
+.button:hover .arrow {
+    opacity: 1;
+}

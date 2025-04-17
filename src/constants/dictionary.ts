@@ -21,6 +21,15 @@ export const dictionary = {
             commentsTitle: "Comments",
             commentsInput: "Leave a comment",
             send: "Send",
+            form: "Form",
+            answers: "Answers",
+            statistic: "Statistic",
+        },
+        answers: {
+            id: "ID",
+            name: "Name",
+            email: "Email",
+            time: "Time",
         },
         header: {
             login: "Log In",
@@ -92,6 +101,9 @@ export const dictionary = {
             commentsTitle: "Comentarios",
             commentsInput: "Deja un comentario",
             send: "Enviar",
+            form: "Formulario",
+            answers: "Respuestas",
+            statistic: "Estadística",
         },
         header: {
             login: "Iniciar sesión",
@@ -112,6 +124,12 @@ export const dictionary = {
             enterPassword: "Ingresa la contraseña",
             noAccount: "Sin cuenta",
             submit: "Enviar",
+        },
+        answers: {
+            id: "ID",
+            name: "Nombre",
+            email: "Correo electrónico",
+            time: "Hora",
         },
         errors: {
             unknown:
