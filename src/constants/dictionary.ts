@@ -24,6 +24,7 @@ export const dictionary = {
             form: "Form",
             answers: "Answers",
             statistic: "Statistic",
+            noResult: "No result"
         },
         answers: {
             id: "ID",
@@ -104,6 +105,7 @@ export const dictionary = {
             form: "Formulario",
             answers: "Respuestas",
             statistic: "Estadística",
+            noResult: "Sin resultado"
         },
         header: {
             login: "Iniciar sesión",

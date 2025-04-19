@@ -1,39 +1,35 @@
 import { Form } from "react-bootstrap";
-import { FormHeadTag } from "../form-head-tag/form-head-tag";
+import { useFormHeadUsers } from "./use-form-head-users";
+import Select from "react-select";
 import { useLanguage } from "../../../contexts/language-context/use-language";
 import { dictionary } from "../../../constants/dictionary";
-import { useFormHeadUsers } from "./use-form-head-users";
-import { useAppSelector } from "../../../redux/hooks";
-import { selectUsers } from "../../../redux/entities/forms/forms-slice";
+import { useSelectStyles } from "../../../hooks/use-select-styles";
 
 export const FromHeadUsers = () => {
     const { language } = useLanguage();
     const words = dictionary[language].form;
-    const users = useAppSelector(selectUsers);
+    const {customStyles} = useSelectStyles()
     const {
-        handlerDeleteUser,
+        handlerSetUsers,
         onChangeUser,
         toggleFilter,
         userFilter,
-        handlerEnter,
-        availableUsers,
+        usersOptions,
+        users,
     } = useFormHeadUsers();
-
-    const formatUsers = users ? Object.values(users) : [];
 
     return (
         <>
-            <Form.Control
-                list="user"
-                onKeyDown={handlerEnter}
-                onChange={onChangeUser}
+            <Select
+                onChange={(users) => handlerSetUsers(users)}
+                options={usersOptions}
+                value={users}
+                isMulti
                 placeholder={words.user}
+                styles={customStyles}
+                noOptionsMessage={() => words.noResult}
+                onInputChange={(value) => onChangeUser(value)}
             />
-            <datalist id="user">
-                {availableUsers.map((e) => {
-                    return <option value={e[userFilter]} key={e.id} />;
-                })}
-            </datalist>
             <div className="d-flex gap-3 flex-wrap">
                 <Form.Check
                     checked={userFilter === "name"}
@@ -49,17 +45,6 @@ export const FromHeadUsers = () => {
                     label={`email`}
                     value="email"
                 />
-            </div>
-            <div className="d-flex flex-wrap gap-2">
-                {formatUsers.map((u) => (
-                    <FormHeadTag
-                        text={u[userFilter]}
-                        key={u.id}
-                        onDelete={() => {
-                            handlerDeleteUser(u);
-                        }}
-                    />
-                ))}
             </div>
         </>
     );

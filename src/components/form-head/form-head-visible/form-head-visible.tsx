@@ -2,11 +2,11 @@ import { FC } from "react";
 import { FormHead } from "../../../types/form/form-head";
 import { useAppSelector } from "../../../redux/hooks";
 import { selectTags } from "../../../redux/entities/forms/forms-slice";
-import { FormHeadTag } from "../form-head-tag/form-head-tag";
 import MDEditor from "@uiw/react-md-editor";
 import styles from "./form-head-visible.module.css";
 import classNames from "classnames";
 import { useTheme } from "../../../contexts/theme-context/use-theme";
+import { Badge } from "react-bootstrap";
 
 type Props = { head: FormHead };
 
@@ -28,7 +28,12 @@ export const FormHeadVisible: FC<Props> = ({ head }) => {
             {head.img && <img src={head.img} alt="img" />}
             <h2 className="text-capitalize">{head.theme}</h2>
             <div className="d-flex gap-2 flex-wrap">
-                {tags && tags.map((t) => <FormHeadTag text={t} key={t} />)}
+                {tags &&
+                    tags.map((t) => (
+                        <Badge key={t.value} className="d-flex align-items-center gap-1 fs-6">
+                            <span>{t.value}</span>
+                        </Badge>
+                    ))}
             </div>
         </>
     );

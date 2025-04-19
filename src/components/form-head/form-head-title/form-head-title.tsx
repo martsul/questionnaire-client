@@ -5,15 +5,16 @@ import styles from "./form-head-title.module.css";
 import MDEditor from "@uiw/react-md-editor";
 import { useFormHeadTitle } from "./use-form-head-title";
 import { FC } from "react";
+import { useTheme } from "../../../contexts/theme-context/use-theme";
 
 type Props = { title: string; description: string; img: string };
 
 export const FormHeadTitle: FC<Props> = ({ description, title, img }) => {
     const { language } = useLanguage();
+    const { theme } = useTheme();
     const words = dictionary[language].form;
-    const { handlerChangeDescription, handlerChangeTitle, handlerFileChange } = useFormHeadTitle();
-
-
+    const { handlerChangeDescription, handlerChangeTitle, handlerFileChange } =
+        useFormHeadTitle();
 
     return (
         <>
@@ -23,7 +24,7 @@ export const FormHeadTitle: FC<Props> = ({ description, title, img }) => {
                 value={title}
                 onChange={(event) => handlerChangeTitle(event.target.value)}
             />
-            <div>
+            <div data-color-mode={theme}>
                 <MDEditor
                     value={description}
                     onChange={(event) => {

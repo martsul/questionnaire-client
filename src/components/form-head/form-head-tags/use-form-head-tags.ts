@@ -1,53 +1,59 @@
-import { ChangeEventHandler, useState } from "react";
+import { useState } from "react";
 import { simpleApi } from "../../../api";
 import { endpoints } from "../../../constants/config";
 import { debounce } from "lodash";
 import { useAppDispatch } from "../../../redux/hooks";
-import { addTag, deleteTag } from "../../../redux/entities/forms/forms-slice";
+import { ApiResponse } from "../../../types/api-response";
+import { setTags } from "../../../redux/entities/forms/forms-slice";
+import { SelectValue } from "../../../types/select-value";
+import { MultiValue } from "react-select";
+
+const getTags = async (value: string) => {
+    const response: ApiResponse<string[]> = await simpleApi.get(endpoints.tag, {
+        params: { tag: value },
+    });
+    return response;
+};
+
+const formatAvailableTags = (tags: string[], value: string) => {
+    if (value) {
+        return [
+            ...tags.map((tag) => ({ value: tag, label: tag })),
+            { value, label: value },
+        ];
+    }
+    return [...tags.map((tag) => ({ value: tag, label: tag }))];
+};
 
 export const useFormHeadTags = () => {
-    const [availableTags, setAvailableTags] = useState<string[]>([]);
+    const [availableTags, setAvailableTags] = useState<
+        { value: string; label: string }[]
+    >([]);
     const dispatch = useAppDispatch();
 
-    const sendTagToServer = async (value: string) => {
+    const getAvailableTags = async (value: string) => {
         try {
-            const response = await simpleApi.get(endpoints.tag, {
-                params: { tag: value },
-            });
-            setAvailableTags(response.data);
+            const tags = await getTags(value);
+            const formattedTags = formatAvailableTags(tags.data, value);
+            setAvailableTags(formattedTags);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
 
-    const debouncedSendData = debounce(sendTagToServer, 100);
+    const debouncedSendData = debounce(getAvailableTags, 100);
 
-    const onChangeTag: ChangeEventHandler<HTMLInputElement> = async (event) => {
-        const value = event.target.value;
+    const onChangeTag = (value: string) => {
         debouncedSendData(value);
     };
 
-    const handlerAddTag = (tag: string) => {
-        dispatch(addTag(tag));
-    };
-
-    const handlerDeleteTag = (tag: string) => {
-        dispatch(deleteTag(tag));
-    };
-
-    const handlerEnter: React.KeyboardEventHandler<HTMLInputElement> = (
-        event
-    ) => {
-        if (event.key === "Enter") {
-            handlerAddTag(event.currentTarget.value);
-            event.currentTarget.value = "";
-        }
+    const handlerSetTags = (tags: MultiValue<SelectValue>) => {
+        dispatch(setTags(tags));
     };
 
     return {
         availableTags,
         onChangeTag,
-        handlerDeleteTag,
-        handlerEnter,
+        handlerSetTags,
     };
 };

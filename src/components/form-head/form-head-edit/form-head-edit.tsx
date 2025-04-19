@@ -7,17 +7,16 @@ import { FC } from "react";
 
 type Props = {
     head: FormHead;
-    isEdit: boolean;
 };
 
-export const FormHeadEdit: FC<Props> = ({ head, isEdit }) => {
+export const FormHeadEdit: FC<Props> = ({ head }) => {
     const { title, description, isPublic, themes, theme, img } = head;
 
     return (
         <>
             <FormHeadTitle img={img} title={title} description={description} />
             <FromHeadTheme themes={themes} theme={theme} />
-            <FormHeadTags isEdit={isEdit} />
+            <FormHeadTags />
             {!isPublic && <FromHeadUsers />}
         </>
     );

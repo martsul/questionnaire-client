@@ -1,22 +1,44 @@
-import { ChangeEventHandler, useState } from "react";
+import { useState } from "react";
 import { simpleApi } from "../../../api";
 import { endpoints } from "../../../constants/config";
 import { debounce } from "lodash";
 import { AvailableUser } from "../../../types/form/available-users";
-import { useAppDispatch } from "../../../redux/hooks";
-import { addUser, deleteUser } from "../../../redux/entities/forms/forms-slice";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import {
+    selectUsers,
+    setUsers,
+} from "../../../redux/entities/forms/forms-slice";
+import { SelectValue } from "../../../types/select-value";
+import { MultiValue } from "react-select";
+import { ApiResponse } from "../../../types/api-response";
+
+const getUsers = async (user: string, userFilter: "name" | "email") => {
+    const response: ApiResponse<AvailableUser[]> = await simpleApi.get(
+        endpoints.user,
+        {
+            params: { user, userFilter },
+        }
+    );
+    return response.data;
+};
+
+const convertUsers = (users: AvailableUser[], userFIlter: "name" | "email") => {
+    return users.map((user) => ({
+        label: user[userFIlter],
+        value: JSON.stringify(user),
+    }));
+};
 
 export const useFormHeadUsers = () => {
     const [userFilter, setUserFilter] = useState<"name" | "email">("name");
-    const [availableUsers, setAvailableUsers] = useState<AvailableUser[]>([]);
+    const [availableUsers, setAvailableUsers] = useState<SelectValue[]>([]);
+    const users = useAppSelector(selectUsers);
     const dispatch = useAppDispatch();
 
     const sendToServer = async (value: string) => {
         try {
-            const response = await simpleApi.get(endpoints.user, {
-                params: { user: value, userFilter },
-            });
-            setAvailableUsers(response.data);
+            const users = await getUsers(value, userFilter);
+            setAvailableUsers(convertUsers(users, userFilter));
         } catch (error) {
             console.log(error);
         }
@@ -24,22 +46,12 @@ export const useFormHeadUsers = () => {
 
     const debouncedSendData = debounce(sendToServer, 100);
 
-    const onChangeUser: ChangeEventHandler<HTMLInputElement> = async (
-        event
-    ) => {
-        const value = event.target.value;
+    const onChangeUser = (value: string) => {
         debouncedSendData(value);
     };
 
-    const handlerAddUser = (user: string) => {
-        const foundItems = availableUsers.find((u) => u[userFilter] === user);
-        if (foundItems) {
-            dispatch(addUser(foundItems));
-        }
-    };
-
-    const handlerDeleteUser = (user: AvailableUser) => {
-        dispatch(deleteUser(user));
+    const handlerSetUsers = (users: MultiValue<SelectValue>) => {
+        dispatch(setUsers(users.map((user) => JSON.parse(user.value))));
     };
 
     const toggleFilter = (filter: "name" | "email") => {
@@ -48,22 +60,12 @@ export const useFormHeadUsers = () => {
         };
     };
 
-    const handlerEnter: React.KeyboardEventHandler<HTMLInputElement> = (
-        event
-    ) => {
-        if (event.key === "Enter") {
-            handlerAddUser(event.currentTarget.value);
-            event.currentTarget.value = "";
-        }
-    };
-
     return {
+        users: convertUsers(users, userFilter),
+        usersOptions: availableUsers,
         userFilter,
         onChangeUser,
-        handlerAddUser,
-        handlerDeleteUser,
+        handlerSetUsers,
         toggleFilter,
-        handlerEnter,
-        availableUsers,
     };
 };

@@ -8,7 +8,7 @@ import { AvailableEndpoints } from "../types/available-endpoints";
 import { HttpMethods } from "../types/http-methods";
 import { RequestData } from "../types/request-data";
 
-const convertData = (method: HttpMethods, data: RequestData) => {
+const convertData = (method: HttpMethods, data?: RequestData) => {
     if (method === "get") {
         return { params: data };
     }

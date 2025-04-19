@@ -11,6 +11,9 @@ import {
     SetQuestionsPayload,
     ToggleStatisticPayload,
 } from "../../../types/payloads/form-payloads";
+import { SelectValue } from "../../../types/select-value";
+import { MultiValue } from "react-select";
+import { AvailableUser } from "../../../types/form/available-users";
 
 const initialState: formsSliceState = {
     head: null,
@@ -89,25 +92,17 @@ export const formsSlice = createSlice({
                 inStatistic: true,
             });
         },
-        addTag: (state, { payload }: PayloadAction<string>) => {
-            const uniqueTags = new Set(state.tags);
-            uniqueTags.add(payload);
-            state.tags = Array.from(uniqueTags);
+        setTags: (
+            state,
+            { payload }: PayloadAction<MultiValue<SelectValue>>
+        ) => {
+            state.tags = payload.map((option) => ({
+                value: option.value,
+                label: option.label,
+            }));
         },
-        deleteTag: (state, { payload }: PayloadAction<string>) => {
-            const uniqueTags = new Set(state.tags);
-            uniqueTags.delete(payload);
-            state.tags = Array.from(uniqueTags);
-        },
-        addUser: (state, { payload }) => {
-            if (state.users) {
-                state.users[payload.id] = payload;
-            }
-        },
-        deleteUser: (state, { payload }) => {
-            if (state.users) {
-                delete state.users[payload.id];
-            }
+        setUsers: (state, { payload }: PayloadAction<AvailableUser[]>) => {
+            state.users = payload;
         },
         changeQuestionTitle: (
             state,
@@ -181,8 +176,8 @@ export const formsSlice = createSlice({
                     theme: state.head.theme,
                     description: state.head.description,
                     isPublic: state.head.isPublic,
-                    users: state.users,
-                    tags: state.tags,
+                    users: state.users.map((user) => user.id),
+                    tags: state.tags.map((t) => t.value),
                     questions: state.questions,
                     img: state.head.img,
                 };
@@ -200,14 +195,12 @@ export const formsSlice = createSlice({
             .addCase(getForm.fulfilled, (state, action) => {
                 state.requestStatus = "fulfilled";
                 state.head = action.payload.head as FormHead;
-                state.tags = action.payload.tags;
+                state.tags = action.payload.tags.map((tag) => ({
+                    value: tag,
+                    label: tag,
+                }));
                 state.questions = action.payload.questions;
-                action.payload.users.forEach((u) => {
-                    if (!state.users) {
-                        state.users = {};
-                    }
-                    state.users[u.id] = u;
-                });
+                state.users = action.payload.users;
             });
     },
 });
@@ -224,10 +217,8 @@ export const {
     changeHeadTitle,
     changeHeadDescription,
     togglePublic,
-    addTag,
-    addUser,
-    deleteTag,
-    deleteUser,
+    setTags,
+    setUsers,
     addQuestion,
     setQuestions,
     changeType,
