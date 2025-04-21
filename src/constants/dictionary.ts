@@ -24,7 +24,7 @@ export const dictionary = {
             form: "Form",
             answers: "Answers",
             statistic: "Statistic",
-            noResult: "No result"
+            noResult: "No result",
         },
         answers: {
             id: "ID",
@@ -53,6 +53,9 @@ export const dictionary = {
             submit: "Submit",
         },
         errors: {
+            pageNotFound: "Page not found.",
+            uniqueAnswers:
+                "The answers should not be repeated in the question - ",
             unknown: "Unknown error. Please repeat later.",
             "Invalid email address":
                 "There is no user with this email address.",
@@ -79,8 +82,14 @@ export const dictionary = {
             status: "Status",
             role: "Role",
         },
+        homePage: {
+            lastForms: "Recent forms",
+        },
     },
     es: {
+        homePage: {
+            lastForms: "Últimas formas",
+        },
         form: {
             title: "Nombre del formulario",
             description: "Descripción",
@@ -105,7 +114,7 @@ export const dictionary = {
             form: "Formulario",
             answers: "Respuestas",
             statistic: "Estadística",
-            noResult: "Sin resultado"
+            noResult: "Sin resultado",
         },
         header: {
             login: "Iniciar sesión",
@@ -134,6 +143,9 @@ export const dictionary = {
             time: "Hora",
         },
         errors: {
+            pageNotFound: "Página no encontrada.",
+            uniqueAnswers:
+                "Las respuestas no deben repetirse en la pregunta - ",
             unknown:
                 "Error desconocido. Por favor, intenta de nuevo más tarde.",
             "Invalid email address":

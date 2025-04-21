@@ -6,7 +6,7 @@ import { useAppDispatch } from "../../redux/hooks";
 import {
     changeQuestionDescription,
     changeQuestionTitle,
-} from "../../redux/entities/forms/forms-slice";
+} from "../../redux/entities/form/form-slice";
 
 type Props = {
     title: string;

@@ -1,11 +1,11 @@
 import { Form } from "react-bootstrap";
 import { FC } from "react";
 import { useAppDispatch } from "../../../redux/hooks";
-import { setTheme } from "../../../redux/entities/forms/forms-slice";
+import { setTheme } from "../../../redux/entities/form/form-slice";
 
 type Props = { themes: string[]; theme: string };
 
-export const FromHeadTheme: FC<Props> = ({ themes, theme }) => {
+export const FromHeadThemeEdit: FC<Props> = ({ themes, theme }) => {
     const dispatch = useAppDispatch();
     const handlerChange = (value: string) => {
         dispatch(setTheme(value));

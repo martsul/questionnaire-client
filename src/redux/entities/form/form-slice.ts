@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {  createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { formsSliceState } from "../../../types/form/form-slice-state";
-import { getForm } from "./get-forms";
+import { getForm } from "./get-form";
 import { FormHead } from "../../../types/form/form-head";
 import { v4 as uuidv4 } from "uuid";
 import {
@@ -14,6 +14,7 @@ import {
 import { SelectValue } from "../../../types/select-value";
 import { MultiValue } from "react-select";
 import { AvailableUser } from "../../../types/form/available-users";
+import { getAnswers } from "../answers/get-answers";
 
 const initialState: formsSliceState = {
     head: null,
@@ -168,21 +169,6 @@ export const formsSlice = createSlice({
         selectUsers: (state) => {
             return state.users;
         },
-        selectEditData: (state) => {
-            if (state.head) {
-                return {
-                    formId: state.head.id,
-                    title: state.head.title,
-                    theme: state.head.theme,
-                    description: state.head.description,
-                    isPublic: state.head.isPublic,
-                    users: state.users.map((user) => user.id),
-                    tags: state.tags.map((t) => t.value),
-                    questions: state.questions,
-                    img: state.head.img,
-                };
-            }
-        },
     },
     extraReducers: (builder) => {
         builder
@@ -201,6 +187,16 @@ export const formsSlice = createSlice({
                 }));
                 state.questions = action.payload.questions;
                 state.users = action.payload.users;
+            })
+            .addCase(getAnswers.pending, (state) => {
+                state.requestStatus = "pending";
+            })
+            .addCase(getAnswers.rejected, (state) => {
+                state.requestStatus = "rejected";
+            })
+            .addCase(getAnswers.fulfilled, (state, action) => {
+                state.requestStatus = "fulfilled";
+                state.questions = action.payload.questions;
             });
     },
 });
@@ -211,7 +207,6 @@ export const {
     selectTags,
     selectUsers,
     selectQuestions,
-    selectEditData,
 } = formsSlice.selectors;
 export const {
     changeHeadTitle,

@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { Form } from "./form";
-import { getForm } from "../../redux/entities/forms/get-forms";
+import { getForm } from "../../redux/entities/form/get-form";
 import { useNavigate, useParams } from "react-router-dom";
 import {
     selectFormStatus,
     selectHead,
-} from "../../redux/entities/forms/forms-slice";
+} from "../../redux/entities/form/form-slice";
 import { useLoading } from "../../contexts/loading-context/use-loading";
 import { useMessage } from "../../contexts/message-context/use-message-context";
 import { dictionary } from "../../constants/dictionary";

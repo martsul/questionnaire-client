@@ -2,10 +2,10 @@ import {
     changeHeadDescription,
     changeHeadTitle,
     setImg,
-} from "../../../redux/entities/forms/forms-slice";
+} from "../../../redux/entities/form/form-slice";
 import { useAppDispatch } from "../../../redux/hooks";
 
-export const useFormHeadTitle = () => {
+export const useFormHeadTitleEdit = () => {
     const dispatch = useAppDispatch();
 
     const handlerChangeTitle = (value: string) => {
@@ -22,5 +22,14 @@ export const useFormHeadTitle = () => {
         }
     };
 
-    return { handlerChangeTitle, handlerChangeDescription, handlerFileChange };
+    const deleteImg = () => {
+        dispatch(setImg(""));
+    };
+
+    return {
+        handlerChangeTitle,
+        handlerChangeDescription,
+        handlerFileChange,
+        deleteImg,
+    };
 };

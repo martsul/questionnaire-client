@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import { useLanguage } from "../../contexts/language-context/use-language";
 import { dictionary } from "../../constants/dictionary";
 import { useAppDispatch } from "../../redux/hooks";
-import { changeAnswer } from "../../redux/entities/forms/forms-slice";
+import { changeAnswer } from "../../redux/entities/form/form-slice";
 
 type Props = {
     isActive: boolean;

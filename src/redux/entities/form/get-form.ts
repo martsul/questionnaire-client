@@ -14,14 +14,12 @@ export const getForm = createAsyncThunk(
                 endpoints.form,
                 { params: { formId: data.formId, userId: data.userId } }
             );
-
-            if (!response.data.head) {
+            if (!response.data) {
                 return rejectWithValue("No Data");
             }
-
             return response.data;
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return rejectWithValue(error);
         }
     }

@@ -4,10 +4,7 @@ import { endpoints } from "../../../constants/config";
 import { debounce } from "lodash";
 import { AvailableUser } from "../../../types/form/available-users";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import {
-    selectUsers,
-    setUsers,
-} from "../../../redux/entities/forms/forms-slice";
+import { selectUsers, setUsers } from "../../../redux/entities/form/form-slice";
 import { SelectValue } from "../../../types/select-value";
 import { MultiValue } from "react-select";
 import { ApiResponse } from "../../../types/api-response";
@@ -29,7 +26,7 @@ const convertUsers = (users: AvailableUser[], userFIlter: "name" | "email") => {
     }));
 };
 
-export const useFormHeadUsers = () => {
+export const useFormHeadUsersEdit = () => {
     const [userFilter, setUserFilter] = useState<"name" | "email">("name");
     const [availableUsers, setAvailableUsers] = useState<SelectValue[]>([]);
     const users = useAppSelector(selectUsers);

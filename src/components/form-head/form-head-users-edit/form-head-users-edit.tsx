@@ -1,11 +1,11 @@
 import { Form } from "react-bootstrap";
-import { useFormHeadUsers } from "./use-form-head-users";
+import { useFormHeadUsersEdit } from "./use-form-head-users-edit";
 import Select from "react-select";
 import { useLanguage } from "../../../contexts/language-context/use-language";
 import { dictionary } from "../../../constants/dictionary";
 import { useSelectStyles } from "../../../hooks/use-select-styles";
 
-export const FromHeadUsers = () => {
+export const FromHeadUsersEdit = () => {
     const { language } = useLanguage();
     const words = dictionary[language].form;
     const {customStyles} = useSelectStyles()
@@ -16,7 +16,7 @@ export const FromHeadUsers = () => {
         userFilter,
         usersOptions,
         users,
-    } = useFormHeadUsers();
+    } = useFormHeadUsersEdit();
 
     return (
         <>

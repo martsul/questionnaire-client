@@ -1,7 +1,9 @@
-import { RequestStatus } from "../request-status"
-import { Answers } from "./answer"
+import { RequestStatus } from "../request-status";
+import { Answers } from "./answer";
 
 export type AnswersInitialState = {
-    answers: Answers
-    requestStatus: RequestStatus
-}
+    answers: Answers;
+    requestStatus: RequestStatus;
+    user: string;
+    createdAt: string;
+};

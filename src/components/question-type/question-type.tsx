@@ -4,7 +4,7 @@ import { dictionary } from "../../constants/dictionary";
 import { Form } from "react-bootstrap";
 import { useAppDispatch } from "../../redux/hooks";
 import { QuestionsType } from "../../types/form/questions-type";
-import { changeType } from "../../redux/entities/forms/forms-slice";
+import { changeType } from "../../redux/entities/form/form-slice";
 
 type Props = {
     type: string;

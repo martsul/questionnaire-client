@@ -2,10 +2,6 @@
     overflow: auto;
 }
 
-.row {
-    cursor: pointer;
-}
-
 .button {
     display: flex;
     align-items: center;
@@ -19,4 +15,8 @@
 
 .button:hover .arrow {
     opacity: 1;
+}
+
+.link {
+    max-width: max-content;
 }

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useAppDispatch } from "../../../redux/hooks";
-import { togglePublic } from "../../../redux/entities/forms/forms-slice";
+import { togglePublic } from "../../../redux/entities/form/form-slice";
 
 type Props = {
     canEdit: boolean;
@@ -24,7 +24,7 @@ export const FormHeadDetails: FC<Props> = ({
     const dispatch = useAppDispatch();
 
     return (
-        <div className="d-flex justify-content-end text-muted align-items-center gap-3">
+        <div className={"d-flex justify-content-end text-muted align-items-center gap-3"}>
             {isEdit && (
                 <button
                     type="button"

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { selectHead, toggleLike } from "../../redux/entities/forms/forms-slice";
+import { selectHead, toggleLike } from "../../redux/entities/form/form-slice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
 import { simpleApi } from "../../api";
 import { endpoints } from "../../constants/config";
-import { getForm } from "../../redux/entities/forms/get-forms";
+import { getForm } from "../../redux/entities/form/get-form";
 import { selectAnswers } from "../../redux/entities/answers/answers-slice";
 import { useApi } from "../../hooks/use-api";
 import { useMessage } from "../../contexts/message-context/use-message-context";

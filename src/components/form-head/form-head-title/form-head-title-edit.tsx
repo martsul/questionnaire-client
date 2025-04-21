@@ -1,20 +1,24 @@
 import { Form } from "react-bootstrap";
 import { dictionary } from "../../../constants/dictionary";
 import { useLanguage } from "../../../contexts/language-context/use-language";
-import styles from "./form-head-title.module.css";
+import styles from "./form-head-title-edit.module.css";
 import MDEditor from "@uiw/react-md-editor";
-import { useFormHeadTitle } from "./use-form-head-title";
+import { useFormHeadTitleEdit } from "./use-form-head-title-edit";
 import { FC } from "react";
 import { useTheme } from "../../../contexts/theme-context/use-theme";
 
 type Props = { title: string; description: string; img: string };
 
-export const FormHeadTitle: FC<Props> = ({ description, title, img }) => {
+export const FormHeadTitleEdit: FC<Props> = ({ description, title, img }) => {
     const { language } = useLanguage();
     const { theme } = useTheme();
     const words = dictionary[language].form;
-    const { handlerChangeDescription, handlerChangeTitle, handlerFileChange } =
-        useFormHeadTitle();
+    const {
+        handlerChangeDescription,
+        handlerChangeTitle,
+        handlerFileChange,
+        deleteImg,
+    } = useFormHeadTitleEdit();
 
     return (
         <>
@@ -43,6 +47,9 @@ export const FormHeadTitle: FC<Props> = ({ description, title, img }) => {
                     }}
                 />
                 {img && <img className={styles.img} src={img} alt="img" />}
+                <button onClick={deleteImg} className={styles.closeImg}>
+                    <i className="bi bi-x-lg"></i>
+                </button>
             </div>
         </>
     );

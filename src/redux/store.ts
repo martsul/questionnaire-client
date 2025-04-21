@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { formsSlice } from "./entities/forms/forms-slice";
+import { formsSlice } from "./entities/form/form-slice";
 import { answersSlice } from "./entities/answers/answers-slice";
 
 export const store = configureStore({

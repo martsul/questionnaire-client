@@ -4,7 +4,7 @@ import { endpoints } from "../../../constants/config";
 import { debounce } from "lodash";
 import { useAppDispatch } from "../../../redux/hooks";
 import { ApiResponse } from "../../../types/api-response";
-import { setTags } from "../../../redux/entities/forms/forms-slice";
+import { setTags } from "../../../redux/entities/form/form-slice";
 import { SelectValue } from "../../../types/select-value";
 import { MultiValue } from "react-select";
 
@@ -25,7 +25,7 @@ const formatAvailableTags = (tags: string[], value: string) => {
     return [...tags.map((tag) => ({ value: tag, label: tag }))];
 };
 
-export const useFormHeadTags = () => {
+export const useFormHeadTagsEdit = () => {
     const [availableTags, setAvailableTags] = useState<
         { value: string; label: string }[]
     >([]);

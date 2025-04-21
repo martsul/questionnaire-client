@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { FormHead } from "../../../types/form/form-head";
 import { useAppSelector } from "../../../redux/hooks";
-import { selectTags } from "../../../redux/entities/forms/forms-slice";
+import { selectTags } from "../../../redux/entities/form/form-slice";
 import MDEditor from "@uiw/react-md-editor";
 import styles from "./form-head-visible.module.css";
 import classNames from "classnames";
@@ -25,12 +25,19 @@ export const FormHeadVisible: FC<Props> = ({ head }) => {
                 )}
                 source={head.description}
             />
-            {head.img && <img src={head.img} alt="img" />}
+            {head.img && (
+                <div className={styles.img}>
+                    <img src={head.img} alt="img" />
+                </div>
+            )}
             <h2 className="text-capitalize">{head.theme}</h2>
             <div className="d-flex gap-2 flex-wrap">
                 {tags &&
                     tags.map((t) => (
-                        <Badge key={t.value} className="d-flex align-items-center gap-1 fs-6">
+                        <Badge
+                            key={t.value}
+                            className="d-flex align-items-center gap-1 fs-6"
+                        >
                             <span>{t.value}</span>
                         </Badge>
                     ))}

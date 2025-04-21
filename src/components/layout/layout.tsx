@@ -24,7 +24,7 @@ export const Layout = () => {
             <Loader />
             <Message />
             <Header />
-            <main>
+            <main className="my-5">
                 <Container>{!loading && <Outlet />}</Container>
             </main>
         </>

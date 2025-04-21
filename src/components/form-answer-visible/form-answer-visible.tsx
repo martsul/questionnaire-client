@@ -13,9 +13,15 @@ type Props = {
     answers?: string[];
     type: QuestionsType;
     id: string;
+    disabled: boolean;
 };
 
-export const FormAnswerVisible: FC<Props> = ({ answers, type, id }) => {
+export const FormAnswerVisible: FC<Props> = ({
+    answers,
+    type,
+    id,
+    disabled,
+}) => {
     const dispatch = useAppDispatch();
     const answersValues = useAppSelector(selectAnswers);
 
@@ -24,40 +30,48 @@ export const FormAnswerVisible: FC<Props> = ({ answers, type, id }) => {
             {type === "line" && (
                 <Form.Control
                     maxLength={100}
-                    onChange={(event) =>
+                    disabled={disabled}
+                    onChange={(event) => {
                         dispatch(
                             setTextAnswer({ id, value: event.target.value })
-                        )
-                    }
+                        );
+                    }}
                     value={answersValues[id]}
                 />
             )}
             {type === "number" && (
                 <Form.Control
                     maxLength={100}
-                    onChange={(event) =>
+                    disabled={disabled}
+                    onChange={(event) => {
                         dispatch(
                             setNumAnswer({ id, value: event.target.value })
-                        )
-                    }
+                        );
+                    }}
                     value={answersValues[id]}
                 />
             )}
             {type === "paragraph" && (
                 <Form.Control
                     maxLength={250}
-                    onChange={(event) =>
+                    disabled={disabled}
+                    onChange={(event) => {
                         dispatch(
                             setTextAnswer({ id, value: event.target.value })
-                        )
-                    }
+                        );
+                    }}
                     value={answersValues[id]}
                     as={"textarea"}
                 />
             )}
             {answers &&
                 answers.map((a, i) => (
-                    <FormCheckboxAnswerVisible id={id} answer={a} key={i} />
+                    <FormCheckboxAnswerVisible
+                        disabled={disabled}
+                        id={id}
+                        answer={a}
+                        key={i}
+                    />
                 ))}
         </>
     );

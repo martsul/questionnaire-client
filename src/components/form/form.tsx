@@ -29,18 +29,18 @@ export const Form: FC<Props> = ({ formHead }) => {
         <>
             <form
                 onSubmit={(event) => event.preventDefault()}
-                className="my-5 d-flex flex-column gap-4"
+                className="d-flex flex-column gap-4"
             >
-                <div className="bg-body-secondary p-4 rounded d-flex flex-column gap-3">
-                    <FormHeadDetails
-                        likes={formHead.likes}
-                        isLiked={formHead.isLiked}
-                        isPublic={formHead.isPublic}
-                        canEdit={canEdit}
-                        isEdit={isEdit}
-                        toggleEdit={toggleEdit}
-                        onLike={onLike}
-                    />
+                <FormHeadDetails
+                    likes={formHead.likes}
+                    isLiked={formHead.isLiked}
+                    isPublic={formHead.isPublic}
+                    canEdit={canEdit}
+                    isEdit={isEdit}
+                    toggleEdit={toggleEdit}
+                    onLike={onLike}
+                />
+                <div className="bg-body-secondary p-4 rounded d-flex flex-column gap-3 position-relative">
                     {isEdit && <FormHeadEdit head={formHead} />}
                     {!isEdit && <FormHeadVisible head={formHead} />}
                 </div>

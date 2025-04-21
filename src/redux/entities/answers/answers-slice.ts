@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AnswersInitialState } from "../../../types/form/answers-initial-state";
-import { getForm } from "../forms/get-forms";
+import { getForm } from "../form/get-form";
+import { getAnswers } from "./get-answers";
 
 const initialState: AnswersInitialState = {
     requestStatus: "idle",
     answers: {},
+    user: "",
+    createdAt: "",
 };
 
 export const answersSlice = createSlice({
@@ -47,6 +50,12 @@ export const answersSlice = createSlice({
         selectAnswers: (state) => {
             return state.answers;
         },
+        selectRequestStatus: (state) => {
+            return state.requestStatus;
+        },
+        selectCheckedAnswers: (state, payload: string) => {
+            return state.answers[payload];
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -61,9 +70,32 @@ export const answersSlice = createSlice({
                 action.payload.questions.forEach((q) => {
                     state.answers[q.id] = "";
                 });
+            })
+            .addCase(getAnswers.pending, (state) => {
+                state.requestStatus = "pending";
+            })
+            .addCase(getAnswers.rejected, (state) => {
+                state.requestStatus = "rejected";
+            })
+            .addCase(getAnswers.fulfilled, (state, action) => {
+                state.requestStatus = "fulfilled";
+                action.payload.answers.forEach((a) => {
+                    const answer = state.answers[a.questionId];
+                    if (answer) {
+                        if (Array.isArray(answer)) {
+                            answer.push(a.answer);
+                        } else {
+                            state.answers[a.questionId] = [answer, a.answer];
+                        }
+                    } else {
+                        state.answers[a.questionId] = a.answer;
+                    }
+                });
             });
     },
 });
 
-export const { setCheckboxAnswer, setNumAnswer, setTextAnswer } = answersSlice.actions;
-export const { selectAnswers } = answersSlice.selectors;
+export const { setCheckboxAnswer, setNumAnswer, setTextAnswer } =
+    answersSlice.actions;
+export const { selectAnswers, selectRequestStatus, selectCheckedAnswers } =
+    answersSlice.selectors;

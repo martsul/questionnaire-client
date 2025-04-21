@@ -30,7 +30,7 @@ export const UsersTableRow: FC<Props> = ({
                 </td>
                 <td>{data.id}</td>
                 <td>{data.name}</td>
-                <td>{data.isBlocked ? "blocked" : "availabel"}</td>
+                <td>{data.isBlocked ? "blocked" : "available"}</td>
                 <td>{data.isAdmin ? "admin" : "user"}</td>
                 <td>
                     <button

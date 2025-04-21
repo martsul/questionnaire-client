@@ -14,6 +14,8 @@ import { enableMapSet } from "immer";
 import { FormLayout } from "./components/form-layout/form-layout";
 import { AnswersPage } from "./pages/answers-page";
 import { StatisticPage } from "./pages/statistic-page";
+import { AnswerPage } from "./pages/answer-page";
+import { HomePage } from "./pages/home-page";
 
 function App() {
     enableMapSet();
@@ -23,6 +25,7 @@ function App() {
             path: "/",
             element: <Layout />,
             children: [
+                { index: true, element: <HomePage /> },
                 {
                     path: "login",
                     element: <AuthorizationPage thereIsAccount={true} />,
@@ -52,6 +55,10 @@ function App() {
                             element: <StatisticPage />,
                         },
                     ],
+                },
+                {
+                    path: "answer/:answerId",
+                    element: <AnswerPage />,
                 },
             ],
         },
