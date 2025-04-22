@@ -10,7 +10,7 @@ export const FormLayout = () => {
 
     return (
         <section>
-            <nav className="nav nav-pills nav-fill mt-3">
+            <nav className="nav nav-pills nav-fill my-3">
                 <NavLink
                     className={({ isActive }) =>
                         classNames("nav-item nav-link", { active: isActive })

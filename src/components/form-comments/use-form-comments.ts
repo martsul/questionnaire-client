@@ -1,4 +1,4 @@
-import { FormEventHandler, useMemo, useState } from "react";
+import { FormEventHandler, useEffect, useMemo, useState } from "react";
 import { WS_BASE_URL } from "../../constants/config";
 import { Comment } from "../../types/form/comment";
 import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
@@ -39,6 +39,10 @@ export const useFormComments = (formId: number) => {
     ws.onclose = () => {
         console.log("Close WS");
     };
+
+    useEffect(() => {
+        return () => { ws.close() };
+    }, [ws]);
 
     return { comments, comment, setComment, onSubmit };
 };

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import styles from "./answers-table.module.css";
 import { useAnswersTable } from "./use-answers-table";
 import { parseISO, format } from "date-fns";
+import classNames from "classnames";
 
 export const AnswersTable = () => {
     const { language } = useLanguage();
@@ -12,8 +13,8 @@ export const AnswersTable = () => {
     const { answers, toggleASC } = useAnswersTable();
 
     return (
-        <div className={styles.container}>
-            <Table className="">
+        <div className={classNames({"overflow-auto": answers.length})}>
+            <Table>
                 <thead>
                     <tr>
                         <th>

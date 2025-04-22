@@ -1,9 +1,5 @@
-import { LastForms } from "../components/last-forms/last-forms";
+import { HomeContainer } from "../components/home/home-container";
 
 export const HomePage = () => {
-    return (
-        <>
-            <LastForms />
-        </>
-    );
+    return <HomeContainer />;
 };

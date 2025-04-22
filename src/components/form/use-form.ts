@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { selectHead, toggleLike } from "../../redux/entities/form/form-slice";
+import { selectHead } from "../../redux/entities/form/form-slice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
-import { simpleApi } from "../../api";
 import { endpoints } from "../../constants/config";
 import { getForm } from "../../redux/entities/form/get-form";
 import { selectAnswers } from "../../redux/entities/answers/answers-slice";
@@ -33,15 +32,6 @@ export const useForm = () => {
         if (!(result instanceof Error)) addMessage("success", "ok");
     };
 
-    const onLike = () => {
-        simpleApi.post(endpoints.like, {
-            formId: headData?.id,
-            userId: userData?.id,
-            isLiked: headData?.isLiked,
-        });
-        dispatch(toggleLike());
-    };
-
     const toggleEdit = () => setIsEdit(!isEdit);
 
     useEffect(() => {
@@ -53,7 +43,6 @@ export const useForm = () => {
     return {
         toggleEdit,
         isEdit,
-        onLike,
         onSubmit,
     };
 };

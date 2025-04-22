@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useAppDispatch } from "../../../redux/hooks";
 import { togglePublic } from "../../../redux/entities/form/form-slice";
+import { useFormHeadDetails } from "./use-form-head-details";
 
 type Props = {
     canEdit: boolean;
@@ -9,7 +10,6 @@ type Props = {
     isLiked: boolean;
     isEdit: boolean;
     toggleEdit: () => void;
-    onLike: () => void;
 };
 
 export const FormHeadDetails: FC<Props> = ({
@@ -19,12 +19,16 @@ export const FormHeadDetails: FC<Props> = ({
     isLiked,
     isEdit,
     toggleEdit,
-    onLike,
 }) => {
     const dispatch = useAppDispatch();
+    const { onDelete, onLike } = useFormHeadDetails();
 
     return (
-        <div className={"d-flex justify-content-end text-muted align-items-center gap-3"}>
+        <div
+            className={
+                "d-flex justify-content-end text-muted align-items-center gap-3"
+            }
+        >
             {isEdit && (
                 <button
                     type="button"
@@ -40,10 +44,15 @@ export const FormHeadDetails: FC<Props> = ({
                 </button>
             )}
             {canEdit && (
-                <button type="button" onClick={toggleEdit}>
-                    {isEdit && <i className="bi bi-x-lg"></i>}
-                    {!isEdit && <i className="bi bi-pencil fs-6"></i>}
-                </button>
+                <>
+                    <button onClick={onDelete}>
+                        <i className="bi bi-trash"></i>
+                    </button>
+                    <button type="button" onClick={toggleEdit}>
+                        {isEdit && <i className="bi bi-x-lg"></i>}
+                        {!isEdit && <i className="bi bi-pencil fs-6"></i>}
+                    </button>
+                </>
             )}
             <span className="d-flex align-items-center gap-2">
                 <span>{likes}</span>

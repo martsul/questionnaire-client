@@ -84,11 +84,25 @@ export const dictionary = {
         },
         homePage: {
             lastForms: "Recent forms",
+            popularForm: "The most popular forms",
+            id: "ID",
+            creator: "Creator",
+            title: "Title",
+            numberResponse: "Number of responses",
+            popularTags: "The most popular tags",
+            createForm: "Create a new form",
         },
     },
     es: {
         homePage: {
-            lastForms: "Últimas formas",
+            lastForms: "Formularios recientes",
+            popularForm: "Las formas más populares",
+            id: "ID",
+            creator: "Creador",
+            title: "Título",
+            numberResponse: "Número de respuestas",
+            popularTags: "Etiquetas más populares",
+            createForm: "Crear un nuevo formulario",
         },
         form: {
             title: "Nombre del formulario",

@@ -20,7 +20,7 @@ export const Form: FC<Props> = ({ formHead }) => {
     const { language } = useLanguage();
     const words = dictionary[language].form;
     const { userData } = useAuthorization();
-    const { isEdit, onLike, toggleEdit, onSubmit } = useForm();
+    const { isEdit, toggleEdit, onSubmit } = useForm();
     const canEdit = Boolean(
         userData?.id === formHead.ownerId || userData?.isAdmin
     );
@@ -29,7 +29,7 @@ export const Form: FC<Props> = ({ formHead }) => {
         <>
             <form
                 onSubmit={(event) => event.preventDefault()}
-                className="d-flex flex-column gap-4"
+                className="d-flex flex-column gap-4 mb-5"
             >
                 <FormHeadDetails
                     likes={formHead.likes}
@@ -38,7 +38,6 @@ export const Form: FC<Props> = ({ formHead }) => {
                     canEdit={canEdit}
                     isEdit={isEdit}
                     toggleEdit={toggleEdit}
-                    onLike={onLike}
                 />
                 <div className="bg-body-secondary p-4 rounded d-flex flex-column gap-3 position-relative">
                     {isEdit && <FormHeadEdit head={formHead} />}
