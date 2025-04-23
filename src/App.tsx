@@ -16,6 +16,9 @@ import { AnswersPage } from "./pages/answers-page";
 import { StatisticPage } from "./pages/statistic-page";
 import { AnswerPage } from "./pages/answer-page";
 import { HomePage } from "./pages/home-page";
+import { ProfileLayout } from "./components/profile-layout/profile-layout";
+import { ProfileFormsPage } from "./pages/profile-forms-page";
+import { ProfileAnswersPage } from "./pages/profile-answers-page";
 
 function App() {
     enableMapSet();
@@ -26,6 +29,17 @@ function App() {
             element: <Layout />,
             children: [
                 { index: true, element: <HomePage /> },
+                {
+                    path: "profile",
+                    element: <ProfileLayout />,
+                    children: [
+                        { index: true, element: <ProfileFormsPage /> },
+                        {
+                            path: "answers",
+                            element: <ProfileAnswersPage />,
+                        },
+                    ],
+                },
                 {
                     path: "login",
                     element: <AuthorizationPage thereIsAccount={true} />,

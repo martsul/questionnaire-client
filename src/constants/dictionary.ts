@@ -1,5 +1,17 @@
 export const dictionary = {
     en: {
+        profile: {
+            forms: "Forms",
+            answers: "Answers",
+            id: "ID",
+            title: "Title",
+            public: "Public",
+            private: "Private",
+            answerId: "Answer Id",
+            formId: "Form Id",
+            createdAt: "Created At",
+            creator: "Creator",
+        },
         form: {
             title: "Name of the form",
             description: "Description",
@@ -94,6 +106,18 @@ export const dictionary = {
         },
     },
     es: {
+        profile: {
+            forms: "Formularios",
+            id: "ID",
+            title: "Título",
+            public: "Público",
+            private: "Privado",
+            answerId: "ID de respuesta",
+            formId: "ID de formulario",
+            createdAt: "Creado en",
+            answers: "Respuestas",
+            creator: "Creador",
+        },
         homePage: {
             lastForms: "Formularios recientes",
             popularForm: "Las formas más populares",

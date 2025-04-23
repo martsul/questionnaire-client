@@ -1,0 +1,12 @@
+.arrow {
+    opacity: 0;
+    transition: .1s ease;
+}
+
+.th:hover .arrow {
+    opacity: 1;
+}
+
+.link {
+    width: 40px;
+}

@@ -20,7 +20,7 @@ export const UsersTable = () => {
         selectedUsers,
         handlerMainInput,
         sortUsers,
-        filterUsers,
+        findUsers,
         sendUsers,
     } = useUsersTable();
     const { userData } = useAuthorization();
@@ -37,7 +37,7 @@ export const UsersTable = () => {
             <ManagementPanel isActive={Boolean(selectedUsers.size)}>
                 <UsersPanel sendUsers={sendUsers} />
             </ManagementPanel>
-            <TableTitle title={words.title} handlerChange={filterUsers} />
+            <TableTitle title={words.title} handlerChange={findUsers} />
             <div className="overflow-auto">
                 <Table className="">
                     <UsersTableHead

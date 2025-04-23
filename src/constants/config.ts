@@ -25,5 +25,7 @@ export const endpoints = {
     answer: "/answer",
     answers: "/answers",
     statistic: "/statistic",
-    home: "/home_page"
+    home: "/home_page",
+    ownForms: "/own_forms",
+    ownAnswers: "/own_answers"
 } as const;

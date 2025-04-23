@@ -19,7 +19,7 @@ export const UsersTableBody: FC<Props> = ({
                 <UsersTableRow
                     active={selectedUsers.has(e.id)}
                     handlerSingleInput={handlerSingleInput}
-                    data={e}
+                    user={e}
                     key={e.id}
                 />
             ))}

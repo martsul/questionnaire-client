@@ -1,20 +1,18 @@
-import { ChangeEventHandler, FC, useState } from "react";
+import { ChangeEventHandler, FC } from "react";
 import { UsersTable } from "../../../types/users-table";
-import classNames from "classnames";
 import styles from "./users-table-row.module.css";
 
 type Props = {
-    data: UsersTable["users"][0];
+    user: UsersTable["users"][0];
     active: boolean;
     handlerSingleInput: ChangeEventHandler<HTMLInputElement>;
 };
 
 export const UsersTableRow: FC<Props> = ({
-    data,
+    user,
     active,
     handlerSingleInput,
 }) => {
-    const [activeDetails, setActiveDetails] = useState(false);
 
     return (
         <>
@@ -25,31 +23,14 @@ export const UsersTableRow: FC<Props> = ({
                         type="checkbox"
                         checked={active}
                         onChange={handlerSingleInput}
-                        id={`${data.id}`}
+                        id={`${user.id}`}
                     />
                 </td>
-                <td>{data.id}</td>
-                <td>{data.name}</td>
-                <td>{data.isBlocked ? "blocked" : "available"}</td>
-                <td>{data.isAdmin ? "admin" : "user"}</td>
-                <td>
-                    <button
-                        onClick={() => {
-                            setActiveDetails(!activeDetails);
-                        }}
-                        className={classNames(styles.more, {
-                            [styles.active]: activeDetails,
-                        })}
-                    >
-                        <i className="bi bi-caret-down"></i>
-                    </button>
-                </td>
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.isBlocked ? "blocked" : "available"}</td>
+                <td>{user.isAdmin ? "admin" : "user"}</td>
             </tr>
-            {activeDetails && (
-                <tr>
-                    <td colSpan={6}>some info</td>
-                </tr>
-            )}
         </>
     );
 };

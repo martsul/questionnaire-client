@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { api } from "../api";
 import { useLanguage } from "../contexts/language-context/use-language";
 import { useLoading } from "../contexts/loading-context/use-loading";
@@ -20,30 +21,34 @@ export const useApi = () => {
     const { language } = useLanguage();
     const { addMessage } = useMessage();
 
-    const request = async <T>(
-        method: HttpMethods,
-        url: AvailableEndpoints,
-        needMessage: boolean,
-        data?: RequestData
-    ): Promise<T | Error> => {
-        try {
-            startLoading();
-            const convertedData = convertData(method, data);
-            const response: ApiResponse<T> = await api[method](
-                url,
-                convertedData
-            );
-            return response.data;
-        } catch (error) {
-            console.log(error);
-            if (needMessage) {
-                addMessage("danger", handlerErrors(error, language));
+    const request = useCallback(
+        async <T>(
+            method: HttpMethods,
+            url: AvailableEndpoints,
+            needMessage: boolean,
+            data?: RequestData
+        ): Promise<T | Error> => {
+            try {
+                startLoading();
+                const convertedData = convertData(method, data);
+                const response: ApiResponse<T> = await api[method](
+                    url,
+                    convertedData
+                );
+                return response.data;
+            } catch (error) {
+                console.log(error);
+                if (needMessage) {
+                    addMessage("danger", handlerErrors(error, language));
+                }
+                return error as Error;
+            } finally {
+                stopLoading();
             }
-            return error as Error;
-        } finally {
-            stopLoading();
-        }
-    };
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        []
+    );
 
     return request;
 };

@@ -42,7 +42,6 @@ export const UsersTableHead: FC<Props> = ({handlerMainInput, sortUsers}) => {
                         <i className="bi bi-arrow-down-short"></i>
                     </button>
                 </th>
-                <th className={styles.more}></th>
             </tr>
         </thead>
     );

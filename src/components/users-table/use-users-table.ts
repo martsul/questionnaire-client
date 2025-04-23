@@ -12,6 +12,7 @@ import { useMessage } from "../../contexts/message-context/use-message-context";
 import { dictionary } from "../../constants/dictionary";
 import { useLanguage } from "../../contexts/language-context/use-language";
 import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
+import { sortObjects } from "../../helpers/sort-objects";
 
 let data: UsersTable["users"] = [];
 
@@ -73,19 +74,17 @@ export const useUsersTable = () => {
     };
 
     const sortUsers: MouseEventHandler<HTMLButtonElement> = (event) => {
-        const id = event.currentTarget.id as keyof UsersTable["users"][0];
+        const sortBy = event.currentTarget.id as keyof UsersTable["users"][0];
         const tempUsers = [...users];
-        tempUsers.sort((a, b) =>
-            isAscending ? +(a[id] > b[id]) : +(a[id] < b[id])
-        );
-        setUsers(tempUsers);
+        const sortedUsers = sortObjects(tempUsers, sortBy, isAscending) as UsersTable["users"]
+        setUsers(sortedUsers);
         setIsAscending(!isAscending);
     };
 
-    const filterUsers: ChangeEventHandler<HTMLInputElement> = (event) => {
+    const findUsers: ChangeEventHandler<HTMLInputElement> = (event) => {
         const value = event.target.value;
         if (value) {
-            setUsers(users.filter((e) => e.name.match(value)));
+            setUsers(users.filter((e) => e.name.toLowerCase().match(value)));
         } else {
             setUsers([...data]);
         }
@@ -97,7 +96,7 @@ export const useUsersTable = () => {
         selectedUsers,
         handlerMainInput,
         sortUsers,
-        filterUsers,
+        findUsers,
         sendUsers,
     };
 };

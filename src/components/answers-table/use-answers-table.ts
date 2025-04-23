@@ -3,21 +3,19 @@ import { useApi } from "../../hooks/use-api";
 import { endpoints } from "../../constants/config";
 import { useParams } from "react-router-dom";
 import { TableAnswer } from "../../types/form/table-answer";
+import { sortObjects } from "../../helpers/sort-objects";
 
 export const useAnswersTable = () => {
     const { formId } = useParams();
-    const [isASC, setIsASC] = useState(true);
+    const [isAscending, setIsAscending] = useState(true);
     const [answers, setAnswers] = useState<TableAnswer[]>([]);
     const request = useApi();
 
     const toggleASC = (filterName: keyof TableAnswer) => {
-        const tempAnswers = answers.sort((a, b) => {
-            return isASC
-                ? +(a[filterName] < b[filterName])
-                : +(a[filterName] > b[filterName]);
-        });
-        setAnswers(tempAnswers);
-        setIsASC(!isASC);
+        const tempAnswers = [...answers];
+        const sortedAnswers = sortObjects(tempAnswers, filterName, isAscending) as TableAnswer[]; 
+        setAnswers(sortedAnswers);
+        setIsAscending(!isAscending);
     };
 
     useEffect(() => {
