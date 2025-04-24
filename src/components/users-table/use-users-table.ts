@@ -1,9 +1,4 @@
-import {
-    ChangeEventHandler,
-    MouseEventHandler,
-    useEffect,
-    useState,
-} from "react";
+import { ChangeEventHandler, useEffect, useState } from "react";
 import { useApi } from "../../hooks/use-api";
 import { endpoints } from "../../constants/config";
 import { UsersTable } from "../../types/users-table";
@@ -73,10 +68,13 @@ export const useUsersTable = () => {
         });
     };
 
-    const sortUsers: MouseEventHandler<HTMLButtonElement> = (event) => {
-        const sortBy = event.currentTarget.id as keyof UsersTable["users"][0];
+    const onSort = (sortField: keyof UsersTable["users"][0]) => {
         const tempUsers = [...users];
-        const sortedUsers = sortObjects(tempUsers, sortBy, isAscending) as UsersTable["users"]
+        const sortedUsers = sortObjects(
+            tempUsers,
+            sortField,
+            isAscending
+        ) as UsersTable["users"];
         setUsers(sortedUsers);
         setIsAscending(!isAscending);
     };
@@ -95,7 +93,7 @@ export const useUsersTable = () => {
         handlerSingleInput,
         selectedUsers,
         handlerMainInput,
-        sortUsers,
+        onSort,
         findUsers,
         sendUsers,
     };

@@ -80,6 +80,7 @@ export const useFormQuestionEdit = () => {
             const requestData = await getRequestData(editData);
             await request("put", endpoints.form, true, requestData);
         } catch (error) {
+            console.error(error)
             const message =
                 error instanceof AnswerError
                     ? words.uniqueAnswers + `"${error.message}"`

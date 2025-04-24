@@ -19,6 +19,7 @@ import { HomePage } from "./pages/home-page";
 import { ProfileLayout } from "./components/profile-layout/profile-layout";
 import { ProfileFormsPage } from "./pages/profile-forms-page";
 import { ProfileAnswersPage } from "./pages/profile-answers-page";
+import { SearchContextProvider } from "./contexts/search-context/search-context-provider";
 
 function App() {
     enableMapSet();
@@ -80,17 +81,19 @@ function App() {
 
     return (
         <Provider store={store}>
-            <LoadingContextProvider>
-                <AuthorizationContextProvider>
-                    <MessageContextProvider>
-                        <LanguageContextProvider>
-                            <ThemeContextProvider>
-                                <RouterProvider router={router} />
-                            </ThemeContextProvider>
-                        </LanguageContextProvider>
-                    </MessageContextProvider>
-                </AuthorizationContextProvider>
-            </LoadingContextProvider>
+            <SearchContextProvider>
+                <LoadingContextProvider>
+                    <AuthorizationContextProvider>
+                        <MessageContextProvider>
+                            <LanguageContextProvider>
+                                <ThemeContextProvider>
+                                    <RouterProvider router={router} />
+                                </ThemeContextProvider>
+                            </LanguageContextProvider>
+                        </MessageContextProvider>
+                    </AuthorizationContextProvider>
+                </LoadingContextProvider>
+            </SearchContextProvider>
         </Provider>
     );
 }

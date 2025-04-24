@@ -9,7 +9,11 @@ export const useTableOwnAnswers = () => {
     const { userData } = useAuthorization();
     const [answers, setAnswers] = useState<OwnAnswer[]>([]);
     const request = useApi();
-    const [isAscending, setIsAscending] = useState<boolean>(true);
+    const [isAscending, setIsAscending] = useState<boolean>(false);
+    const [allSelected, setAllSelected] = useState<boolean>(false);
+    const [selectedAnswers, setSelectedAnswers] = useState<Set<number>>(
+        new Set()
+    );
 
     useEffect(() => {
         request<OwnAnswer[]>("get", endpoints.ownAnswers, true, {
@@ -32,5 +36,41 @@ export const useTableOwnAnswers = () => {
         setIsAscending(!isAscending);
     };
 
-    return { onSort, answers };
+    const selectAllAnswers = () => {
+        if (allSelected) {
+            setSelectedAnswers(new Set());
+        } else {
+            setSelectedAnswers(new Set(answers.map((a) => a.answerId)));
+        }
+        setAllSelected(!allSelected);
+    };
+
+    const selectAnswer = (id: number) => {
+        const tempAnswers = new Set(selectedAnswers);
+        if (selectedAnswers.has(id)) {
+            tempAnswers.delete(id);
+        } else {
+            tempAnswers.add(id);
+        }
+        setSelectedAnswers(tempAnswers);
+    };
+
+    const onDelete = async () => {
+        await request("delete", "/answer", true, {
+            ids: Array.from(selectedAnswers),
+        });
+        const answers = await request<OwnAnswer[]>(
+            "get",
+            endpoints.ownAnswers,
+            true,
+            {
+                userId: userData?.id,
+            }
+        );
+        if (!(answers instanceof Error)) {
+            setAnswers(answers);
+        }
+    };
+
+    return { onSort, answers, selectAllAnswers, selectAnswer, onDelete, selectedAnswers, allSelected };
 };

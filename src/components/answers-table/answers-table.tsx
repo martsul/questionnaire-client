@@ -6,77 +6,34 @@ import styles from "./answers-table.module.css";
 import { useAnswersTable } from "./use-answers-table";
 import { parseISO, format } from "date-fns";
 import classNames from "classnames";
+import { FilterColumn } from "../filter-column/filter-column";
 
 export const AnswersTable = () => {
     const { language } = useLanguage();
     const words = dictionary[language].answers;
-    const { answers, toggleASC } = useAnswersTable();
+    const { answers, onSort } = useAnswersTable();
 
     return (
-        <div className={classNames({"overflow-auto": answers.length})}>
+        <div className={classNames({ "overflow-auto": answers.length })}>
             <Table>
                 <thead>
                     <tr>
-                        <th>
-                            <button
-                                onClick={() => {
-                                    toggleASC("resultId");
-                                }}
-                                className={styles.button}
-                            >
-                                <span>{words.id}</span>
-                                <i
-                                    className={
-                                        "bi bi-arrow-down-short " + styles.arrow
-                                    }
-                                ></i>
-                            </button>
-                        </th>
-                        <th>
-                            <button
-                                onClick={() => {
-                                    toggleASC("name");
-                                }}
-                                className={styles.button}
-                            >
-                                <span>{words.name}</span>
-                                <i
-                                    className={
-                                        "bi bi-arrow-down-short " + styles.arrow
-                                    }
-                                ></i>
-                            </button>
-                        </th>
-                        <th>
-                            <button
-                                onClick={() => {
-                                    toggleASC("email");
-                                }}
-                                className={styles.button}
-                            >
-                                <span>{words.email}</span>
-                                <i
-                                    className={
-                                        "bi bi-arrow-down-short " + styles.arrow
-                                    }
-                                ></i>
-                            </button>
-                        </th>
-                        <th>
-                            <button
-                                onClick={() => {
-                                    toggleASC("createdAt");
-                                }}
-                                className={styles.button}
-                            >
-                                <span>{words.time}</span>
-                                <i
-                                    className={
-                                        "bi bi-arrow-down-short " + styles.arrow
-                                    }
-                                ></i>
-                            </button>
-                        </th>
+                        <FilterColumn
+                            text={words.id}
+                            onSort={() => onSort("resultId")}
+                        />
+                        <FilterColumn
+                            text={words.name}
+                            onSort={() => onSort("name")}
+                        />
+                        <FilterColumn
+                            text={words.email}
+                            onSort={() => onSort("email")}
+                        />
+                        <FilterColumn
+                            text={words.time}
+                            onSort={() => onSort("createdAt")}
+                        />
                         <th className={styles.link}></th>
                     </tr>
                 </thead>

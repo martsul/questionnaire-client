@@ -11,7 +11,7 @@ export const useAnswersTable = () => {
     const [answers, setAnswers] = useState<TableAnswer[]>([]);
     const request = useApi();
 
-    const toggleASC = (filterName: keyof TableAnswer) => {
+    const onSort = (filterName: keyof TableAnswer) => {
         const tempAnswers = [...answers];
         const sortedAnswers = sortObjects(tempAnswers, filterName, isAscending) as TableAnswer[]; 
         setAnswers(sortedAnswers);
@@ -29,5 +29,5 @@ export const useAnswersTable = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [formId]);
 
-    return { answers, toggleASC };
+    return { answers, onSort };
 };

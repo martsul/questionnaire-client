@@ -19,7 +19,7 @@ export const UsersTable = () => {
         handlerSingleInput,
         selectedUsers,
         handlerMainInput,
-        sortUsers,
+        onSort,
         findUsers,
         sendUsers,
     } = useUsersTable();
@@ -41,7 +41,7 @@ export const UsersTable = () => {
             <div className="overflow-auto">
                 <Table className="">
                     <UsersTableHead
-                        sortUsers={sortUsers}
+                        onSort={onSort}
                         handlerMainInput={handlerMainInput}
                     />
                     <UsersTableBody

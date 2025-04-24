@@ -27,5 +27,6 @@ export const endpoints = {
     statistic: "/statistic",
     home: "/home_page",
     ownForms: "/own_forms",
-    ownAnswers: "/own_answers"
+    ownAnswers: "/own_answers",
+    searchForm: "search_form"
 } as const;

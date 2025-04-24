@@ -1,19 +1,19 @@
-import { FC, useRef, useState } from "react";
+import { FC, useCallback, useRef, useState } from "react";
 import { MessageContext } from ".";
 import { AddMessage, MessageContextState } from "../../types/message-context";
-import { ProviderProps } from "../../types/provider-pops";
+import { ProviderProps } from "../../types/provider-props";
 
 export const MessageContextProvider: FC<ProviderProps> = ({ children }) => {
     const [message, setMessage] = useState<MessageContextState>(null);
     const timerId = useRef<number>(null);
 
-    const addMessage: AddMessage = (type, message) => {
+    const addMessage: AddMessage = useCallback((type, message) => {
         if (timerId.current) {
-            clearTimeout(timerId.current)
-        };
+            clearTimeout(timerId.current);
+        }
         setMessage({ type, message: message });
         timerId.current = setTimeout(() => setMessage(null), 2000);
-    };
+    }, []);
 
     return (
         <MessageContext.Provider value={{ message, addMessage }}>

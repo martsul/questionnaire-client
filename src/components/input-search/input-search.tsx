@@ -2,11 +2,14 @@ import { InputGroup } from "react-bootstrap";
 import { useLanguage } from "../../contexts/language-context/use-language";
 import { dictionary } from "../../constants/dictionary";
 import { Form } from "react-bootstrap";
-import { ChangeEventHandler, FC } from "react";
+import { FC } from "react";
 
-type Props = { handlerChange: ChangeEventHandler<HTMLInputElement> };
+type Props = {
+    value?: string;
+    onChange?: (value: string) => void;
+};
 
-export const InputSearch: FC<Props> = ({ handlerChange }) => {
+export const InputSearch: FC<Props> = ({ value, onChange }) => {
     const { language } = useLanguage();
     const words = dictionary[language].header;
 
@@ -15,7 +18,15 @@ export const InputSearch: FC<Props> = ({ handlerChange }) => {
             <InputGroup.Text>
                 <i className="bi bi-search"></i>
             </InputGroup.Text>
-            <Form.Control onChange={handlerChange} placeholder={words.search} />
+            <Form.Control
+                onChange={(event) => {
+                    if (onChange) {
+                        onChange(event.target.value);
+                    }
+                }}
+                value={value}
+                placeholder={words.search}
+            />
         </InputGroup>
     );
 };

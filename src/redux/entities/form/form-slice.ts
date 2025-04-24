@@ -176,6 +176,7 @@ export const formsSlice = createSlice({
                 state.requestStatus = "pending";
             })
             .addCase(getForm.rejected, (state) => {
+                console.error("Get Form Error")
                 state.requestStatus = "rejected";
             })
             .addCase(getForm.fulfilled, (state, action) => {
@@ -192,6 +193,7 @@ export const formsSlice = createSlice({
                 state.requestStatus = "pending";
             })
             .addCase(getAnswers.rejected, (state) => {
+                console.error("Get Answers Error")
                 state.requestStatus = "rejected";
             })
             .addCase(getAnswers.fulfilled, (state, action) => {

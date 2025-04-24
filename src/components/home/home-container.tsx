@@ -14,14 +14,15 @@ export const HomeContainer = () => {
         dispatch(getHomePage());
     }, [dispatch]);
 
+    useEffect(() => {
+        if (requestStatus === "idle" || requestStatus === "pending") {
+            startLoading();
+        } else {
+            stopLoading();
+        }
+    }, [requestStatus, startLoading, stopLoading]);
+
     if (requestStatus === "idle" || requestStatus === "pending") {
-        startLoading();
-        return null;
-    }
-
-    stopLoading();
-
-    if (requestStatus === "rejected") {
         return null;
     }
 

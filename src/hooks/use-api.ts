@@ -12,6 +12,8 @@ import { RequestData } from "../types/request-data";
 const convertData = (method: HttpMethods, data?: RequestData) => {
     if (method === "get") {
         return { params: data };
+    } else if (method === "delete") {
+        return { data };
     }
     return data;
 };
@@ -37,7 +39,7 @@ export const useApi = () => {
                 );
                 return response.data;
             } catch (error) {
-                console.log(error);
+                console.error(error);
                 if (needMessage) {
                     addMessage("danger", handlerErrors(error, language));
                 }

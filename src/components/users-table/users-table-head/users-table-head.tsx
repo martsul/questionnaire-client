@@ -1,14 +1,16 @@
-import { ChangeEventHandler, FC, MouseEventHandler } from "react";
+import { ChangeEventHandler, FC } from "react";
 import { dictionary } from "../../../constants/dictionary";
 import { useLanguage } from "../../../contexts/language-context/use-language";
 import styles from "./users-table-head.module.css";
+import { FilterColumn } from "../../filter-column/filter-column";
+import { UsersTable } from "../../../types/users-table";
 
 type Props = {
-    handlerMainInput: ChangeEventHandler<HTMLInputElement>
-    sortUsers: MouseEventHandler<HTMLButtonElement>
-}
+    handlerMainInput: ChangeEventHandler<HTMLInputElement>;
+    onSort: (sortField: keyof UsersTable["users"][0]) => void;
+};
 
-export const UsersTableHead: FC<Props> = ({handlerMainInput, sortUsers}) => {
+export const UsersTableHead: FC<Props> = ({ handlerMainInput, onSort }) => {
     const { language } = useLanguage();
     const words = dictionary[language].usersTable;
 
@@ -16,32 +18,18 @@ export const UsersTableHead: FC<Props> = ({handlerMainInput, sortUsers}) => {
         <thead>
             <tr>
                 <th className={styles.input}>
-                    <input onChange={handlerMainInput} type="checkbox" />
+                    <input className={styles.mainInput} onChange={handlerMainInput} type="checkbox" />
                 </th>
-                <th className={styles.cell}>
-                    <button id="id" onClick={sortUsers}>
-                        <span>{words.id}</span>{" "}
-                        <i className="bi bi-arrow-down-short"></i>
-                    </button>
-                </th>
-                <th className={styles.cell}>
-                    <button id="name" onClick={sortUsers}>
-                        <span>{words.name}</span>{" "}
-                        <i className="bi bi-arrow-down-short"></i>
-                    </button>
-                </th>
-                <th className={styles.cell}>
-                    <button id="isBlocked" onClick={sortUsers}>
-                        <span>{words.status}</span>{" "}
-                        <i className="bi bi-arrow-down-short"></i>
-                    </button>
-                </th>
-                <th className={styles.cell}>
-                    <button id="isAdmin" onClick={sortUsers}>
-                        <span>{words.role}</span>{" "}
-                        <i className="bi bi-arrow-down-short"></i>
-                    </button>
-                </th>
+                <FilterColumn text={words.id} onSort={() => onSort("id")} />
+                <FilterColumn text={words.name} onSort={() => onSort("name")} />
+                <FilterColumn
+                    text={words.status}
+                    onSort={() => onSort("isBlocked")}
+                />
+                <FilterColumn
+                    text={words.role}
+                    onSort={() => onSort("isAdmin")}
+                />
             </tr>
         </thead>
     );

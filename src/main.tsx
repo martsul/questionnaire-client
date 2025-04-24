@@ -1,4 +1,3 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./assets/reset.css";
@@ -10,8 +9,4 @@ import "swiper/css";
 // @ts-expect-error Missing type declarations for Swiper pagination CSS
 import "swiper/css/pagination";
 
-createRoot(document.getElementById("root")!).render(
-    <StrictMode>
-        <App />
-    </StrictMode>
-);
+createRoot(document.getElementById("root")!).render(<App />);

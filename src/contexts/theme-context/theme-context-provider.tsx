@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { ThemeContext } from ".";
-import { ProviderProps } from "../../types/provider-pops";
+import { ProviderProps } from "../../types/provider-props";
 
 export const ThemeContextProvider: FC<ProviderProps> = ({ children }) => {
     const [theme, setTheme] = useState(

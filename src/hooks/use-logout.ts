@@ -15,6 +15,7 @@ export const useLogout = () => {
             localStorage.removeItem("accessToken");
             deleteUser();
         } catch (error) {
+            console.error(error)
             handlerErrors(error, language);
         }
     };

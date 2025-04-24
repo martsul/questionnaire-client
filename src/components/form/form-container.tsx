@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { Form } from "./form";
 import { getForm } from "../../redux/entities/form/get-form";
@@ -12,6 +12,9 @@ import { useMessage } from "../../contexts/message-context/use-message-context";
 import { dictionary } from "../../constants/dictionary";
 import { useLanguage } from "../../contexts/language-context/use-language";
 import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
+import { selectAnswers } from "../../redux/entities/answers/answers-slice";
+import { useApi } from "../../hooks/use-api";
+import { endpoints } from "../../constants/config";
 
 export const FormContainer = () => {
     const dispatch = useAppDispatch();
@@ -21,9 +24,12 @@ export const FormContainer = () => {
     const { errors } = dictionary[language];
     const { userData } = useAuthorization();
     const headData = useAppSelector(selectHead);
+    const answers = useAppSelector(selectAnswers);
     const formId = +(useParams().formId as string);
     const status = useAppSelector(selectFormStatus);
     const navigate = useNavigate();
+    const request = useApi();
+    const [isEdit, setIsEdit] = useState(false);
 
     useEffect(() => {
         dispatch(getForm({ formId, userId: userData?.id }));
@@ -41,12 +47,48 @@ export const FormContainer = () => {
             navigate("/");
             addMessage("danger", errors.unknown);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [errors.unknown, headData, navigate, status]);
+    }, [
+        addMessage,
+        errors.unknown,
+        headData,
+        navigate,
+        startLoading,
+        status,
+        stopLoading,
+    ]);
 
     if (!headData) {
         return null;
     }
 
-    return <Form formHead={headData} />;
+    const onSubmit = async () => {
+        const requestData = {
+            answers,
+            formId: headData?.id,
+            userId: userData?.id,
+        };
+        const result = await request(
+            "post",
+            endpoints.answer,
+            true,
+            requestData
+        );
+        if (!(result instanceof Error)) addMessage("success", "ok");
+    };
+
+    const toggleEdit = () => {
+        setIsEdit(!isEdit);
+        if (isEdit && headData?.id) {
+            dispatch(getForm({ formId: headData.id, userId: userData?.id }));
+        }
+    };
+
+    return (
+        <Form
+            isEdit={isEdit}
+            onSubmit={onSubmit}
+            toggleEdit={toggleEdit}
+            formHead={headData}
+        />
+    );
 };

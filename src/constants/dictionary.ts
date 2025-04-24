@@ -104,8 +104,14 @@ export const dictionary = {
             popularTags: "The most popular tags",
             createForm: "Create a new form",
         },
+        search: {
+            noResults: "No results"
+        }
     },
     es: {
+        search: {
+            noResults: "No hay resultados"
+        },
         profile: {
             forms: "Formularios",
             id: "ID",

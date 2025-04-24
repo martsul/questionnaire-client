@@ -24,7 +24,7 @@ export const answersSlice = createSlice({
             state,
             { payload }: PayloadAction<{ value: string; id: string }>
         ) => {
-            if (+payload.value || payload.value == "0") {
+            if (+payload.value || payload.value === "0" || payload.value === "") {
                 state.answers[payload.id] = payload.value;
             }
         },
@@ -63,6 +63,7 @@ export const answersSlice = createSlice({
                 state.requestStatus = "pending";
             })
             .addCase(getForm.rejected, (state) => {
+                console.error("Get Form Error")
                 state.requestStatus = "rejected";
             })
             .addCase(getForm.fulfilled, (state, action) => {
@@ -75,6 +76,7 @@ export const answersSlice = createSlice({
                 state.requestStatus = "pending";
             })
             .addCase(getAnswers.rejected, (state) => {
+                console.error("Get Answers Error")
                 state.requestStatus = "rejected";
             })
             .addCase(getAnswers.fulfilled, (state, action) => {

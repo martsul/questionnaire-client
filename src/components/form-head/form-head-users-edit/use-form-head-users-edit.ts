@@ -37,7 +37,7 @@ export const useFormHeadUsersEdit = () => {
             const users = await getUsers(value, userFilter);
             setAvailableUsers(convertUsers(users, userFilter));
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
 

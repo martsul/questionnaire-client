@@ -27,7 +27,7 @@ export const useFormHeadDetails = () => {
 
     const onDelete = async () => {
         const result = await request("delete", endpoints.form, true, {
-            data: { id: headData?.id },
+            ids: [headData?.id],
         });
         if (!(result instanceof Error)) {
             navigate("/");

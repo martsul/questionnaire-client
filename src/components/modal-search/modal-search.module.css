@@ -1,0 +1,9 @@
+.body {
+    max-height: 400px;
+    height: 100%;
+    overflow: auto;
+}
+
+.search {
+    font-size: 100px;
+}

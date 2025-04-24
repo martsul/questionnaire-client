@@ -1,17 +1,17 @@
-import { FC, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { LoadingContext } from ".";
-import { ProviderProps } from "../../types/provider-pops";
+import { ProviderProps } from "../../types/provider-props";
 
 export const LoadingContextProvider: FC<ProviderProps> = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
 
-    const startLoading = () => {
+    const startLoading = useCallback(() => {
         setIsLoading(true);
-    };
+    }, []);
 
-    const stopLoading = () => {
+    const stopLoading = useCallback(() => {
         setIsLoading(false);
-    };
+    }, []);
 
     return (
         <LoadingContext.Provider
