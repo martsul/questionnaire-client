@@ -90,6 +90,7 @@ export const FormQuestionBlockEdit: FC<Props> = ({
                 {!active && (
                     <FormAnswerVisible
                         id={id}
+                        disabled={false}
                         answers={question.answers}
                         type={type}
                     />

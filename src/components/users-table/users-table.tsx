@@ -37,7 +37,7 @@ export const UsersTable = () => {
             <ManagementPanel isActive={Boolean(selectedUsers.size)}>
                 <UsersPanel sendUsers={sendUsers} />
             </ManagementPanel>
-            <TableTitle title={words.title} handlerChange={findUsers} />
+            <TableTitle title={words.title} onChange={findUsers} />
             <div className="overflow-auto">
                 <Table className="">
                     <UsersTableHead

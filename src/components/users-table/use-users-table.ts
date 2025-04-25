@@ -79,8 +79,7 @@ export const useUsersTable = () => {
         setIsAscending(!isAscending);
     };
 
-    const findUsers: ChangeEventHandler<HTMLInputElement> = (event) => {
-        const value = event.target.value;
+    const findUsers= (value: string) => {
         if (value) {
             setUsers(users.filter((e) => e.name.toLowerCase().match(value)));
         } else {

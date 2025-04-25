@@ -1,10 +1,10 @@
-// export const API_BASE_URL =
-//     "https://questionnaire-server-cwqc.onrender.com/api";
-export const API_BASE_URL = "http://localhost:10000/api";
+export const API_BASE_URL =
+    "https://questionnaire-server-cwqc.onrender.com/api";
+// export const API_BASE_URL = "http://localhost:10000/api";
 
-// export const WS_BASE_URL =
-//     "wss://questionnaire-server-cwqc.onrender.com/api/comments?formId=";
-export const WS_BASE_URL = "ws://localhost:10000/api/comments?formId=";
+export const WS_BASE_URL =
+    "wss://questionnaire-server-cwqc.onrender.com/api/comments?formId=";
+// export const WS_BASE_URL = "ws://localhost:10000/api/comments?formId=";
 
 export const endpoints = {
     signin: `/signin`,
@@ -28,5 +28,5 @@ export const endpoints = {
     home: "/home_page",
     ownForms: "/own_forms",
     ownAnswers: "/own_answers",
-    searchForm: "search_form"
+    searchForm: "search_form",
 } as const;
