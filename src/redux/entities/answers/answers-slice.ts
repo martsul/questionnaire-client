@@ -6,7 +6,7 @@ import { getAnswers } from "./get-answers";
 const initialState: AnswersInitialState = {
     requestStatus: "idle",
     answers: {},
-    user: "",
+    user: { name: "", id: NaN },
     createdAt: "",
 };
 
@@ -24,7 +24,11 @@ export const answersSlice = createSlice({
             state,
             { payload }: PayloadAction<{ value: string; id: string }>
         ) => {
-            if (+payload.value || payload.value === "0" || payload.value === "") {
+            if (
+                +payload.value ||
+                payload.value === "0" ||
+                payload.value === ""
+            ) {
                 state.answers[payload.id] = payload.value;
             }
         },
@@ -56,6 +60,12 @@ export const answersSlice = createSlice({
         selectCheckedAnswers: (state, payload: string) => {
             return state.answers[payload];
         },
+        selectUser: (state) => {
+            return state.user;
+        },
+        selectCreatedAt: (state) => {
+            return state.createdAt;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -63,7 +73,7 @@ export const answersSlice = createSlice({
                 state.requestStatus = "pending";
             })
             .addCase(getForm.rejected, (state) => {
-                console.error("Get Form Error")
+                console.error("Get Form Error");
                 state.requestStatus = "rejected";
             })
             .addCase(getForm.fulfilled, (state, action) => {
@@ -76,14 +86,16 @@ export const answersSlice = createSlice({
                 state.requestStatus = "pending";
             })
             .addCase(getAnswers.rejected, (state) => {
-                console.error("Get Answers Error")
+                console.error("Get Answers Error");
                 state.requestStatus = "rejected";
             })
             .addCase(getAnswers.fulfilled, (state, action) => {
                 state.requestStatus = "fulfilled";
+                state.createdAt = action.payload.createdAt;
+                state.user = action.payload.user;
                 action.payload.answers.forEach((a) => {
                     const answer = state.answers[a.questionId];
-                    if (answer) {
+                    if (answer ) {
                         if (Array.isArray(answer)) {
                             answer.push(a.answer);
                         } else {
@@ -97,7 +109,15 @@ export const answersSlice = createSlice({
     },
 });
 
-export const { setCheckboxAnswer, setNumAnswer, setTextAnswer } =
-    answersSlice.actions;
-export const { selectAnswers, selectRequestStatus, selectCheckedAnswers } =
-    answersSlice.selectors;
+export const {
+    setCheckboxAnswer,
+    setNumAnswer,
+    setTextAnswer,
+} = answersSlice.actions;
+export const {
+    selectAnswers,
+    selectRequestStatus,
+    selectCheckedAnswers,
+    selectUser,
+    selectCreatedAt,
+} = answersSlice.selectors;

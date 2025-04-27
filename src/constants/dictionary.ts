@@ -1,5 +1,16 @@
 export const dictionary = {
     en: {
+        titles: {
+            home: "Home",
+            adminPanel: "Admin Panel",
+            profile: "Profile",
+            form: "Form",
+            answers: "Answers",
+            statistic: "Statistic",
+            answer: "Answer",
+            login: "Log In",
+            signup: "Sign Up",
+        },
         profile: {
             forms: "Forms",
             answers: "Answers",
@@ -37,6 +48,7 @@ export const dictionary = {
             answers: "Answers",
             statistic: "Statistic",
             noResult: "No result",
+            updateAnswer: "Update answer"
         },
         answers: {
             id: "ID",
@@ -103,14 +115,28 @@ export const dictionary = {
             numberResponse: "Number of responses",
             popularTags: "The most popular tags",
             createForm: "Create a new form",
+            noTitle: "No title",
         },
         search: {
-            noResults: "No results"
-        }
+            noResults: "No results",
+            noTitle: "No title",
+        },
     },
     es: {
+        titles: {
+            home: "Inicio",
+            adminPanel: "Panel de Administración",
+            profile: "Perfil",
+            form: "Formulario",
+            answers: "Respuestas",
+            statistic: "Estadística",
+            answer: "Respuesta",
+            login: "Iniciar Sesión",
+            signup: "Regístrate Ahora",
+        },
         search: {
-            noResults: "No hay resultados"
+            noResults: "No hay resultados",
+            noTitle: "Sin título",
         },
         profile: {
             forms: "Formularios",
@@ -133,6 +159,7 @@ export const dictionary = {
             numberResponse: "Número de respuestas",
             popularTags: "Etiquetas más populares",
             createForm: "Crear un nuevo formulario",
+            noTitle: "Sin título",
         },
         form: {
             title: "Nombre del formulario",
@@ -159,6 +186,7 @@ export const dictionary = {
             answers: "Respuestas",
             statistic: "Estadística",
             noResult: "Sin resultado",
+            updateAnswer: "Respuesta de actualización"
         },
         header: {
             login: "Iniciar sesión",

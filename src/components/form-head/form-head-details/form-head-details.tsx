@@ -2,6 +2,8 @@ import { FC } from "react";
 import { useAppDispatch } from "../../../redux/hooks";
 import { togglePublic } from "../../../redux/entities/form/form-slice";
 import { useFormHeadDetails } from "./use-form-head-details";
+import { useAuthorization } from "../../../contexts/authorization-context/use-authorization";
+import styles from "./form-head-details.module.css"
 
 type Props = {
     canEdit: boolean;
@@ -22,6 +24,7 @@ export const FormHeadDetails: FC<Props> = ({
 }) => {
     const dispatch = useAppDispatch();
     const { onDelete, onLike } = useFormHeadDetails();
+    const { userData } = useAuthorization();
 
     return (
         <div
@@ -56,7 +59,7 @@ export const FormHeadDetails: FC<Props> = ({
             )}
             <span className="d-flex align-items-center gap-2">
                 <span>{likes}</span>
-                <button onClick={onLike}>
+                <button className={styles.like} disabled={!userData} onClick={onLike}>
                     {isLiked && <i className="bi bi-heart-fill"></i>}
                     {!isLiked && <i className="bi bi-heart"></i>}
                 </button>

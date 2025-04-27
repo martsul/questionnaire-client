@@ -11,7 +11,6 @@ import { FormPage } from "./pages/form-page";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { enableMapSet } from "immer";
-import { FormLayout } from "./components/form-layout/form-layout";
 import { AnswersPage } from "./pages/answers-page";
 import { StatisticPage } from "./pages/statistic-page";
 import { AnswerPage } from "./pages/answer-page";
@@ -20,6 +19,7 @@ import { ProfileLayout } from "./components/profile-layout/profile-layout";
 import { ProfileFormsPage } from "./pages/profile-forms-page";
 import { ProfileAnswersPage } from "./pages/profile-answers-page";
 import { SearchContextProvider } from "./contexts/search-context/search-context-provider";
+import { FormLayoutContainer } from "./components/form-layout/form-layout-container";
 
 function App() {
     enableMapSet();
@@ -55,7 +55,7 @@ function App() {
                 },
                 {
                     path: "form/:formId",
-                    element: <FormLayout />,
+                    element: <FormLayoutContainer />,
                     children: [
                         {
                             index: true,

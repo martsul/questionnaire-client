@@ -23,7 +23,7 @@ export const FormQuestionVisible: FC<Props> = ({
                 <h2>{title || words.noInfo}</h2>
                 {!inStatistic && <i className="bi bi-incognito"></i>}
             </div>
-            <p className={styles.description}>{description || words.noInfo}</p>
+            {description && <p className={styles.description}>{description}</p>}
         </>
     );
 };

@@ -4,6 +4,7 @@ import { dictionary } from "../../constants/dictionary";
 import { FC } from "react";
 import { useFormComments } from "./use-form-comments";
 import { FormComment } from "../form-comment/form-comment";
+import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
 
 type Props = {
     formId: number;
@@ -13,20 +14,23 @@ export const FormComments: FC<Props> = ({ formId }) => {
     const { language } = useLanguage();
     const words = dictionary[language].form;
     const { comments, comment, onSubmit, setComment } = useFormComments(formId);
+    const { userData } = useAuthorization();
 
     return (
         <form onSubmit={onSubmit} className="mb-5">
-            <h2>{words.commentsTitle}</h2>
-            <div className="d-flex flex-column gap-2 align-items-end mb-5">
-                <Form.Control
-                    maxLength={256}
-                    value={comment}
-                    onChange={(event) => setComment(event.target.value)}
-                    placeholder={words.commentsInput}
-                    as="textarea"
-                />
-                <Button type="submit">{words.send}</Button>
-            </div>
+            <h2 className="mb-4">{words.commentsTitle}</h2>
+            {userData && (
+                <div className="d-flex flex-column gap-2 align-items-end mb-5">
+                    <Form.Control
+                        maxLength={256}
+                        value={comment}
+                        onChange={(event) => setComment(event.target.value)}
+                        placeholder={words.commentsInput}
+                        as="textarea"
+                    />
+                    <Button type="submit">{words.send}</Button>
+                </div>
+            )}
             <div className="d-flex flex-column gap-3">
                 {comments.map((c) => (
                     <FormComment

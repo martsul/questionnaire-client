@@ -27,7 +27,7 @@ api.interceptors.response.use(
     },
     async (error) => {
         const originalRequest = error.config;
-        if (error.response.status === 401) {
+        if (error?.response?.status === 401) {
             const response = await axios.get<Tokens>(
                 API_BASE_URL + endpoints.refresh,
                 { withCredentials: true }

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { simpleApi } from "../../../api";
+import { api } from "../../../api";
 import { endpoints } from "../../../constants/config";
 import { ApiResponse } from "../../../types/api-response";
 import { GetAnswerResponse } from "../../../types/form/get-answer-response";
@@ -9,7 +9,7 @@ export const getAnswers = createAsyncThunk(
     async (answerId: number, { rejectWithValue }) => {
         try {
             const response: ApiResponse<GetAnswerResponse> =
-                await simpleApi.get(endpoints.answer, {
+                await api.get(endpoints.answer, {
                     params: { answerId },
                 });
             if (!response.data) {

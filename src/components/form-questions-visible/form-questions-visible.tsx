@@ -10,7 +10,7 @@ type Props = {
 
 export const FormQuestionsVisible: FC<Props> = ({ disabled = false }) => {
     const questions = useAppSelector(selectQuestions);
-
+    
     return (
         <>
             {questions.map((q) => (

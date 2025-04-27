@@ -1,5 +1,5 @@
-import { FormContainer } from "../components/form/form-container";
+import { Form } from "../components/form/form";
 
 export const FormPage = () => {
-    return <FormContainer />;
+    return <Form />;
 };

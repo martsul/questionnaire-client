@@ -7,16 +7,20 @@ import styles from "./form-head-visible.module.css";
 import classNames from "classnames";
 import { useTheme } from "../../../contexts/theme-context/use-theme";
 import { Badge } from "react-bootstrap";
+import { useLanguage } from "../../../contexts/language-context/use-language";
+import { dictionary } from "../../../constants/dictionary";
 
 type Props = { head: FormHead };
 
 export const FormHeadVisible: FC<Props> = ({ head }) => {
     const tags = useAppSelector(selectTags);
     const { theme } = useTheme();
+    const {language} = useLanguage()
+    const {form} = dictionary[language]
 
     return (
         <>
-            <h1>{head.title}</h1>
+            <h1>{head.title || form.noInfo}</h1>
             <MDEditor.Markdown
                 className={classNames(
                     styles.markdown,
@@ -26,8 +30,8 @@ export const FormHeadVisible: FC<Props> = ({ head }) => {
                 source={head.description}
             />
             {head.img && (
-                <div className={styles.img}>
-                    <img src={head.img} alt="img" />
+                <div className={styles.imgContainer}>
+                    <img src={head.img} className={styles.img} alt="img" />
                 </div>
             )}
             <h2 className="text-capitalize">{head.theme}</h2>

@@ -9,12 +9,12 @@ import { selectLastForms } from "../../redux/entities/home-page/home-page-slice"
 
 export const LastForms = () => {
     const { language } = useLanguage();
-    const words = dictionary[language].homePage;
+    const { homePage } = dictionary[language];
     const lastForm = useAppSelector(selectLastForms);
 
     return (
         <section>
-            <h2 className="mb-4">{words.lastForms}</h2>
+            <h2 className="mb-4">{homePage.lastForms}</h2>
             <Swiper
                 modules={[Pagination]}
                 className="pb-5"
@@ -42,13 +42,17 @@ export const LastForms = () => {
                             to={`/form/${f.id}`}
                             className="text-decoration-none"
                         >
-                            <Card className="bg-body-secondary">
-                                {f.img && <Card.Img src={f.img} />}
+                            <Card className="bg-body-secondary h-100">
+                                <Card.Img
+                                    src={
+                                        f.img ||
+                                        "https://res.cloudinary.com/dx0xkmpsq/image/upload/fl_preserve_transparency/v1745678523/drilldown_euccrj.jpg?_s=public-apps"
+                                    }
+                                />
                                 <Card.Body>
-                                    {!f.img && (
-                                        <Card.Text>{f.description}</Card.Text>
-                                    )}
-                                    <Card.Title>{f.title}</Card.Title>
+                                    <Card.Title>
+                                        {f.title || homePage.noTitle}
+                                    </Card.Title>
                                     <Card.Text>{f.creator}</Card.Text>
                                 </Card.Body>
                             </Card>

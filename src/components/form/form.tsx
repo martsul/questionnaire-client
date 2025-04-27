@@ -1,33 +1,30 @@
 import { FormHeadEdit } from "../form-head/form-head-edit/form-head-edit";
 import { FormHeadVisible } from "../form-head/form-head-visible/form-head-visible";
-import { FC } from "react";
-import { FormHead } from "../../types/form/form-head";
 import { FormQuestionsEdit } from "../form-questions-edit/form-questions-edit";
-import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
 import { FormQuestionsVisible } from "../form-questions-visible/form-questions-visible";
 import { FormComments } from "../form-comments/form-comments";
 import { FormHeadDetails } from "../form-head/form-head-details/form-head-details";
 import { useLanguage } from "../../contexts/language-context/use-language";
 import { dictionary } from "../../constants/dictionary";
 import { Button } from "react-bootstrap";
+import { useForm } from "./use-form";
+import { useAppSelector } from "../../redux/hooks";
+import { selectHead } from "../../redux/entities/form/form-slice";
+import { PageTitle } from "../page-title/page-title";
 
-type Props = {
-    formHead: FormHead;
-    onSubmit: () => void;
-    toggleEdit: () => void;
-    isEdit: boolean
-};
-
-export const Form: FC<Props> = ({ formHead, onSubmit, toggleEdit, isEdit }) => {
+export const Form = () => {
     const { language } = useLanguage();
-    const words = dictionary[language].form;
-    const { userData } = useAuthorization();
-    const canEdit = Boolean(
-        userData?.id === formHead.ownerId || userData?.isAdmin
-    );
+    const { form, titles } = dictionary[language];
+    const formHead = useAppSelector(selectHead);
+    const { onSubmit, toggleEdit, isEdit, canSendAnswer, canEdit } = useForm();
+
+    if (!formHead) {
+        return null;
+    }
 
     return (
         <>
+            <PageTitle title={formHead.title ? formHead.title : titles.form} />
             <form
                 onSubmit={(event) => event.preventDefault()}
                 className="d-flex flex-column gap-4 mb-5"
@@ -46,7 +43,9 @@ export const Form: FC<Props> = ({ formHead, onSubmit, toggleEdit, isEdit }) => {
                 </div>
                 {isEdit && <FormQuestionsEdit />}
                 {!isEdit && <FormQuestionsVisible />}
-                {!isEdit && <Button onClick={onSubmit}>{words.send}</Button>}
+                {canSendAnswer && (
+                    <Button onClick={onSubmit}>{form.send}</Button>
+                )}
             </form>
             <FormComments formId={formHead.id} />
         </>

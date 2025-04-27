@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { simpleApi } from "../../../api";
+import { api } from "../../../api";
 import { endpoints } from "../../../constants/config";
 import { useAuthorization } from "../../../contexts/authorization-context/use-authorization";
 import { useApi } from "../../../hooks/use-api";
@@ -17,12 +17,14 @@ export const useFormHeadDetails = () => {
     const navigate = useNavigate();
 
     const onLike = () => {
-        simpleApi.post(endpoints.like, {
-            formId: headData?.id,
-            userId: userData?.id,
-            isLiked: headData?.isLiked,
-        });
-        dispatch(toggleLike());
+        if (userData) {
+            api.post(endpoints.like, {
+                formId: headData?.id,
+                userId: userData?.id,
+                isLiked: headData?.isLiked,
+            });
+            dispatch(toggleLike());
+        }
     };
 
     const onDelete = async () => {
