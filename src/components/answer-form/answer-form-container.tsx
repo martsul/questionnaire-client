@@ -57,12 +57,20 @@ export const AnswerFormContainer = () => {
 
     const onSubmit = async () => {
         await request("put", endpoints.answer, true, { answerId, answers });
+        dispatch(getAnswers(Number(answerId)));
+    };
+
+    const onDelete = async () => {
+        const result = await request("delete", endpoints.answer, true, { ids: [answerId] });
+        if (!(result instanceof Error)) {
+            navigate("/")
+        }
     };
 
     return (
         <>
             <PageTitle title={titles.answer} />
-            <AnswerForm onSubmit={onSubmit} canRedact={canRedact} />
+            <AnswerForm onDelete={onDelete} onSubmit={onSubmit} canRedact={canRedact} />
         </>
     );
 };

@@ -83,6 +83,7 @@ export const answersSlice = createSlice({
                 });
             })
             .addCase(getAnswers.pending, (state) => {
+                state.answers = {};
                 state.requestStatus = "pending";
             })
             .addCase(getAnswers.rejected, (state) => {
@@ -95,7 +96,7 @@ export const answersSlice = createSlice({
                 state.user = action.payload.user;
                 action.payload.answers.forEach((a) => {
                     const answer = state.answers[a.questionId];
-                    if (answer ) {
+                    if (answer) {
                         if (Array.isArray(answer)) {
                             answer.push(a.answer);
                         } else {
@@ -109,11 +110,8 @@ export const answersSlice = createSlice({
     },
 });
 
-export const {
-    setCheckboxAnswer,
-    setNumAnswer,
-    setTextAnswer,
-} = answersSlice.actions;
+export const { setCheckboxAnswer, setNumAnswer, setTextAnswer } =
+    answersSlice.actions;
 export const {
     selectAnswers,
     selectRequestStatus,

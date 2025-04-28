@@ -13,9 +13,10 @@ import { format, isValid, parseISO } from "date-fns";
 type Props = {
     canRedact: boolean;
     onSubmit: () => void;
+    onDelete: () => void
 };
 
-export const AnswerForm: FC<Props> = ({ canRedact, onSubmit }) => {
+export const AnswerForm: FC<Props> = ({ canRedact, onSubmit, onDelete }) => {
     const { language } = useLanguage();
     const { form } = dictionary[language];
     const ownerAnswer = useAppSelector(selectUser);
@@ -30,11 +31,18 @@ export const AnswerForm: FC<Props> = ({ canRedact, onSubmit }) => {
         <form className="d-flex flex-column gap-4">
             <div className="d-flex align-items-center justify-content-between">
                 <span>{ownerAnswer.name}</span>
-                <span>{formattedDate || "-"}</span>
+                <div className="d-flex align-items-center gap-3">
+                    {canRedact && (
+                        <button type="button" onClick={onDelete}>
+                            <i className="bi bi-trash"></i>
+                        </button>
+                    )}
+                    <span>{formattedDate || "-"}</span>
+                </div>
             </div>
             <FormQuestionsVisible disabled={!canRedact} />
             {canRedact && (
-                <Button onClick={onSubmit}>{form.updateAnswer}</Button>
+                <Button type="submit" onClick={onSubmit}>{form.updateAnswer}</Button>
             )}
         </form>
     );
