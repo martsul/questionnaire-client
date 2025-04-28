@@ -19,7 +19,6 @@ export const endpoints = {
     refresh: "/refresh",
     form: "/form",
     tag: "/tag",
-    theme: "/theme",
     user: "/user",
     like: "/like",
     answer: "/answer",

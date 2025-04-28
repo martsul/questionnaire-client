@@ -46,10 +46,14 @@ export const FormHeadTitleEdit: FC<Props> = ({ description, title, img }) => {
                         handlerFileChange(event.target.files);
                     }}
                 />
-                {img && <img className={styles.img} src={img} alt="img" />}
-                <button onClick={deleteImg} className={styles.closeImg}>
-                    <i className="bi bi-x-lg"></i>
-                </button>
+                {img && (
+                    <>
+                        <img className={styles.img} src={img} alt="img" />
+                        <button onClick={deleteImg} className={styles.closeImg}>
+                            <i className="bi bi-x-lg"></i>
+                        </button>
+                    </>
+                )}
             </div>
         </>
     );

@@ -16,13 +16,13 @@ export const useTableOwnAnswers = () => {
     );
 
     useEffect(() => {
-        request<OwnAnswer[]>("get", endpoints.ownAnswers, true, {
-            userId: userData?.id,
-        }).then((response) => {
-            if (!(response instanceof Error)) {
-                setAnswers(response);
+        request<OwnAnswer[]>("get", endpoints.ownAnswers, true).then(
+            (response) => {
+                if (!(response instanceof Error)) {
+                    setAnswers(response);
+                }
             }
-        });
+        );
     }, [request, userData?.id]);
 
     const onSort = (sortField: keyof OwnAnswer) => {
@@ -62,15 +62,20 @@ export const useTableOwnAnswers = () => {
         const answers = await request<OwnAnswer[]>(
             "get",
             endpoints.ownAnswers,
-            true,
-            {
-                userId: userData?.id,
-            }
+            true
         );
         if (!(answers instanceof Error)) {
             setAnswers(answers);
         }
     };
 
-    return { onSort, answers, selectAllAnswers, selectAnswer, onDelete, selectedAnswers, allSelected };
+    return {
+        onSort,
+        answers,
+        selectAllAnswers,
+        selectAnswer,
+        onDelete,
+        selectedAnswers,
+        allSelected,
+    };
 };

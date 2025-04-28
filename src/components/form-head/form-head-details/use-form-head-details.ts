@@ -18,9 +18,8 @@ export const useFormHeadDetails = () => {
 
     const onLike = () => {
         if (userData) {
-            api.post(endpoints.like, {
+            api.post(endpoints.like, {  
                 formId: headData?.id,
-                userId: userData?.id,
                 isLiked: headData?.isLiked,
             });
             dispatch(toggleLike());

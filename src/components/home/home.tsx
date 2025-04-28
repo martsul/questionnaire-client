@@ -26,7 +26,7 @@ export const Home = () => {
             }
         );
         if (!(result instanceof Error)) {
-            navigate(`/form/${result.id}`);
+            navigate(`/form/${result.id }`);
         }
     };
 

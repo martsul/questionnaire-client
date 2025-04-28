@@ -19,9 +19,7 @@ export const useTableOwnForms = () => {
     }, [forms]);
 
     useEffect(() => {
-        request<OwnForm[]>("get", endpoints.ownForms, true, {
-            ownerId: userData?.id,
-        }).then((response) => {
+        request<OwnForm[]>("get", endpoints.ownForms, true).then((response) => {
             if (!(response instanceof Error)) {
                 setForms(response);
             }
@@ -65,10 +63,7 @@ export const useTableOwnForms = () => {
         const forms = await request<OwnForm[]>(
             "get",
             endpoints.ownForms,
-            true,
-            {
-                ownerId: userData?.id,
-            }
+            true
         );
         if (!(forms instanceof Error)) {
             setForms(forms);
