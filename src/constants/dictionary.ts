@@ -48,7 +48,7 @@ export const dictionary = {
             answers: "Answers",
             statistic: "Statistic",
             noResult: "No result",
-            updateAnswer: "Update answer"
+            updateAnswer: "Update answer",
         },
         answers: {
             id: "ID",
@@ -121,8 +121,24 @@ export const dictionary = {
             noResults: "No results",
             noTitle: "No title",
         },
+        tooltips: {
+            confidential: "Accessible exclusively to authorized personnel",
+            save: "Save changes",
+            addQuestion: "Add a question",
+            deleteQuestions: "Delete questions",
+            publicResponse: "Make the response public",
+            confidentialResponse: "Make the response confidential",
+        },
     },
     es: {
+        tooltips: {
+            confidential: "Accesible exclusivamente para el personal autorizado",
+            save: "Guardar los cambios",
+            addQuestion: "Añadir una pregunta",
+            deleteQuestions: "Eliminar preguntas",
+            publicResponse: "Hacer pública la respuesta",
+            confidentialResponse: "Hacer confidencial la respuesta",
+        },
         titles: {
             home: "Inicio",
             adminPanel: "Panel de Administración",
@@ -186,7 +202,7 @@ export const dictionary = {
             answers: "Respuestas",
             statistic: "Estadística",
             noResult: "Sin resultado",
-            updateAnswer: "Respuesta de actualización"
+            updateAnswer: "Respuesta de actualización",
         },
         header: {
             login: "Iniciar sesión",

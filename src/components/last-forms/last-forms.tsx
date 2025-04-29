@@ -6,6 +6,7 @@ import { dictionary } from "../../constants/dictionary";
 import { Pagination } from "swiper/modules";
 import { useAppSelector } from "../../redux/hooks";
 import { selectLastForms } from "../../redux/entities/home-page/home-page-slice";
+import styles from "./last-forms.module.css";
 
 export const LastForms = () => {
     const { language } = useLanguage();
@@ -42,18 +43,23 @@ export const LastForms = () => {
                             to={`/form/${f.id}`}
                             className="text-decoration-none"
                         >
-                            <Card className="bg-body-secondary h-100">
+                            <Card
+                                className={`bg-body-secondary ${styles.card}`}
+                            >
                                 <Card.Img
+                                    className={styles.img}
                                     src={
                                         f.img ||
                                         "https://res.cloudinary.com/dx0xkmpsq/image/upload/fl_preserve_transparency/v1745678523/drilldown_euccrj.jpg?_s=public-apps"
                                     }
                                 />
                                 <Card.Body>
-                                    <Card.Title>
+                                    <Card.Title className={styles.title}>
                                         {f.title || homePage.noTitle}
                                     </Card.Title>
-                                    <Card.Text>{f.creator}</Card.Text>
+                                    <Card.Text className={styles.creator}>
+                                        {f.creator}
+                                    </Card.Text>
                                 </Card.Body>
                             </Card>
                         </Link>

@@ -30,59 +30,67 @@ export const TableOwnForms = () => {
                     <i className="bi bi-plus-lg"></i>
                 </button>
             </div>
-            <Table>
-                <thead>
-                    <tr>
-                        <th className={styles.check + " " + styles.mainCheck}>
-                            <Form.Check
-                                checked={allSelected}
-                                onChange={selectAllForms}
-                            />
-                        </th>
-                        <FilterColumn
-                            onSort={() => {
-                                onSort("id");
-                            }}
-                            text={words.id}
-                        />
-                        <FilterColumn
-                            onSort={() => {
-                                onSort("title");
-                            }}
-                            text={words.title}
-                        />
-                        <FilterColumn
-                            onSort={() => {
-                                onSort("isPublic");
-                            }}
-                            text={words.public}
-                        />
-                        <th className={styles.link}></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {forms.map((f) => (
-                        <tr key={f.id}>
-                            <td className={styles.check}>
+            <div className="overflow-auto">
+                <Table>
+                    <thead>
+                        <tr>
+                            <th
+                                className={
+                                    styles.check + " " + styles.mainCheck
+                                }
+                            >
                                 <Form.Check
-                                    onChange={() => {
-                                        toggleSelectForm(f.id);
-                                    }}
-                                    checked={selectedForms.has(f.id)}
+                                    checked={allSelected}
+                                    onChange={selectAllForms}
                                 />
-                            </td>
-                            <td>{f.id}</td>
-                            <td>{f.title}</td>
-                            <td>{f.isPublic ? words.public : words.private}</td>
-                            <td className={styles.link}>
-                                <Link to={`/form/${f.id}`}>
-                                    <i className="bi bi-box-arrow-up-right"></i>
-                                </Link>
-                            </td>
+                            </th>
+                            <FilterColumn
+                                onSort={() => {
+                                    onSort("id");
+                                }}
+                                text={words.id}
+                            />
+                            <FilterColumn
+                                onSort={() => {
+                                    onSort("title");
+                                }}
+                                text={words.title}
+                            />
+                            <FilterColumn
+                                onSort={() => {
+                                    onSort("isPublic");
+                                }}
+                                text={words.public}
+                            />
+                            <th className={styles.link}></th>
                         </tr>
-                    ))}
-                </tbody>
-            </Table>
+                    </thead>
+                    <tbody>
+                        {forms.map((f) => (
+                            <tr key={f.id}>
+                                <td className={styles.check}>
+                                    <Form.Check
+                                        onChange={() => {
+                                            toggleSelectForm(f.id);
+                                        }}
+                                        checked={selectedForms.has(f.id)}
+                                    />
+                                </td>
+                                <td>{f.id}</td>
+                                <td>{f.title}</td>
+                                <td>
+                                    {f.isPublic ? words.public : words.private}
+                                </td>
+                                <td className={styles.link}>
+                                    <Link to={`/form/${f.id}`}>
+                                        <i className="bi bi-box-arrow-up-right"></i>
+                                    </Link>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+            </div>
         </>
     );
 };

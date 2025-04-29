@@ -13,11 +13,15 @@ export const FormHeadEdit: FC<Props> = ({ head }) => {
     const { title, description, isPublic, themes, theme, img } = head;
 
     return (
-        <>
-            <FormHeadTitleEdit img={img} title={title} description={description} />
+        <div className="bg-body-secondary p-4 rounded d-flex flex-column gap-3 position-relative">
+            <FormHeadTitleEdit
+                img={img}
+                title={title}
+                description={description}
+            />
             <FromHeadThemeEdit themes={themes} theme={theme} />
             <FormHeadTagsEdit />
             {!isPublic && <FromHeadUsersEdit />}
-        </>
+        </div>
     );
 };

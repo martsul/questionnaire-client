@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useLanguage } from "../../contexts/language-context/use-language";
 import { dictionary } from "../../constants/dictionary";
-import { Form } from "react-bootstrap";
+import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useAppDispatch } from "../../redux/hooks";
 import {
     changeQuestionDescription,
@@ -23,7 +23,7 @@ export const FormQuestionEdit: FC<Props> = ({
 }) => {
     const dispatch = useAppDispatch();
     const { language } = useLanguage();
-    const words = dictionary[language].form;
+    const { form, tooltips } = dictionary[language];
 
     const handlerChange = (item: "title" | "description", value: string) => {
         const action =
@@ -36,18 +36,22 @@ export const FormQuestionEdit: FC<Props> = ({
             <div className="d-flex align-items-center justify-content-between gap-3">
                 <Form.Control
                     maxLength={40}
-                    placeholder={words.questionTitle}
+                    placeholder={form.questionTitle}
                     onChange={(event) => {
                         handlerChange("title", event.target.value);
                     }}
                     value={title}
                 />
-                {!inStatistic && <i className="bi bi-incognito"></i>}
+                {!inStatistic && (
+                    <OverlayTrigger overlay={<Tooltip>{tooltips.confidential}</Tooltip>}>
+                        <i className="bi bi-incognito"></i>
+                    </OverlayTrigger>
+                )}
             </div>
 
             <Form.Control
                 maxLength={100}
-                placeholder={words.questionDescription}
+                placeholder={form.questionDescription}
                 onChange={(event) => {
                     handlerChange("description", event.target.value);
                 }}

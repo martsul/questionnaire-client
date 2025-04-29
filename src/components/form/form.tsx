@@ -37,10 +37,8 @@ export const Form = () => {
                     isEdit={isEdit}
                     toggleEdit={toggleEdit}
                 />
-                <div className="bg-body-secondary p-4 rounded d-flex flex-column gap-3 position-relative">
-                    {isEdit && <FormHeadEdit head={formHead} />}
-                    {!isEdit && <FormHeadVisible head={formHead} />}
-                </div>
+                {isEdit && <FormHeadEdit head={formHead} />}
+                {!isEdit && <FormHeadVisible head={formHead} />}
                 {isEdit && <FormQuestionsEdit />}
                 {!isEdit && <FormQuestionsVisible />}
                 {canSendAnswer && (

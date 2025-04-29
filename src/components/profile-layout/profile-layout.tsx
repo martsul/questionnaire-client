@@ -11,7 +11,7 @@ export const ProfileLayout = () => {
     return (
         <>
             <PageTitle title={titles.profile} />
-            <section className="overflow-auto">
+            <section>
                 <nav className="nav nav-pills nav-fill my-3">
                     <NavLink
                         className={({ isActive }) =>

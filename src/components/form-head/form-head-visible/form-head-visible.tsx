@@ -15,11 +15,11 @@ type Props = { head: FormHead };
 export const FormHeadVisible: FC<Props> = ({ head }) => {
     const tags = useAppSelector(selectTags);
     const { theme } = useTheme();
-    const {language} = useLanguage()
-    const {form} = dictionary[language]
+    const { language } = useLanguage();
+    const { form } = dictionary[language];
 
     return (
-        <>
+        <div className="bg-body-secondary p-4 rounded d-flex flex-column gap-3 position-relative">
             <h1>{head.title || form.noInfo}</h1>
             <MDEditor.Markdown
                 className={classNames(
@@ -46,6 +46,6 @@ export const FormHeadVisible: FC<Props> = ({ head }) => {
                         </Badge>
                     ))}
             </div>
-        </>
+        </div>
     );
 };

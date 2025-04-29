@@ -1,0 +1,5 @@
+.drag {
+    touch-action: none;
+    position: relative;
+    top: -2px;
+}

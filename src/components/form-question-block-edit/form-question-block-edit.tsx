@@ -9,6 +9,7 @@ import { FormAnswerEdit } from "../form-answer-edit/form-answer-edit";
 import { QuestionType } from "../question-type/question-type";
 import { FormQuestionVisible } from "../form-question-visible/form-question-visible";
 import { FormAnswerVisible } from "../form-answer-visible/form-answer-visible";
+import styles from "./form-question-block-edit.module.css";
 
 type Props = {
     question: Question;
@@ -57,8 +58,8 @@ export const FormQuestionBlockEdit: FC<Props> = ({
         >
             <div className="d-flex align-items-center gap-2">
                 <div className="d-flex gap-2 align-items-center">
-                    <div {...attributes} {...listeners}>
-                        ☰
+                    <div className={styles.drag} {...attributes} {...listeners}>
+                        <i className="bi bi-list fs-4"></i>
                     </div>
                     <Form.Check onChange={handlerChange} checked={isSelected} />
                 </div>

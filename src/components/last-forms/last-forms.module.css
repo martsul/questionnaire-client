@@ -1,0 +1,57 @@
+.card {
+    height: 335px !important;
+}
+
+.img {
+    aspect-ratio: 1 / 1;
+}
+
+.title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.creator {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 1399px) {
+    .card {
+        height: 305px !important;
+    }
+}
+
+@media (max-width: 1280px) {
+    .card {
+        height: 360px !important;
+    }
+}
+
+@media (max-width: 1199px) {
+    .card {
+        height: 325px !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .card {
+        height: 445px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .card {
+        height: 360px !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .card {
+        height: auto !important;
+    }
+}

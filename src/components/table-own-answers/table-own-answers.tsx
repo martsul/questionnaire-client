@@ -27,74 +27,82 @@ export const TableOwnAnswers = () => {
                     <i className="bi bi-trash"></i>
                 </button>
             </div>
-            <Table>
-                <thead>
-                    <tr>
-                        <th className={styles.check + " " + styles.mainCheck}>
-                            <Form.Check
-                                checked={allSelected}
-                                onChange={selectAllAnswers}
+            <div className="overflow-auto">
+                <Table>
+                    <thead>
+                        <tr>
+                            <th
+                                className={
+                                    styles.check + " " + styles.mainCheck
+                                }
+                            >
+                                <Form.Check
+                                    checked={allSelected}
+                                    onChange={selectAllAnswers}
+                                />
+                            </th>
+                            <FilterColumn
+                                onSort={() => {
+                                    onSort("answerId");
+                                }}
+                                text={words.answerId}
                             />
-                        </th>
-                        <FilterColumn
-                            onSort={() => {
-                                onSort("answerId");
-                            }}
-                            text={words.answerId}
-                        />
-                        <FilterColumn
-                            onSort={() => {
-                                onSort("formId");
-                            }}
-                            text={words.formId}
-                        />
-                        <FilterColumn
-                            onSort={() => {
-                                onSort("title");
-                            }}
-                            text={words.title}
-                        />
-                        <FilterColumn
-                            onSort={() => {
-                                onSort("createdAt");
-                            }}
-                            text={words.createdAt}
-                        />
-                        <th className={styles.link}></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {answers.map((a) => {
-                        const date = parseISO(a.createdAt);
-                        const formattedDate = format(
-                            date,
-                            "yyyy-MM-dd HH:mm:ss"
-                        );
+                            <FilterColumn
+                                onSort={() => {
+                                    onSort("formId");
+                                }}
+                                text={words.formId}
+                            />
+                            <FilterColumn
+                                onSort={() => {
+                                    onSort("title");
+                                }}
+                                text={words.title}
+                            />
+                            <FilterColumn
+                                onSort={() => {
+                                    onSort("createdAt");
+                                }}
+                                text={words.createdAt}
+                            />
+                            <th className={styles.link}></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {answers.map((a) => {
+                            const date = parseISO(a.createdAt);
+                            const formattedDate = format(
+                                date,
+                                "yyyy-MM-dd HH:mm:ss"
+                            );
 
-                        return (
-                            <tr key={a.answerId}>
-                                <td className={styles.check}>
-                                    <Form.Check
-                                        onChange={() => {
-                                            selectAnswer(a.answerId);
-                                        }}
-                                        checked={selectedAnswers.has(a.answerId)}
-                                    />
-                                </td>
-                                <td>{a.answerId}</td>
-                                <td>{a.formId}</td>
-                                <td>{a.title}</td>
-                                <td>{formattedDate}</td>
-                                <td className={styles.link}>
-                                    <Link to={`/answer/${a.answerId}`}>
-                                        <i className="bi bi-box-arrow-up-right"></i>
-                                    </Link>
-                                </td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </Table>
+                            return (
+                                <tr key={a.answerId}>
+                                    <td className={styles.check}>
+                                        <Form.Check
+                                            onChange={() => {
+                                                selectAnswer(a.answerId);
+                                            }}
+                                            checked={selectedAnswers.has(
+                                                a.answerId
+                                            )}
+                                        />
+                                    </td>
+                                    <td>{a.answerId}</td>
+                                    <td>{a.formId}</td>
+                                    <td>{a.title}</td>
+                                    <td>{formattedDate}</td>
+                                    <td className={styles.link}>
+                                        <Link to={`/answer/${a.answerId}`}>
+                                            <i className="bi bi-box-arrow-up-right"></i>
+                                        </Link>
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </Table>
+            </div>
         </>
     );
 };
