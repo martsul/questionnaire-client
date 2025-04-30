@@ -3,7 +3,7 @@ import { ApiResponse } from "../../../types/api-response";
 import { LastForm } from "../../../types/last-from";
 import { PopularForm } from "../../../types/popular-form";
 import { PopularType } from "../../../types/popular-tag";
-import { simpleApi } from "../../../api";
+import { api } from "../../../api";
 import { endpoints } from "../../../constants/config";
 
 type Response = {
@@ -16,7 +16,7 @@ export const getHomePage = createAsyncThunk(
     "homePage/getHomePage",
     async (_, { rejectWithValue }) => {
         try {
-            const response: ApiResponse<Response> = await simpleApi.get(
+            const response: ApiResponse<Response> = await api.get(
                 endpoints.home
             );
 

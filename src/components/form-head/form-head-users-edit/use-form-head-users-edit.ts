@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { simpleApi } from "../../../api";
+import { api } from "../../../api";
 import { endpoints } from "../../../constants/config";
 import { debounce } from "lodash";
 import { AvailableUser } from "../../../types/form/available-users";
@@ -10,7 +10,7 @@ import { MultiValue } from "react-select";
 import { ApiResponse } from "../../../types/api-response";
 
 const getUsers = async (user: string, userFilter: "name" | "email") => {
-    const response: ApiResponse<AvailableUser[]> = await simpleApi.get(
+    const response: ApiResponse<AvailableUser[]> = await api.get(
         endpoints.user,
         {
             params: { user, userFilter },

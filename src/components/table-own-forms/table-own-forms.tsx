@@ -34,11 +34,7 @@ export const TableOwnForms = () => {
                 <Table>
                     <thead>
                         <tr>
-                            <th
-                                className={
-                                    styles.check + " " + styles.mainCheck
-                                }
-                            >
+                            <th className={styles.check}>
                                 <Form.Check
                                     checked={allSelected}
                                     onChange={selectAllForms}

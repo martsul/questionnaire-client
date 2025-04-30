@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useEffect, useState } from "react";
+import { ChangeEventHandler, useCallback, useEffect, useState } from "react";
 import { useApi } from "../../hooks/use-api";
 import { endpoints } from "../../constants/config";
 import { UsersTable } from "../../types/users-table";
@@ -6,10 +6,10 @@ import { AvailableEndpoints } from "../../types/available-endpoints";
 import { useMessage } from "../../contexts/message-context/use-message-context";
 import { dictionary } from "../../constants/dictionary";
 import { useLanguage } from "../../contexts/language-context/use-language";
-import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
 import { sortObjects } from "../../helpers/sort-objects";
+import { AxiosError } from "axios";
 
-let data: UsersTable["users"] = [];
+let data: UsersTable = [];
 
 export const useUsersTable = () => {
     const [users, setUsers] = useState(data);
@@ -19,17 +19,17 @@ export const useUsersTable = () => {
     const { language } = useLanguage();
     const words = dictionary[language].success;
     const request = useApi();
-    const { changeStatus } = useAuthorization();
 
-    useEffect(() => {
+    const getUsers = useCallback(() => {
         request<UsersTable>("get", endpoints.users, true).then((response) => {
-            if (!(response instanceof Error)) {
-                setUsers(response.users);
-                data = response.users;
+            if (!(response instanceof AxiosError)) {
+                setUsers(response);
+                data = response;
             }
         });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [request]);
+
+    useEffect(getUsers, [getUsers]);
 
     const handlerSingleInput: ChangeEventHandler<HTMLInputElement> = (
         event
@@ -52,34 +52,31 @@ export const useUsersTable = () => {
         }
     };
 
-    const sendUsers = (endpoint: AvailableEndpoints) => {
-        request<UsersTable>(
+    const sendUsers = async (endpoint: AvailableEndpoints) => {
+        const result = await request<UsersTable>(
             "post",
             endpoint,
             true,
             JSON.stringify(Array.from(selectedUsers))
-        ).then((response) => {
-            if (!(response instanceof Error)) {
-                setUsers(response.users);
-                data = response.users;
-                addMessage("success", words.success);
-                changeStatus(response.status);
-            }
-        });
+        );
+        if (!(result instanceof Error)) {
+            addMessage("success", words.success);
+        }
+        getUsers();
     };
 
-    const onSort = (sortField: keyof UsersTable["users"][0]) => {
+    const onSort = (sortField: keyof UsersTable[0]) => {
         const tempUsers = [...users];
         const sortedUsers = sortObjects(
             tempUsers,
             sortField,
             isAscending
-        ) as UsersTable["users"];
+        ) as UsersTable;
         setUsers(sortedUsers);
         setIsAscending(!isAscending);
     };
 
-    const findUsers= (value: string) => {
+    const findUsers = (value: string) => {
         if (value) {
             setUsers(users.filter((e) => e.name.toLowerCase().match(value)));
         } else {

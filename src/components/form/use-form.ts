@@ -7,6 +7,8 @@ import { useApi } from "../../hooks/use-api";
 import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
 import { useMessage } from "../../contexts/message-context/use-message-context";
 import { getForm } from "../../redux/entities/form/get-form";
+import { useLanguage } from "../../contexts/language-context/use-language";
+import { dictionary } from "../../constants/dictionary";
 
 export const useForm = () => {
     const dispatch = useAppDispatch();
@@ -17,6 +19,8 @@ export const useForm = () => {
     const { userData } = useAuthorization();
     const { addMessage } = useMessage();
     const users = useAppSelector(selectUsers);
+    const { language } = useLanguage();
+    const { success } = dictionary[language];
     const canSendAnswer = Boolean(
         !isEdit &&
             userData &&
@@ -40,7 +44,7 @@ export const useForm = () => {
             true,
             requestData
         );
-        if (!(result instanceof Error)) addMessage("success", "ok");
+        if (!(result instanceof Error)) addMessage("success", success.sendAnswer);
     };
 
     const toggleEdit = () => {

@@ -62,7 +62,7 @@ export const AnswerFormContainer = () => {
 
     const onDelete = async () => {
         const result = await request("delete", endpoints.answer, true, { ids: [answerId] });
-        if (!(result instanceof Error)) {
+        if (result) {
             navigate("/")
         }
     };

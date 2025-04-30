@@ -14,7 +14,6 @@ export const AnswersTable = () => {
     const { answers: words, titles } = dictionary[language];
     const { answers, onSort } = useAnswersTable();
 
-
     return (
         <>
             <PageTitle title={titles.answers} />

@@ -12,7 +12,7 @@ import { PageTitle } from "../page-title/page-title";
 type Props = { thereIsAccount: boolean };
 
 export const AuthorizationForm: FC<Props> = ({ thereIsAccount }) => {
-    const { handlerSubmit } = useAuthorizationForm();
+    const { handlerSubmit } = useAuthorizationForm(thereIsAccount);
     const { theme } = useTheme();
     const { language } = useLanguage();
     const {authorization, titles} = dictionary[language];

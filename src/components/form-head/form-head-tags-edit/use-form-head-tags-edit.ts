@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { simpleApi } from "../../../api";
+import { api } from "../../../api";
 import { endpoints } from "../../../constants/config";
 import { debounce } from "lodash";
 import { useAppDispatch } from "../../../redux/hooks";
@@ -9,7 +9,7 @@ import { SelectValue } from "../../../types/select-value";
 import { MultiValue } from "react-select";
 
 const getTags = async (value: string) => {
-    const response: ApiResponse<string[]> = await simpleApi.get(endpoints.tag, {
+    const response: ApiResponse<string[]> = await api.get(endpoints.tag, {
         params: { tag: value },
     });
     return response;

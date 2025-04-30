@@ -5,9 +5,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
 import { selectFormStatus } from "../../redux/entities/form/form-slice";
 import { useLoading } from "../../contexts/loading-context/use-loading";
-import { useMessage } from "../../contexts/message-context/use-message-context";
-import { useLanguage } from "../../contexts/language-context/use-language";
-import { dictionary } from "../../constants/dictionary";
 import { FormLayout } from "./form-layout";
 
 export const FormLayoutContainer = () => {
@@ -17,9 +14,6 @@ export const FormLayoutContainer = () => {
     const requestStatus = useAppSelector(selectFormStatus);
     const { startLoading, stopLoading } = useLoading();
     const navigate = useNavigate();
-    const { addMessage } = useMessage();
-    const { language } = useLanguage();
-    const { errors } = dictionary[language];
 
     useEffect(() => {
         dispatch(getForm({ formId, userId: userData?.id }));
@@ -38,7 +32,6 @@ export const FormLayoutContainer = () => {
 
     if (requestStatus === "rejected") {
         navigate("/");
-        addMessage("danger", errors.unknown);
         return null;
     }
 

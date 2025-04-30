@@ -7,11 +7,6 @@
     opacity: 1;
 }
 
-.mainCheck {
-    position: relative;
-    top: -4px;
-}
-
 .check {
     width: 20px;
 }

@@ -1,14 +1,7 @@
 import { API_BASE_URL, endpoints } from "../constants/config";
 import axios from "axios";
-import { Tokens } from "../types/tokens";
 
 export const api = axios.create({
-    baseURL: API_BASE_URL,
-    withCredentials: true,
-    headers: { "Content-Type": "application/json" },
-});
-
-export const simpleApi = axios.create({
     baseURL: API_BASE_URL,
     withCredentials: true,
     headers: { "Content-Type": "application/json" },
@@ -27,12 +20,14 @@ api.interceptors.response.use(
     },
     async (error) => {
         const originalRequest = error.config;
-        if (error?.response?.status === 401) {
-            const response = await axios.get<Tokens>(
+        const status = error?.response?.status;
+        if (status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
+            const response = await axios.get<string>(
                 API_BASE_URL + endpoints.refresh,
                 { withCredentials: true }
             );
-            localStorage.setItem("accessToken", response.data.accessToken);
+            localStorage.setItem("accessToken", response.data);
             return api.request(originalRequest);
         }
         throw error;

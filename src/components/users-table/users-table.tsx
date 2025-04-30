@@ -6,9 +6,6 @@ import { useLanguage } from "../../contexts/language-context/use-language";
 import { UsersTableBody } from "./users-table-body/users-table-body";
 import { useUsersTable } from "./use-users-table";
 import { ManagementPanel } from "../management-panel/management-panel";
-import { useAuthorization } from "../../contexts/authorization-context/use-authorization";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { UsersPanel } from "../users-panel/users-panel";
 
 export const UsersTable = () => {
@@ -23,14 +20,6 @@ export const UsersTable = () => {
         findUsers,
         sendUsers,
     } = useUsersTable();
-    const { userData } = useAuthorization();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!userData || !userData.isAdmin) {
-            navigate("/");
-        }
-    }, [userData, navigate]);
 
     return (
         <section className="mt-5">

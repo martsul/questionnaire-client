@@ -77,6 +77,8 @@ export const dictionary = {
             submit: "Submit",
         },
         errors: {
+            "User Is Blocked": "You are blocked", 
+            "Rights Error":"You don't have enough rights",
             pageNotFound: "Page not found.",
             uniqueAnswers:
                 "The answers should not be repeated in the question - ",
@@ -84,20 +86,21 @@ export const dictionary = {
             "Invalid email address":
                 "There is no user with this email address.",
             "Invalid password": "Wrong password.",
-            "Validation error: Validation len on name failed":
+            "Validation len on name failed":
                 "The name must be between 1 and 100 characters long.",
-            "Validation error: Validation len on email failed":
+            "Validation len on email failed":
                 "Fill in the email field.",
-            "Validation error: Validation isEmail on email failed":
+            "Validation isEmail on email failed":
                 "Incorrect email address.",
-            "Validation error: Validation len on password failed":
+            "Validation len on password failed":
                 "The password must have at least 1 character.",
-            "Validation error": "The user with this email already exists.",
+            "email must be unique": "The user with this email already exists.",
             Unauthorized: "Authorization error",
             "User is blocked": "This user is blocked",
         },
         success: {
             success: "The operation was successful",
+            sendAnswer: "The response is saved",
         },
         usersTable: {
             title: "Users",
@@ -132,7 +135,8 @@ export const dictionary = {
     },
     es: {
         tooltips: {
-            confidential: "Accesible exclusivamente para el personal autorizado",
+            confidential:
+                "Accesible exclusivamente para el personal autorizado",
             save: "Guardar los cambios",
             addQuestion: "Añadir una pregunta",
             deleteQuestions: "Eliminar preguntas",
@@ -231,6 +235,8 @@ export const dictionary = {
             time: "Hora",
         },
         errors: {
+            "User Is Blocked": "Estás bloqueado", 
+            "Rights Error":"No tienes suficientes derechos",
             pageNotFound: "Página no encontrada.",
             uniqueAnswers:
                 "Las respuestas no deben repetirse en la pregunta - ",
@@ -239,21 +245,22 @@ export const dictionary = {
             "Invalid email address":
                 "No existe un usuario con esta dirección de correo electrónico.",
             "Invalid password": "Contraseña incorrecta.",
-            "Validation error: Validation len on name failed":
+            "Validation len on name failed":
                 "El nombre debe tener entre 1 y 100 caracteres de longitud.",
-            "Validation error: Validation len on email failed":
+            "Validation len on email failed":
                 "Rellena el campo de correo electrónico.",
-            "Validation error: Validation isEmail on email failed":
+            "Validation isEmail on email failed":
                 "Dirección de correo electrónico incorrecta.",
-            "Validation error: Validation len on password failed":
+            "Validation len on password failed":
                 "La contraseña debe tener al menos 1 carácter.",
-            "Validation error":
+            "email must be unique":
                 "Ya existe un usuario con este correo electrónico.",
             Unauthorized: "Error de autorización",
             "User is blocked": "Este usuario está bloqueado",
         },
         success: {
             success: "La operación fue exitosa",
+            sendAnswer: "Respuesta guardada",
         },
         usersTable: {
             title: "Usuarios",

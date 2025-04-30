@@ -20,10 +20,6 @@ import { endpoints } from "../../constants/config";
 import { EditData } from "../../types/form/edit-data";
 import { Question } from "../../types/form/question";
 import { AnswerError } from "../../errors/answer-error";
-import { useMessage } from "../../contexts/message-context/use-message-context";
-import { useLanguage } from "../../contexts/language-context/use-language";
-import { dictionary } from "../../constants/dictionary";
-import { handlerErrors } from "../../helpers/handler-errors";
 import { selectEditData } from "../../redux/entities/form/selectors";
 
 const validateQuestions = (questions: Question[]) => {
@@ -47,12 +43,9 @@ const getRequestData = async (data?: EditData) => {
 };
 
 export const useFormQuestionEdit = () => {
-    const { language } = useLanguage();
-    const words = dictionary[language].errors;
     const dispatch = useAppDispatch();
     const editData = useAppSelector(selectEditData);
     const questions = useAppSelector(selectQuestions);
-    const { addMessage } = useMessage();
     const request = useApi();
     const [editQuestion, setEditQuestion] = useState("");
     const [selectedQuestions, setSelectedQuestions] = useState<Set<string>>(
@@ -76,17 +69,8 @@ export const useFormQuestionEdit = () => {
     };
 
     const onSubmit = async () => {
-        try {
-            const requestData = await getRequestData(editData);
-            await request("put", endpoints.form, true, requestData);
-        } catch (error) {
-            console.error(error)
-            const message =
-                error instanceof AnswerError
-                    ? words.uniqueAnswers + `"${error.message}"`
-                    : handlerErrors(error, language);
-            addMessage("danger", message);
-        }
+        const requestData = await getRequestData(editData);
+        await request("put", endpoints.form, true, requestData);
     };
 
     const onDelete = () => {

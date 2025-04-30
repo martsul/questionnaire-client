@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { SearchContext } from ".";
 import { ProviderProps } from "../../types/provider-props";
 import { debounce } from "lodash";
-import { simpleApi } from "../../api";
+import { api } from "../../api";
 import { endpoints } from "../../constants/config";
 import { FoundedForm } from "../../types/founded-form";
 import { ApiResponse } from "../../types/api-response";
@@ -15,7 +15,7 @@ export const SearchContextProvider: FC<ProviderProps> = ({ children }) => {
 
     const searchForm: OnSearchForm = async (value, searchBy) => {
         try {
-            const result: ApiResponse<FoundedForm[]> = await simpleApi.get(
+            const result: ApiResponse<FoundedForm[]> = await api.get(
                 endpoints.searchForm,
                 { params: { word: value, searchBy } }
             );
