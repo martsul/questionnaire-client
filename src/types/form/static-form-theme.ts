@@ -1,1 +1,0 @@
-export type StaticFormTheme = "education" | "quiz" | "other";

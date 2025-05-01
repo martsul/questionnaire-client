@@ -3,7 +3,7 @@ import { UsersTable } from "../../../types/users-table";
 import { UsersTableRow } from "../users-table-row/users-table-row";
 
 type Props = {
-    users: UsersTable["users"];
+    users: UsersTable;
     selectedUsers: Set<number>;
     handlerSingleInput: ChangeEventHandler<HTMLInputElement>;
 };

@@ -26,8 +26,7 @@ export const useAnswersTable = () => {
                 }
             }
         );
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [formId]);
+    }, [formId, request]);
 
     return { answers, onSort };
 };

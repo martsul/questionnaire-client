@@ -7,7 +7,7 @@ import { UsersTable } from "../../../types/users-table";
 
 type Props = {
     handlerMainInput: ChangeEventHandler<HTMLInputElement>;
-    onSort: (sortField: keyof UsersTable["users"][0]) => void;
+    onSort: (sortField: keyof UsersTable[0]) => void;
 };
 
 export const UsersTableHead: FC<Props> = ({ handlerMainInput, onSort }) => {

@@ -24,23 +24,9 @@ export const AuthorizationContextProvider: FC<ProviderProps> = ({
         setUserData(null);
     };
 
-    const changeStatus = ({
-        isAdmin,
-        isBlocked,
-    }: {
-        isAdmin: boolean;
-        isBlocked: boolean;
-    }) => {
-        if (isBlocked) {
-            deleteUser();
-        } else if (userData) {
-            setUserData({ ...userData, isAdmin });
-        }
-    };
-
     return (
         <AuthorizationContext.Provider
-            value={{ userData, deleteUser, addUser, changeStatus }}
+            value={{ userData, deleteUser, addUser }}
         >
             {children}
         </AuthorizationContext.Provider>

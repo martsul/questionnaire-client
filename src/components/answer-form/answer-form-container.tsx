@@ -16,6 +16,7 @@ import { useAuthorization } from "../../contexts/authorization-context/use-autho
 import { useApi } from "../../hooks/use-api";
 import { endpoints } from "../../constants/config";
 import { useLoading } from "../../contexts/loading-context/use-loading";
+import { AxiosError } from "axios";
 
 export const AnswerFormContainer = () => {
     const { answerId } = useParams();
@@ -61,16 +62,22 @@ export const AnswerFormContainer = () => {
     };
 
     const onDelete = async () => {
-        const result = await request("delete", endpoints.answer, true, { ids: [answerId] });
-        if (result) {
-            navigate("/")
+        const result = await request<string>("delete", endpoints.answer, true, {
+            ids: [answerId],
+        });
+        if (!(result instanceof AxiosError)) {
+            navigate("/");
         }
     };
 
     return (
         <>
             <PageTitle title={titles.answer} />
-            <AnswerForm onDelete={onDelete} onSubmit={onSubmit} canRedact={canRedact} />
+            <AnswerForm
+                onDelete={onDelete}
+                onSubmit={onSubmit}
+                canRedact={canRedact}
+            />
         </>
     );
 };

@@ -42,7 +42,7 @@ export const AnswerForm: FC<Props> = ({ canRedact, onSubmit, onDelete }) => {
             </div>
             <FormQuestionsVisible disabled={!canRedact} />
             {canRedact && (
-                <Button type="submit" onClick={onSubmit}>{form.updateAnswer}</Button>
+                <Button type="button" onClick={onSubmit}>{form.updateAnswer}</Button>
             )}
         </form>
     );

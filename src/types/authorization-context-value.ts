@@ -7,11 +7,4 @@ export type AuthorizationContextValue = {
         data: Omit<AuthorizationResponse, "accessToken" | "refreshToken">
     ) => void;
     deleteUser: () => void;
-    changeStatus: ({
-        isAdmin,
-        isBlocked,
-    }: {
-        isAdmin: boolean;
-        isBlocked: boolean;
-    }) => void;
 };

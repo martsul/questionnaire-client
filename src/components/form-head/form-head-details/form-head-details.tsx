@@ -48,7 +48,7 @@ export const FormHeadDetails: FC<Props> = ({
             )}
             {canEdit && (
                 <>
-                    <button onClick={onDelete}>
+                    <button type="button" onClick={onDelete}>
                         <i className="bi bi-trash"></i>
                     </button>
                     <button type="button" onClick={toggleEdit}>
@@ -59,7 +59,7 @@ export const FormHeadDetails: FC<Props> = ({
             )}
             <span className="d-flex align-items-center gap-2">
                 <span>{likes}</span>
-                <button className={styles.like} disabled={!userData} onClick={onLike}>
+                <button type="button" className={styles.like} disabled={!userData} onClick={onLike}>
                     {isLiked && <i className="bi bi-heart-fill"></i>}
                     {!isLiked && <i className="bi bi-heart"></i>}
                 </button>

@@ -18,10 +18,12 @@ export const PopularForms = () => {
                 <Table>
                     <thead>
                         <tr>
-                            <th>{words.id}</th>
-                            <th>{words.title}</th>
-                            <th>{words.creator}</th>
-                            <th>{words.numberResponse}</th>
+                            <th className="text-nowrap">{words.id}</th>
+                            <th className="text-nowrap">{words.title}</th>
+                            <th className="text-nowrap">{words.creator}</th>
+                            <th className="text-nowrap">
+                                {words.numberResponse}
+                            </th>
                             <th className={styles.link}></th>
                         </tr>
                     </thead>

@@ -7,7 +7,7 @@ type Props = {
     sendUsers: (endpoint: AvailableEndpoints) => void;
 };
 
-export const UsersPanel: FC<Props> = ({sendUsers}) => {
+export const UsersPanel: FC<Props> = ({ sendUsers }) => {
     return (
         <>
             <Button
@@ -16,7 +16,7 @@ export const UsersPanel: FC<Props> = ({sendUsers}) => {
                 }}
                 variant="outline-success"
             >
-                <i className="fs-4 bi bi-person-fill-up"></i>
+                <i className="fs-5 bi bi-person-fill-up"></i>
             </Button>
             <Button
                 onClick={() => {
@@ -24,7 +24,7 @@ export const UsersPanel: FC<Props> = ({sendUsers}) => {
                 }}
                 variant="outline-danger"
             >
-                <i className="fs-4 bi bi-person-fill-down"></i>
+                <i className="fs-5 bi bi-person-fill-down"></i>
             </Button>
             <Button
                 onClick={() => {
@@ -32,7 +32,7 @@ export const UsersPanel: FC<Props> = ({sendUsers}) => {
                 }}
                 variant="outline-success"
             >
-                <i className="fs-4 bi bi-person-fill-check"></i>
+                <i className="fs-5 bi bi-person-fill-check"></i>
             </Button>
             <Button
                 onClick={() => {
@@ -40,7 +40,15 @@ export const UsersPanel: FC<Props> = ({sendUsers}) => {
                 }}
                 variant="outline-danger"
             >
-                <i className="fs-4 bi bi-person-fill-lock"></i>
+                <i className="fs-5 bi bi-person-fill-lock"></i>
+            </Button>
+            <Button
+                onClick={() => {
+                    sendUsers(endpoints.deleteUsers);
+                }}
+                variant="outline-danger"
+            >
+                <i className="fs-5 bi bi-trash"></i>
             </Button>
         </>
     );

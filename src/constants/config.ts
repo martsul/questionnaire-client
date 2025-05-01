@@ -14,6 +14,7 @@ export const endpoints = {
     users: "/users",
     block: "/block",
     unblock: "/unblock",
+    deleteUsers: "/delete_users",
     giveAdmin: "/give_admin",
     takeAdmin: "/take_admin",
     refresh: "/refresh",

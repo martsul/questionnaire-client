@@ -16,7 +16,7 @@ export const useHandlerError = () => {
         if (status === 404 || status === 403 || status === 401) {
             navigate("/");
         }
-        if (message === "User Is Blocked") {
+        if (message === "User Is Blocked" || message === "User Not Founded") {
             handlerLogout();
         }
         return message in errors

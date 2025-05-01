@@ -10,7 +10,7 @@ export const FilterColumn: FC<Props> = ({ onSort, text }) => {
     return (
         <th className={styles.tr}>
             <button
-                className="d-flex align-items-center gap-1"
+                className="d-flex align-items-center gap-1 text-nowrap"
                 onClick={onSort}
             >
                 {text}
