@@ -1,5 +1,5 @@
 import { Form } from "react-bootstrap";
-import { FormCheckboxAnswerVisible } from "../form-checkbox-answer-visible/form-checkbox-answer-visible";
+import { FormCheckAnswerVisible } from "../form-check-answer-visible/form-check-answer-visible";
 import { FC } from "react";
 import { QuestionsType } from "../../types/form/questions-type";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -64,9 +64,22 @@ export const FormAnswerVisible: FC<Props> = ({
                     as={"textarea"}
                 />
             )}
-            {answers &&
+            {type === "checkbox" &&
+                answers &&
                 answers.map((a, i) => (
-                    <FormCheckboxAnswerVisible
+                    <FormCheckAnswerVisible
+                        type={type}
+                        disabled={disabled}
+                        id={id}
+                        answer={a}
+                        key={i}
+                    />
+                ))}
+            {type === "radio" &&
+                answers &&
+                answers.map((a, i) => (
+                    <FormCheckAnswerVisible
+                        type={type}
                         disabled={disabled}
                         id={id}
                         answer={a}

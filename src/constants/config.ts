@@ -6,6 +6,8 @@ export const API_BASE_URL = "http://localhost:10000/api";
 //     "wss://questionnaire-server-gajm.onrender.com/api/comments?formId=";
 export const WS_BASE_URL = "ws://localhost:10000/api/comments?formId=";
 
+export const GITHUB_AUTH = "http://localhost:10000/api/auth/github"
+
 export const endpoints = {
     signin: `/signin`,
     signup: `/signup`,
@@ -28,5 +30,6 @@ export const endpoints = {
     home: "/home_page",
     ownForms: "/own_forms",
     ownAnswers: "/own_answers",
-    searchForm: "search_form",
+    searchForm: "/search_form",
+    githubAuth: "/auth/github/tokens"
 } as const;

@@ -13,6 +13,7 @@ import { dictionary } from "../../constants/dictionary";
 export const useForm = () => {
     const dispatch = useAppDispatch();
     const [isEdit, setIsEdit] = useState(false);
+    const [answerOnEmail, setAnswerOnEmail] = useState(false);
     const answers = useAppSelector(selectAnswers);
     const formHead = useAppSelector(selectHead);
     const request = useApi();
@@ -35,6 +36,7 @@ export const useForm = () => {
 
     const onSubmit = async () => {
         const requestData = {
+            answerOnEmail,
             answers,
             formId: formHead?.id,
         };
@@ -44,7 +46,8 @@ export const useForm = () => {
             true,
             requestData
         );
-        if (!(result instanceof Error)) addMessage("success", success.sendAnswer);
+        if (!(result instanceof Error))
+            addMessage("success", success.sendAnswer);
     };
 
     const toggleEdit = () => {
@@ -54,5 +57,13 @@ export const useForm = () => {
         }
     };
 
-    return { toggleEdit, onSubmit, isEdit, canSendAnswer, canEdit };
+    return {
+        toggleEdit,
+        onSubmit,
+        isEdit,
+        canSendAnswer,
+        canEdit,
+        answerOnEmail,
+        setAnswerOnEmail,
+    };
 };

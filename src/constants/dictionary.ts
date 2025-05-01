@@ -37,6 +37,7 @@ export const dictionary = {
             paragraph: "Multiple-line text",
             number: "Non-negative integers",
             checkbox: "Checkboxes",
+            radio: "One of many",
             noInfo: "No information",
             questionTitle: "Title",
             questionDescription: "Description",
@@ -49,6 +50,7 @@ export const dictionary = {
             statistic: "Statistic",
             noResult: "No result",
             updateAnswer: "Update answer",
+            sendOnEmail: "Send responses by email"
         },
         answers: {
             id: "ID",
@@ -77,8 +79,8 @@ export const dictionary = {
             submit: "Submit",
         },
         errors: {
-            "User Is Blocked": "You are blocked", 
-            "Rights Error":"You don't have enough rights",
+            "User Is Blocked": "You are blocked",
+            "Rights Error": "You don't have enough rights",
             pageNotFound: "Page not found.",
             uniqueAnswers:
                 "The answers should not be repeated in the question - ",
@@ -88,10 +90,8 @@ export const dictionary = {
             "Invalid password": "Wrong password.",
             "Validation len on name failed":
                 "The name must be between 1 and 100 characters long.",
-            "Validation len on email failed":
-                "Fill in the email field.",
-            "Validation isEmail on email failed":
-                "Incorrect email address.",
+            "Validation len on email failed": "Fill in the email field.",
+            "Validation isEmail on email failed": "Incorrect email address.",
             "Validation len on password failed":
                 "The password must have at least 1 character.",
             "email must be unique": "The user with this email already exists.",
@@ -195,6 +195,7 @@ export const dictionary = {
             paragraph: "Texto de múltiples líneas",
             number: "Enteros no negativos",
             checkbox: "Casillas de verificación",
+            radio: "Uno de muchos",
             noInfo: "Sin información",
             questionTitle: "Título",
             questionDescription: "Descripción",
@@ -207,6 +208,7 @@ export const dictionary = {
             statistic: "Estadística",
             noResult: "Sin resultado",
             updateAnswer: "Respuesta de actualización",
+            sendOnEmail: "Enviar respuestas por correo electrónico"
         },
         header: {
             login: "Iniciar sesión",
@@ -235,8 +237,8 @@ export const dictionary = {
             time: "Hora",
         },
         errors: {
-            "User Is Blocked": "Estás bloqueado", 
-            "Rights Error":"No tienes suficientes derechos",
+            "User Is Blocked": "Estás bloqueado",
+            "Rights Error": "No tienes suficientes derechos",
             pageNotFound: "Página no encontrada.",
             uniqueAnswers:
                 "Las respuestas no deben repetirse en la pregunta - ",

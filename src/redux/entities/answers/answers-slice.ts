@@ -49,6 +49,18 @@ export const answersSlice = createSlice({
                 answers.splice(valueIndex, 1);
             }
         },
+        setRadioAnswer: (
+            state,
+            {
+                payload,
+            }: PayloadAction<{ value: string; id: string; isAdd: boolean }>
+        ) => {
+            if (payload.isAdd) {
+                state.answers[payload.id] = payload.value;
+            } else {
+                delete state.answers[payload.id];
+            }
+        },
     },
     selectors: {
         selectAnswers: (state) => {
@@ -78,6 +90,7 @@ export const answersSlice = createSlice({
             })
             .addCase(getForm.fulfilled, (state, action) => {
                 state.requestStatus = "fulfilled";
+                state.answers = {};
                 action.payload.questions.forEach((q) => {
                     state.answers[q.id] = "";
                 });
@@ -110,8 +123,12 @@ export const answersSlice = createSlice({
     },
 });
 
-export const { setCheckboxAnswer, setNumAnswer, setTextAnswer } =
-    answersSlice.actions;
+export const {
+    setCheckboxAnswer,
+    setNumAnswer,
+    setTextAnswer,
+    setRadioAnswer,
+} = answersSlice.actions;
 export const {
     selectAnswers,
     selectRequestStatus,

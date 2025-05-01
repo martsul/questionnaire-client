@@ -27,6 +27,7 @@ export const QuestionType: FC<Props> = ({ type, index }) => {
             <option value="paragraph">{words.paragraph}</option>
             <option value="number">{words.number}</option>
             <option value="checkbox">{words.checkbox}</option>
+            <option value="radio">{words.radio}</option>
         </Form.Select>
     );
 };

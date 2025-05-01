@@ -16,9 +16,8 @@ export const FormAnswerBodyEdit: FC<Props> = ({
     answers,
     selectedAnswers,
     handlerChange,
-    index
+    index,
 }) => {
-
     return (
         <>
             {(type === "line" || type === "number") && (

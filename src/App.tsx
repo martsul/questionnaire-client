@@ -20,6 +20,7 @@ import { ProfileFormsPage } from "./pages/profile-forms-page";
 import { ProfileAnswersPage } from "./pages/profile-answers-page";
 import { SearchContextProvider } from "./contexts/search-context/search-context-provider";
 import { FormLayoutContainer } from "./components/form-layout/form-layout-container";
+import { GithubAuthPage } from "./pages/github-auth-page";
 
 function App() {
     enableMapSet();
@@ -76,6 +77,10 @@ function App() {
                     element: <AnswerPage />,
                 },
             ],
+        },
+        {
+            path: "github/:token",
+            element: <GithubAuthPage />,
         },
     ]);
 

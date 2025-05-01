@@ -6,17 +6,25 @@ import { FormComments } from "../form-comments/form-comments";
 import { FormHeadDetails } from "../form-head/form-head-details/form-head-details";
 import { useLanguage } from "../../contexts/language-context/use-language";
 import { dictionary } from "../../constants/dictionary";
-import { Button } from "react-bootstrap";
 import { useForm } from "./use-form";
 import { useAppSelector } from "../../redux/hooks";
 import { selectHead } from "../../redux/entities/form/form-slice";
 import { PageTitle } from "../page-title/page-title";
+import { SendForm } from "../send-form/send-form";
 
 export const Form = () => {
     const { language } = useLanguage();
-    const { form, titles } = dictionary[language];
+    const { titles } = dictionary[language];
     const formHead = useAppSelector(selectHead);
-    const { onSubmit, toggleEdit, isEdit, canSendAnswer, canEdit } = useForm();
+    const {
+        onSubmit,
+        toggleEdit,
+        isEdit,
+        canSendAnswer,
+        canEdit,
+        answerOnEmail,
+        setAnswerOnEmail,
+    } = useForm();
 
     if (!formHead) {
         return null;
@@ -42,7 +50,11 @@ export const Form = () => {
                 {isEdit && <FormQuestionsEdit />}
                 {!isEdit && <FormQuestionsVisible />}
                 {canSendAnswer && (
-                    <Button onClick={onSubmit}>{form.send}</Button>
+                    <SendForm
+                        answerOnEmail={answerOnEmail}
+                        setAnswerOnEmail={setAnswerOnEmail}
+                        onSubmit={onSubmit}
+                    />
                 )}
             </form>
             <FormComments formId={formHead.id} />

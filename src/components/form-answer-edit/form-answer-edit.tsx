@@ -27,7 +27,7 @@ export const FormAnswerEdit: FC<Props> = ({ index, type, answers }) => {
                 answers={answers}
                 index={index}
             />
-            {type === "checkbox" && (
+            {(type === "checkbox" || type === "radio") && (
                 <FormAnswerFooter
                     handlerAddAnswer={handlerAddAnswer}
                     handlerDeleteAnswer={handlerDeleteAnswer}

@@ -21,6 +21,9 @@ import { EditData } from "../../types/form/edit-data";
 import { Question } from "../../types/form/question";
 import { AnswerError } from "../../errors/answer-error";
 import { selectEditData } from "../../redux/entities/form/selectors";
+import { useMessage } from "../../contexts/message-context/use-message-context";
+import { useLanguage } from "../../contexts/language-context/use-language";
+import { dictionary } from "../../constants/dictionary";
 
 const validateQuestions = (questions: Question[]) => {
     questions.forEach((q) => {
@@ -48,6 +51,9 @@ export const useFormQuestionEdit = () => {
     const questions = useAppSelector(selectQuestions);
     const request = useApi();
     const [editQuestion, setEditQuestion] = useState("");
+    const { addMessage } = useMessage();
+    const { language } = useLanguage();
+    const { errors } = dictionary[language];
     const [selectedQuestions, setSelectedQuestions] = useState<Set<string>>(
         new Set()
     );
@@ -69,8 +75,14 @@ export const useFormQuestionEdit = () => {
     };
 
     const onSubmit = async () => {
-        const requestData = await getRequestData(editData);
-        await request("put", endpoints.form, true, requestData);
+        try {
+            const requestData = await getRequestData(editData);
+            await request("put", endpoints.form, true, requestData);
+        } catch (error) {
+            if (error instanceof Error) {
+                addMessage("danger", errors.uniqueAnswers + error.message);
+            }
+        }
     };
 
     const onDelete = () => {

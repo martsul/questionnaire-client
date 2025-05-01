@@ -1,1 +1,6 @@
-export type QuestionsType = "line" | "paragraph" | "number" | "checkbox"
+export type QuestionsType =
+    | "line"
+    | "paragraph"
+    | "number"
+    | "checkbox"
+    | "radio";
