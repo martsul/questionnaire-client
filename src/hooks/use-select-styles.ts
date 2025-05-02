@@ -28,9 +28,16 @@ export const useSelectStyles = () => {
         }),
         option: (
             provided: CSSObjectWithLabel,
+            state: { isFocused: boolean }
         ) => ({
             ...provided,
-            backgroundColor: theme === "dark" ? "#212529" : "#fff",
+            backgroundColor: state.isFocused
+                ? theme === "dark"
+                    ? "#52525e"
+                    : "#E5E7EB"
+                : theme === "dark"
+                ? "#212529"
+                : "#fff",
             color: theme === "dark" ? "#FFFFFF" : "#1F2A44",
             borderRadius: "2px",
             "&:hover": {
