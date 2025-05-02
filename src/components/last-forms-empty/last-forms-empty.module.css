@@ -1,0 +1,15 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    max-width: 200px;
+    width: 100%;
+    border-width: 2px !important;
+}
+
+@media (max-width: 575px) {
+    .button {
+        max-width: none;
+    }
+}

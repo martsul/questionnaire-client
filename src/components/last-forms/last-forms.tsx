@@ -11,7 +11,7 @@ import styles from "./last-forms.module.css";
 export const LastForms = () => {
     const { language } = useLanguage();
     const { homePage } = dictionary[language];
-    const lastForm = useAppSelector(selectLastForms);
+    const lastForms = useAppSelector(selectLastForms);
 
     return (
         <section>
@@ -37,7 +37,7 @@ export const LastForms = () => {
                     },
                 }}
             >
-                {lastForm.map((f) => (
+                {lastForms.map((f) => (
                     <SwiperSlide key={f.id}>
                         <Link
                             to={`/form/${f.id}`}

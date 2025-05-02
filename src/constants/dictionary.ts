@@ -50,7 +50,7 @@ export const dictionary = {
             statistic: "Statistic",
             noResult: "No result",
             updateAnswer: "Update answer",
-            sendOnEmail: "Send responses by email"
+            sendOnEmail: "Send responses by email",
         },
         answers: {
             id: "ID",
@@ -208,7 +208,7 @@ export const dictionary = {
             statistic: "Estadística",
             noResult: "Sin resultado",
             updateAnswer: "Respuesta de actualización",
-            sendOnEmail: "Enviar respuestas por correo electrónico"
+            sendOnEmail: "Enviar respuestas por correo electrónico",
         },
         header: {
             login: "Iniciar sesión",

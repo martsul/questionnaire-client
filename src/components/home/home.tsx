@@ -8,6 +8,9 @@ import { Button } from "react-bootstrap";
 import { LastForms } from "../last-forms/last-forms";
 import { PopularForms } from "../popular-forms/popular-forms";
 import { PopularTags } from "../popular-tags/popular-tags";
+import { useAppSelector } from "../../redux/hooks";
+import { selectLastForms } from "../../redux/entities/home-page/home-page-slice";
+import { LastFormEmpty } from "../last-forms-empty/last-forms-empty";
 
 export const Home = () => {
     const { language } = useLanguage();
@@ -15,8 +18,9 @@ export const Home = () => {
     const { userData } = useAuthorization();
     const request = useApi();
     const navigate = useNavigate();
+    const lastForms = useAppSelector(selectLastForms);
 
-    const onClick = async () => {
+    const createForm = async () => {
         const result = await request<{ id: number }>(
             "post",
             endpoints.form,
@@ -26,18 +30,19 @@ export const Home = () => {
             }
         );
         if (!(result instanceof Error)) {
-            navigate(`/form/${result.id }`);
+            navigate(`/form/${result.id}`);
         }
     };
 
     return (
         <>
             {userData && (
-                <Button onClick={onClick} className="mb-4 w-100">
+                <Button onClick={createForm} className="mb-4 w-100">
                     {words.createForm}
                 </Button>
             )}
-            <LastForms />
+            {lastForms.length && <LastForms />}
+            {!lastForms.length && <LastFormEmpty createForm={createForm} />}
             <PopularForms />
             <PopularTags />
         </>

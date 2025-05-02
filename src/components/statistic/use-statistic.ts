@@ -30,8 +30,7 @@ export const useStatistic = () => {
                 }
             }
         );
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [formId]);
+    }, [formId, response]);
 
     return { answers };
 };
