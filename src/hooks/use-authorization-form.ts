@@ -13,11 +13,17 @@ export const useAuthorizationForm = (thereIsAccount: boolean) => {
 
     const handlerSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
-        const result = await request<AuthorizationResponse>("post", endpoint, true, event.currentTarget);
-        if (result instanceof Error) return;
-        addUser(result);
-        localStorage.setItem("accessToken", result.accessToken);
-        navigate("/");
+        const result = await request<AuthorizationResponse>(
+            "post",
+            endpoint,
+            true,
+            event.currentTarget
+        );
+        if (!(result instanceof Error)) {
+            addUser(result);
+            localStorage.setItem("accessToken", result.accessToken);
+            navigate("/");
+        }
     };
 
     return { handlerSubmit };
