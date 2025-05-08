@@ -6,7 +6,7 @@ export const WS_BASE_URL =
     "wss://questionnaire-server-gajm.onrender.com/api/comments?formId=";
 // export const WS_BASE_URL = "ws://localhost:10000/api/comments?formId=";
 
-export const GITHUB_AUTH =  API_BASE_URL + "/auth/github"
+export const GITHUB_AUTH = API_BASE_URL + "/auth/github";
 
 export const endpoints = {
     signin: `/signin`,
@@ -31,5 +31,7 @@ export const endpoints = {
     ownForms: "/own_forms",
     ownAnswers: "/own_answers",
     searchForm: "/search_form",
-    githubAuth: "/auth/github/tokens"
+    githubAuth: "/auth/github/tokens",
+    salesforce: "/salesforce",
+    salesforceRegister: "/salesforce-register",
 } as const;

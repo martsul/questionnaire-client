@@ -1,5 +1,15 @@
 export const dictionary = {
     en: {
+        salesforce: {
+            register: "Register",
+            update: "Update",
+            firstName: "First name",
+            lastName: "Last name",
+            email: "Email",
+            phone: "Phone",
+            title: "Title",
+            success: "Salesforce has been successfully updated",
+        },
         titles: {
             home: "Home",
             adminPanel: "Admin Panel",
@@ -134,6 +144,16 @@ export const dictionary = {
         },
     },
     es: {
+        salesforce: {
+            register: "Registrar",
+            update: "Actualizar",
+            firstName: "Nombre",
+            lastName: "Apellido",
+            email: "Correo electrónico",
+            phone: "Teléfono",
+            title: "Cargo",
+            success: "Salesforce actualizado con éxito",
+        },
         tooltips: {
             confidential:
                 "Accesible exclusivamente para el personal autorizado",

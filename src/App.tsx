@@ -21,6 +21,7 @@ import { ProfileAnswersPage } from "./pages/profile-answers-page";
 import { SearchContextProvider } from "./contexts/search-context/search-context-provider";
 import { FormLayoutContainer } from "./components/form-layout/form-layout-container";
 import { GithubAuthPage } from "./pages/github-auth-page";
+import { SalesforceForm } from "./components/salesforce-form/salesforce-form";
 
 function App() {
     enableMapSet();
@@ -76,6 +77,7 @@ function App() {
                     path: "answer/:answerId",
                     element: <AnswerPage />,
                 },
+                {path: "salesforce", element: <SalesforceForm/>}
             ],
         },
         {
