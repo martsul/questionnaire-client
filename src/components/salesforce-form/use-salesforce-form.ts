@@ -23,10 +23,23 @@ export const useSalesforceForm = () => {
     });
     const request = useApi();
 
+    const sfRegister = async () => {
+        const authLink = await request<string>(
+            "get",
+            endpoints.salesforceRegister,
+            true
+        );
+        if (!(authLink instanceof AxiosError)) {
+            window.location.href = authLink;
+        }
+    };
+
     useEffect(() => {
         request<SfAuthResponse>("get", endpoints.salesforce, true).then(
             (response) => {
-                if (!(response instanceof AxiosError)) {
+                if (response instanceof AxiosError && response.status === 400) {
+                    sfRegister();
+                } else if (!(response instanceof AxiosError)) {
                     setIsRegistered(response.isRegistered);
                     if (response.isRegistered) {
                         setFields(response.data);
@@ -37,23 +50,12 @@ export const useSalesforceForm = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [request]);
 
-    const onClickIsRegistered = () => {
+    const sfUpdate = () => {
         request("put", endpoints.salesforce, true, fields).then((response) => {
             if (!(response instanceof AxiosError)) {
                 addMessage("success", salesforce.success);
             }
         });
-    };
-
-    const onClickIsNotRegistered = async () => {
-        const authLink = await request<string>(
-            "get",
-            endpoints.salesforceRegister,
-            true
-        );
-        if (!(authLink instanceof AxiosError)) {
-            window.location.href = authLink;
-        }
     };
 
     const onChange = (field: keyof SfUser, value: string) => {
@@ -65,8 +67,8 @@ export const useSalesforceForm = () => {
     };
 
     return {
+        onClick: isRegistered ? sfUpdate : sfRegister,
         isRegistered,
-        onClick: isRegistered ? onClickIsRegistered : onClickIsNotRegistered,
         fields,
         onChange,
     };

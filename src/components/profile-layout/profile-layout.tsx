@@ -1,42 +1,41 @@
-import classNames from "classnames";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useLanguage } from "../../contexts/language-context/use-language";
 import { dictionary } from "../../constants/dictionary";
 import { PageTitle } from "../page-title/page-title";
+import { ProfileNav } from "../profile-nav/profile-nav";
+import { ApiInput } from "../api-input/api-input";
+import { useState } from "react";
+import { useApi } from "../../hooks/use-api";
+import { endpoints } from "../../constants/config";
+import { AxiosError } from "axios";
 
 export const ProfileLayout = () => {
+    const [apiKey, setApiKey] = useState("");
     const { language } = useLanguage();
-    const { titles, profile } = dictionary[language];
+    const { titles } = dictionary[language];
+    const request = useApi();
+
+    const getApiKey = async () => {
+        const response = await request<string>(
+            "get",
+            endpoints.odooApiKey,
+            true
+        );
+        if (!(response instanceof AxiosError)) {
+            setApiKey(response);
+        }
+    };
 
     return (
         <>
             <PageTitle title={titles.profile} />
             <section>
                 <div className="d-flex flex-column gap-3">
-                    <Link className="btn btn-primary" to="/salesforce">Salesforce</Link>
-                    <nav className="nav nav-pills nav-fill my-3">
-                        <NavLink
-                            className={({ isActive }) =>
-                                classNames("nav-item nav-link", {
-                                    active: isActive,
-                                })
-                            }
-                            end
-                            to={``}
-                        >
-                            {profile.forms}
-                        </NavLink>
-                        <NavLink
-                            className={({ isActive }) =>
-                                classNames("nav-item nav-link", {
-                                    active: isActive,
-                                })
-                            }
-                            to={"answers"}
-                        >
-                            {profile.answers}
-                        </NavLink>
-                    </nav>
+                    <ApiInput getApiKey={getApiKey} value={apiKey} />
+                    <Link className="btn btn-primary" to="/salesforce">
+                        Salesforce
+                    </Link>
+                    <ProfileNav />
                 </div>
                 <Outlet />
             </section>

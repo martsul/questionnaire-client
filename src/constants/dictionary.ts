@@ -1,5 +1,8 @@
 export const dictionary = {
     en: {
+        other: {
+            generateApi: "Generate an Api Key",
+        },
         salesforce: {
             register: "Register",
             update: "Update",
@@ -89,6 +92,7 @@ export const dictionary = {
             submit: "Submit",
         },
         errors: {
+            "Api Time Error": "You can generate an Api Key once every 2 hours.",
             "User Is Blocked": "You are blocked",
             "Rights Error": "You don't have enough rights",
             pageNotFound: "Page not found.",
@@ -144,6 +148,9 @@ export const dictionary = {
         },
     },
     es: {
+        other: {
+            generateApi: "Generar Api Key",
+        },
         salesforce: {
             register: "Registrar",
             update: "Actualizar",
@@ -257,6 +264,7 @@ export const dictionary = {
             time: "Hora",
         },
         errors: {
+            "Api Time Error": "Puedes generar Una API Key cada 2 horas",
             "User Is Blocked": "Estás bloqueado",
             "Rights Error": "No tienes suficientes derechos",
             pageNotFound: "Página no encontrada.",
