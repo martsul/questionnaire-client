@@ -1,5 +1,14 @@
 export const dictionary = {
     en: {
+        help: {
+            help: "Help",
+            low: "Low",
+            average: "Average",
+            high: "High",
+            summary: "Summary",
+            priority: "Priority",
+            send: "Send",
+        },
         other: {
             generateApi: "Generate an Api Key",
         },
@@ -113,6 +122,7 @@ export const dictionary = {
             "User is blocked": "This user is blocked",
         },
         success: {
+            appeal: "The appeal has been delivered",
             success: "The operation was successful",
             sendAnswer: "The response is saved",
         },
@@ -148,6 +158,15 @@ export const dictionary = {
         },
     },
     es: {
+        help: {
+            help: "Ayuda",
+            low: "Bajo",
+            average: "Promedio",
+            high: "Alto",
+            summary: "Resumen",
+            priority: "Prioridad",
+            send: "Enviar",
+        },
         other: {
             generateApi: "Generar Api Key",
         },
@@ -291,6 +310,7 @@ export const dictionary = {
         success: {
             success: "La operación fue exitosa",
             sendAnswer: "Respuesta guardada",
+            appeal: "El recurso ha sido presentado",
         },
         usersTable: {
             title: "Usuarios",

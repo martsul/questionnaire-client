@@ -24,11 +24,7 @@ export const answersSlice = createSlice({
             state,
             { payload }: PayloadAction<{ value: string; id: string }>
         ) => {
-            if (
-                +payload.value ||
-                payload.value === "0" ||
-                payload.value === ""
-            ) {
+            if (payload.value.match(/^[0-9]*(\.[0-9]*)?$/)) {
                 state.answers[payload.id] = payload.value;
             }
         },

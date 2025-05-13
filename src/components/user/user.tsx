@@ -21,6 +21,7 @@ export const User = () => {
                 <Link
                     to={"login"}
                     className={classNames(
+                        styles.login,
                         "text-nowrap btn d-flex gap-2 align-items-center",
                         { "btn-outline-light": theme === "dark" },
                         { "btn-outline-dark": theme === "light" }
@@ -44,6 +45,13 @@ export const User = () => {
                     <Link className="dropdown-item" to={"profile"}>
                         {words.profile}
                     </Link>
+                    <a
+                        className="dropdown-item"
+                        href="https://odoo-itransion.onrender.com/"
+                        target="_blank"
+                    >
+                        Odoo
+                    </a>
                     <Dropdown.Item onClick={handlerLogout}>
                         {words.logout}
                     </Dropdown.Item>

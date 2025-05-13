@@ -4,6 +4,7 @@ import { ThemeButton } from "../theme-button/theme-button";
 import { LanguageButton } from "../language-button/language-button";
 import { User } from "../user/user";
 import { Search } from "../search/search";
+import { HelpButton } from "../help-button/help-button";
 
 export const Header = () => {
     return (
@@ -14,8 +15,9 @@ export const Header = () => {
                         <i className="bi bi-house-fill fs-5"></i>
                     </Link>
                     <Search />
-                    <div className="d-flex align-items-center gap-1 gap-sm-4">
+                    <div className="d-flex align-items-center gap-2 gap-sm-4">
                         <div className="d-flex gap-0 gap-sm-1 align-items-center">
+                            <HelpButton/>
                             <LanguageButton />
                             <ThemeButton />
                         </div>

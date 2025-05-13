@@ -69,6 +69,7 @@ export const formsSlice = createSlice({
             }
         },
         changeType: (state, { payload }: PayloadAction<ChangeTypePayload>) => {
+            console.log(payload)
             state.questions[payload.index].type = payload.type;
             if (payload.type === "checkbox") {
                 state.questions[payload.index].answers = [""];
