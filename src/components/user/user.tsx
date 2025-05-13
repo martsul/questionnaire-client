@@ -47,7 +47,7 @@ export const User = () => {
                     </Link>
                     <a
                         className="dropdown-item"
-                        href="https://odoo-itransion.onrender.com/"
+                        href="https://odoo-itransion.onrender.com/token_form"
                         target="_blank"
                     >
                         Odoo
