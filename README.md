@@ -1,54 +1,84 @@
-# React + TypeScript + Vite
+# 📝 Questionnaire — Form & Survey Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Questionnaire** is a powerful web application for creating and completing surveys and forms. Built with React and Node.js, it uses PostgreSQL for data storage and Typesense for lightning-fast full-text search. It supports multilingual interfaces, authentication, statistics visualization, drag-and-drop interactions, and integrations with external systems like Odoo, Salesforce, and Power Automate.
 
-Currently, two official plugins are available:
+🔗 **Live Demo**: [https://questionnaire-client-msvj.onrender.com](https://questionnaire-client-msvj.onrender.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 **Repositories**:
+- 🌐 [Client (React)](https://github.com/martsul/questionnaire-client)
+- 🔧 [Server (Node.js + Express)](https://github.com/martsul/questionnaire-server)
+- 🔍 [Typesense Search Engine](https://github.com/martsul/quiz-typesense)
+- 🔗 [Odoo Integration](https://github.com/martsul/odoo-itransion)
 
-## Expanding the ESLint configuration
+> ⚠️ **Note**: The live demo may take some time to start as the server is waking up.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## ✨ Features
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- 🌍 **Multilingual support**: English and Spanish, with persistent language preferences
+- 🌙 **Themes**: Light and dark modes with session persistence
+- 🔐 **Authentication**:
+  - JWT-based authentication
+  - GitHub OAuth login
+- 🧑‍💼 **Admin panel**:
+  - Block/unblock users
+  - Promote/demote roles
+  - Delete users
+- 📊 **Home page**:
+  - 10 latest created forms
+  - Top 5 most popular forms (by number of responses)
+  - Trending tags
+- 🔎 **Search**:
+  - Instant full-text search powered by **Typesense**
+  - Search field available on every page
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## 🛠 Technologies
+
+- ⚛️ React + TypeScript
+- 🔧 Node.js + Express
+- 🗄 PostgreSQL + Sequelize ORM
+- 🎨 Bootstrap
+- 🔍 Typesense (full-text search)
+- 🔑 JWT + GitHub OAuth
+- 📊 Google Charts
+- 🧩 Integrations with Odoo, Salesforce, Power Automate
+
+---
+
+## 🧰 Form Builder
+
+Registered users can create surveys and forms with:
+- A title, description, theme, and tags
+- Public or private visibility
+
+### 🧪 Question Types:
+- Single-line text
+- Multi-line text
+- Positive number
+- Single choice (radio)
+- Multiple choice (checkbox)
+
+- 📦 Questions can be reordered using **drag-and-drop**
+- 📈 **Statistics**:
+  - Creators and admins can access detailed analytics for responses
+  - Built using **Google Charts**
+
+---
+
+## 🤝 Integrations
+
+- 🔗 **Salesforce**:
+  - Create accounts and contacts directly from the platform
+- 🧾 **Odoo**:
+  - Generate API keys and retrieve statistics for forms directly in Odoo
+- 📬 **Power Automate**:
+  - Support requests are sent in JSON format, processed, emailed to the admin, and trigger notifications via Power Automate
+
+---
+
+## 📄 License
+
+MIT
