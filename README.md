@@ -76,9 +76,3 @@ Registered users can create surveys and forms with:
   - Generate API keys and retrieve statistics for forms directly in Odoo
 - 📬 **Power Automate**:
   - Support requests are sent in JSON format, processed, emailed to the admin, and trigger notifications via Power Automate
-
----
-
-## 📄 License
-
-MIT
